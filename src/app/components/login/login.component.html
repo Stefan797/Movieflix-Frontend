@@ -1,1 +1,53 @@
-<p>login works!</p>
+<div class="login-page">
+    <div class="inside-container center">
+
+        <div class="movieflix-title-container">
+            <span>MovieFlix</span>
+        </div>
+        
+        <div class="login-container">
+            <h2>Einloggen</h2>
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
+                <input formControlName="email" placeholder="Gebe hier deine E-Mail-Adresse ein" type="text" name="email" autocomplete="off" name="name">
+                <ng-container *ngIf="loginForm.controls['email'] as email">
+                    <ng-container *ngIf="email.dirty || email.touched">
+                        <ng-container *ngIf="email.errors as errors">
+                            <p *ngIf="errors['required']" class="error">Es muss eine E-Mail-Adresse eingegeben werden.
+                            </p>
+                            <p *ngIf="errors['pattern']" class="error">Die E-Mail-Adresse muss ein @ Zeichen enthalten
+                            </p>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+
+                <!-- Input Password -->
+                <div class="password-input">
+                    <input #passwordInput id="showPass" class="placement" formControlName="password" placeholder="Gebe hier dein Passwort ein"
+                        type="password" autocomplete="off" name="password">
+                    <img (click)="showPassword(passwordInput)" class="show" src="assets/img/eye.png">
+                </div>
+                <ng-container *ngIf="loginForm.controls['password'] as password">
+                    <ng-container *ngIf="password.dirty || password.touched">
+                        <ng-container *ngIf="password.errors as errors">
+                            <p *ngIf="errors['required']" class="error">Es muss ein Password eingegeben werden.</p>
+                            <p *ngIf="errors['minLength']" class="error">Es sollten mindestens {{
+                                password.errors['minLength'].requiredLength }} Buchstaben sein</p>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+
+                <button class="primary-button" type="submit">Login</button>
+            </form>
+            <div class="save-user-datas">
+                <div (click)="changeCheckboxValue()" class="show-checkbox" [ngClass]="{ 'show-checkbox': !checkboxVisible, 'hide-checkbox': checkboxVisible }">
+                    <img [ngStyle]="{ 'display': checkboxVisible ? 'block' : 'none' }" src="./assets/img/checkbox-white.png">
+                </div>
+
+                <p>Benutzerdaten merken</p>
+            </div>
+            
+
+            <span>Erstes mal hier? <a routerLink="/de/register">Jetzt registrieren</a></span>
+        </div>
+    </div>
+</div>

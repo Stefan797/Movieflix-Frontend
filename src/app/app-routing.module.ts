@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ContentComponent } from './components/content/content.component';
+import { FirstPageComponent } from './components/first-page/first-page.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   { path: '', component: ContentComponent},
   { path: 'home', component: ContentComponent},
-  // { path: 'de', component: FirstPageComponent},
-  // { path: 'de/login', component: LoginComponent},
-  // { path: 'de/register', component: RegisterComponent},
-  // { path: '**', component: FirstPageComponent},
+  { path: 'de', component: FirstPageComponent},
+  { path: 'de/login', component: LoginComponent},
+  { path: 'de/register', component: RegisterComponent},
+  { path: '**', component: FirstPageComponent},
 ];
 
 @NgModule({

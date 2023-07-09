@@ -14,6 +14,9 @@ import { FirstPageComponent } from './components/first-page/first-page.component
 import { HeaderNotificationContainerComponent } from './components/header-notification-container/header-notification-container.component';
 import { HeaderProfileSettingsContainerComponent } from './components/header-profile-settings-container/header-profile-settings-container.component';
 
+// import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +33,8 @@ import { HeaderProfileSettingsContainerComponent } from './components/header-pro
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,1 +1,89 @@
-<p>register works!</p>
+<div class="register-page">
+    <div class="inside-container center">
+
+        <div class="movieflix-title-container">
+            <span>MovieFlix</span>
+        </div>
+
+        <div class="register-container">
+            <h2>Neu registrieren</h2>
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                
+                <!-- Input Username -->
+                <input formControlName="username" placeholder="Gebe hier deinen Benutzernamen ein" type="text"
+                    autocomplete="off" name="username">
+                <ng-container *ngIf="registerForm.controls['username'] as username">
+                    <ng-container *ngIf="username.dirty || username.touched">
+                        <ng-container *ngIf="username.errors as errors">
+                            <p *ngIf="errors['required']" class="error">Es muss ein Username eingegeben werden.</p>
+                            <p *ngIf="errors['minLength']" class="error">Es sollten mindestens {{
+                                username.errors['minLength'].requiredLength }} Buchstaben sein</p>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+
+                <!-- Input Vorname -->
+                <input formControlName="firstname" placeholder="Gebe hier deinen Vornamen ein" type="text"
+                    autocomplete="off" name="first_name">
+                <ng-container *ngIf="registerForm.controls['firstname'] as firstname">
+                    <ng-container *ngIf="firstname.dirty || firstname.touched">
+                        <ng-container *ngIf="firstname.errors as errors">
+                            <p *ngIf="errors['required']" class="error">Es muss ein Vorname eingegeben werden.</p>
+                            <p *ngIf="errors['minLength']" class="error">Es sollten mindestens {{
+                                firstname.errors['minLength'].requiredLength }} Buchstaben sein
+                            </p>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+
+                <!-- Input Nachname -->
+                <input formControlName="lastname" placeholder="Gebe hier deinen Nachnamen ein" type="text"
+                    autocomplete="off" name="last_name">
+                <ng-container *ngIf="registerForm.controls['lastname'] as lastname">
+                    <ng-container *ngIf="lastname.dirty || lastname.touched">
+                        <ng-container *ngIf="lastname.errors as errors">
+                            <p *ngIf="errors['required']" class="error">Es muss ein Nachname eingegeben werden.</p>
+                            <p *ngIf="errors['minLength']" class="error">Es sollten mindestens {{
+                                lastname.errors['minLength'].requiredLength }} Buchstaben sein
+                            </p>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+
+                <!-- Input Email -->
+                <input formControlName="email" placeholder="Gebe hier deine E-Mail-Adresse ein" type="text"
+                    autocomplete="off" name="email">
+                <ng-container *ngIf="registerForm.controls['email'] as email">
+                    <ng-container *ngIf="email.dirty || email.touched">
+                        <ng-container *ngIf="email.errors as errors">
+                            <p *ngIf="errors['required']" class="error">Es muss eine E-Mail-Adresse eingegeben werden.
+                            </p>
+                            <p *ngIf="errors['pattern']" class="error">Die E-Mail-Adresse muss ein @ Zeichen enthalten
+                            </p>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+
+                <!-- Input Password -->
+                <div class="password-input">
+                    <input #passwordInput id="showPass" class="placement" formControlName="password" placeholder="Gebe hier dein Passwort ein"
+                        type="password" autocomplete="off" name="password">
+                    <img (click)="showPassword(passwordInput)" class="show" src="assets/img/eye.png">
+                </div>
+                <ng-container *ngIf="registerForm.controls['password'] as password">
+                    <ng-container *ngIf="password.dirty || password.touched">
+                        <ng-container *ngIf="password.errors as errors">
+                            <p *ngIf="errors['required']" class="error">Es muss ein Password eingegeben werden.</p>
+                            <p *ngIf="errors['minLength']" class="error">Es sollten mindestens {{
+                                password.errors['minLength'].requiredLength }} Buchstaben sein</p>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+
+                <button [disabled]="!registerForm.valid && (registerForm.dirty || registerForm.touched)"
+                    class="primary-button" type="submit">Erstelle einen neuen Account !
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
