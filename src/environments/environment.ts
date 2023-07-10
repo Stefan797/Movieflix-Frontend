@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    baseUrl: ''
+    baseUrl: '' // https://stefan-jonas.developerakademie.org
 };

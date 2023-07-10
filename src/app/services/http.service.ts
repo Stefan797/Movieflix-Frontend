@@ -12,9 +12,9 @@ export class HttpService {
     return this.http.get(url);
   }
 
-  // postrequest() {
-  //   return this.http.post(url);
-  // }
+  postrequest(url: string, body: any) {
+    return this.http.post(url, body);
+  }
 
   // putrequest() {
   //   return this.http.put(url);

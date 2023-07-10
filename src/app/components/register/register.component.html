@@ -1,13 +1,13 @@
 <div class="register-page">
     <div class="inside-container center">
-
+        
         <div class="movieflix-title-container">
             <span>MovieFlix</span>
         </div>
 
         <div class="register-container">
             <h2>Neu registrieren</h2>
-            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <form [formGroup]="registerForm" (ngSubmit)="registerNewUser()">
                 
                 <!-- Input Username -->
                 <input formControlName="username" placeholder="Gebe hier deinen Benutzernamen ein" type="text"

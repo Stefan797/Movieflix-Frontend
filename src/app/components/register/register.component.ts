@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpService } from 'src/app/services/http.service';
+import { environment } from 'src/environments/environment.development';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -8,6 +11,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./register.component.sass']
 })
 export class RegisterComponent {
+
+  registerResponse: any = [];
+
+  error = '';
+
   public registerForm: FormGroup = new FormGroup({
     username: new FormControl('', [
       Validators.required,
@@ -32,33 +40,30 @@ export class RegisterComponent {
     ], [])
   });
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private httpService: HttpService) {
     this.registerForm.valueChanges.subscribe(console.log);
   }
 
   ngOnInit(): void {
   };
 
-  onSubmit() {
+  async registerNewUser() {
     if (this.registerForm.valid) {
       const formData = this.registerForm.value;
-      this.postData(formData);
+      console.log(formData);
+      this.registerResponse = await this.postData(formData);
+      //document.getElementById('register-successfully').classList.remove('hide');
+      this.router.navigate(['/home']);
     }
   }
 
-  async postData(formData: any) {
+  postData(formData: any) {
     try {
-      // const result = await fetchPost('http://127.0.0.1:8000/sign-up/', formData); //  stefan-jonas.developerakademie.org/sign-up/ 'http://127.0.0.1:8000/sign-up/',
-      // console.log(result);
-      // // this.router.navigate(['/home']);
-      // if(!result.ok)
-      //   throw new Error(result.statusText)
-      // const formDataLogin = new FormData();
-      
-      // const result = await this.dataService.fetchPost('http://127.0.0.1:8000/api-user-login/', formData); //  https://stefan-jonas.developerakademie.org/api-user-login/
-      // console.log(result);
-    } catch (error) {
-      //TODO what should happen if fetch fails
+      const url = environment.baseUrl + "/sign-up/";
+      return lastValueFrom(this.httpService.postrequest(url, formData));
+    } catch (e) {
+      this.error = 'Fehler beim Laden!';
+      return null;
     }
   }
 
