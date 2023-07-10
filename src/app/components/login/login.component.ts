@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { lastValueFrom } from 'rxjs';
+import { HttpService } from 'src/app/services/http.service';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +12,10 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   checkboxSrc = './assets/img/checkbox-white.png';
+
+  error = '';
+
+  loginResponse: any = [];
 
   public loginForm: FormGroup = new FormGroup({
     email: new FormControl('', [
@@ -22,26 +29,30 @@ export class LoginComponent {
     ], [])
   });
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private httpService: HttpService,) {
     this.loginForm.valueChanges.subscribe(console.log);
   }
 
   ngOnInit(): void {
   }
 
-  async postData(formData: any) {
-    // const result = await t.fetchPost('http://127.0.0.1:8000/api-user-login/', formData); //  https://stefan-jonas.developerakademie.org/api-user-login/
-    // console.log(result);
-
-    // if (result.token = '') {
-    //   this.router.navigate(['/home']);
-    // }
-  }
-
-  login() {
+  async login() {
     if (this.loginForm.valid) {
       const formData = this.loginForm.value;
-      this.postData(formData);
+      this.loginResponse = await this.postData(formData);
+      this.router.navigate(['/home']);
+      console.log(this.loginResponse);
+      localStorage.setItem('token', this.loginResponse['token']);
+    }
+  }
+
+  postData(formData: any) {
+    try {
+      const url = environment.baseUrl + "/api-user-login/";
+      return lastValueFrom(this.httpService.postrequest(url, formData));
+    } catch (e) {
+      this.error = 'Fehler beim Laden!';
+      return null;
     }
   }
 
