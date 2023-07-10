@@ -17,6 +17,7 @@ import { HeaderProfileSettingsContainerComponent } from './components/header-pro
 // import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { RegisterSuccessfullyComponent } from './components/register-successfully/register-successfully.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
     FirstPageComponent,
     HeaderNotificationContainerComponent,
-    HeaderProfileSettingsContainerComponent
+    HeaderProfileSettingsContainerComponent,
+    RegisterSuccessfullyComponent
   ],
   imports: [
     BrowserModule,

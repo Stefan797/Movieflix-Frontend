@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpService } from 'src/app/services/http.service';
 import { environment } from 'src/environments/environment.development';
 import { lastValueFrom } from 'rxjs';
+import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
   selector: 'app-register',
@@ -40,7 +41,7 @@ export class RegisterComponent {
     ], [])
   });
 
-  constructor(private router: Router, private httpService: HttpService) {
+  constructor(private router: Router, private httpService: HttpService, private registerService: RegisterService) {
     this.registerForm.valueChanges.subscribe(console.log);
   }
 
@@ -52,7 +53,7 @@ export class RegisterComponent {
       const formData = this.registerForm.value;
       console.log(formData);
       this.registerResponse = await this.postData(formData);
-      //document.getElementById('register-successfully').classList.remove('hide');
+      this.registerService.setRegisterResponse(this.registerResponse);
       this.router.navigate(['/home']);
     }
   }
