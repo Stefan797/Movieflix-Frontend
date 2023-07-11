@@ -29,7 +29,7 @@ export class LoginComponent {
     ], [])
   });
 
-  constructor(private router: Router, private httpService: HttpService,) {
+  constructor(private router: Router, private httpService: HttpService) {
     this.loginForm.valueChanges.subscribe(console.log);
   }
 

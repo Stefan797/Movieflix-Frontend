@@ -1,1 +1,27 @@
-<p>header works!</p>
+<div class="header">
+    <div class="left display-flex">
+        <h1>MOVIEFLIX</h1>
+        <div class="navigation-menu display-flex hide-smartphone">
+            <ul class="center">
+                <li><a href="">Startseite</a></li>
+                <li><a href="">Filme</a></li>
+                <li><a href="">Neu und beliebt</a></li>
+                <li><a href="">Meine Liste</a></li>
+                <li><a href="">Nach Sprachen durchsuchen</a></li>
+            </ul>
+        </div> 
+    </div>
+    <div class="right center hide-smartphone">
+        <div class="search-icon-container">
+            <img class="search-icon cursor-pointer" src="assets/img/search-60.png">
+        </div>
+        
+        <div class="notification-icon-container">
+            <img (mouseover)="handleNotificationHover()" class="notification-icon cursor-pointer" src="assets/img/notification.png">
+        </div>
+        
+        <div class="profile-img-container">
+            <img (mouseover)="handleProfileSettingsHover()" class="profile-img cursor-pointer" src="assets/img/profile-icon.png">
+        </div>
+    </div>
+</div>
