@@ -45,7 +45,14 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
   //     this.error = 'Fehler beim Laden!';
   //     return null;
   //   }
+
+  // const url = environment.baseUrl + "/movies/continuemovies";
+  // const url = environment.baseUrl + "/movies/popularatpresent";
+  // const url = environment.baseUrl + "/movies/watchagain";
+  // const url = environment.baseUrl + "/movies/mylist";
   // }
+
+  
 
   movecontent(showMoreContentDirection: string) {
     console.log(showMoreContentDirection);

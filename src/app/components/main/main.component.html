@@ -1,5 +1,23 @@
 <div class="movie-preview-container">
+    <div class="movie center-with-column ">
+        <h2>Movie title</h2>
+        <span>Beschreibung</span>
+        <div class="buttons-container display-flex">
+            <button (click)="showMovieFullscreen()" class="play-button">Abspielen</button>
+            <div class="info-button center">
+                <img src="/assets/img/icons8-ausrufezeichen-100.png">
+                Weitere Infos
+            </div>
+        </div>
+    </div>
+
+    <div class="soundcontrol">
+
+    </div>
     <video autoplay muted loop src="assets/movie/qualle-33995.mp4"></video>
 </div>
 
+
+<!-- <video autoplay muted loop src="http://127.0.0.1:8000/media/movie/qualle-33995.mp4"></video> -->
 <!-- <video src="http://127.0.0.1:8000/media/movie/bug.mp4"></video> -->
+<!-- http://127.0.0.1:8000/movieST/qualle-33995.mp4/ -->

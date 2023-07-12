@@ -1,0 +1,18 @@
+<div class="movie-fullscreen-container">
+    <video id="movie" autoplay loop src="assets/movie/qualle-33995.mp4" (keydown)="handleKeyDown($event)"></video>
+    <div class="arrow-back">
+       <img (click)="backToHome()" src="/assets/img/zurück-pfeil.png">
+    </div>
+    <div class="control-panel">
+        <div class="left-side">
+            <img (click)="toggleVideo()" [src]="isVideoPlaying ? '/assets/img/pause-button.png' : '/assets/img/play-button.png'">
+            <!-- <img (click)="playmovie()" src="/assets/img/play-button.png">
+            <img (click)="playmovie()" src="/assets/img/pause-button.png"> -->
+            <img (click)="soundpanel()" src="/assets/img/sound.png">
+        </div>
+        <div class="right-side">
+            <img (click)="showNextMovie()" src="/assets/img/next.png">
+            <img  (click)="openFullscreen()" src="/assets/img/fullscreen.png">
+        </div>
+    </div>
+</div>

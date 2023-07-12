@@ -20,6 +20,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RegisterSuccessfullyComponent } from './components/register-successfully/register-successfully.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { HoverDirective } from './directives/hover.directive';
+import { MovieFullscreenComponent } from './components/movie-fullscreen/movie-fullscreen.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { HoverDirective } from './directives/hover.directive';
     HeaderNotificationContainerComponent,
     HeaderProfileSettingsContainerComponent,
     RegisterSuccessfullyComponent,
-    HoverDirective
+    HoverDirective,
+    MovieFullscreenComponent
   ],
   imports: [
     BrowserModule,
