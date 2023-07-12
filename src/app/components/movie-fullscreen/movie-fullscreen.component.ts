@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, ElementRef, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from 'src/app/services/http.service';
 
@@ -9,8 +9,8 @@ import { HttpService } from 'src/app/services/http.service';
 })
 export class MovieFullscreenComponent {
 
-  constructor(private router: Router, private httpService: HttpService) {
-   
+  constructor(private router: Router, private httpService: HttpService, private elementRef: ElementRef) {
+
   }
 
   ngOnInit(): void {
@@ -42,8 +42,25 @@ export class MovieFullscreenComponent {
     }
   }
 
-  soundpanel() {
-    this.router.navigate(['/home']);
+  volumeScrollbarOpacity: number = 0;
+
+  showVolumeScrollbar() {
+    this.volumeScrollbarOpacity = 1;
+  }
+
+  hideVolumeScrollbar() {
+    this.volumeScrollbarOpacity = 0;
+  }
+
+  adjustVolume(event: MouseEvent) {
+    if (event.buttons === 1) {
+      const soundImg = document.getElementById("sound-img");
+      const y = event.clientY - soundImg.getBoundingClientRect().top;
+      const volume = 1 - (y / soundImg.offsetHeight);
+
+      // Hier kannst du den Lautstärkewert nutzen, um die Lautstärke zu regulieren
+      console.log("Lautstärke:", volume);
+    }
   }
 
   showNextMovie() {
@@ -51,6 +68,16 @@ export class MovieFullscreenComponent {
   }
 
   openFullscreen() {
-    this.router.navigate(['/home']);
+    const videoPlayer = this.elementRef.nativeElement.querySelector('video');
+
+    if (videoPlayer.requestFullscreen) {
+      videoPlayer.requestFullscreen();
+    } else if (videoPlayer.mozRequestFullScreen) {
+      videoPlayer.mozRequestFullScreen();
+    } else if (videoPlayer.webkitRequestFullscreen) {
+      videoPlayer.webkitRequestFullscreen();
+    } else if (videoPlayer.msRequestFullscreen) {
+      videoPlayer.msRequestFullscreen();
+    }
   }
 }

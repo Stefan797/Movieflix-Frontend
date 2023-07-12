@@ -13,8 +13,18 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
   error = '';
 
   // MovieResponse: any = [];
+  popularAtPresent: any = [];
 
-  popularAtPresent: any[] = [];
+  urls = [
+    environment.baseUrl + "/movies/continuemovies/",
+    environment.baseUrl + "/movies/popularatpresent/",
+    environment.baseUrl + "/movies/watchagain/",
+    environment.baseUrl + "/movies/mylist/"
+  ];
+
+  movieArrays: any = [];
+  
+  userEmailResponse: any = [];
 
   @ViewChild('categoriescontainer') div?: ElementRef;
 
@@ -22,11 +32,27 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
   constructor(private httpService: HttpService) { }
 
   ngOnInit(): void {
+    this.loadUserEmail();
     // this.loadContent();
-    
+
     // popularAtPresent.forEach((popularOnMovieflixMovies) => {
     //   this.popularAtPresent.push(Object.assign({}, popularOnMovieflixMovies));
     // });
+  }
+
+  async loadUserEmail() {
+    this.userEmailResponse = await this.load();
+    console.log(this.userEmailResponse);
+  }
+
+  load() {
+    try {
+      const url = environment.baseUrl + "/useremail/";
+      return lastValueFrom(this.httpService.getrequest(url));
+    } catch (e) {
+      this.error = 'Fehler beim Laden!';
+      return null;
+    }
   }
 
   // async loadContent() {
@@ -35,24 +61,18 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
 
   // loadAllCategories() {
   //   try {
-  //     // for (let index = 0; index < array.length; index++) {
-  //     //   const element = array[index];
-        
-  //     // }
-  //     const url = environment.baseUrl + "/movies/popularatpresent";
-  //     return lastValueFrom(this.httpService.getrequest(url));
+  //     for (let i = 0; i < this.urls.length; i++) {
+  //       this.movieArrays[i] = [];
+
+  //       this.httpService.getrequest(this.urls[i]).subscribe((response) => {
+  //         this.movieArrays[i] = response;
+  //       });
+  //     }
   //   } catch (e) {
   //     this.error = 'Fehler beim Laden!';
   //     return null;
   //   }
-
-  // const url = environment.baseUrl + "/movies/continuemovies";
-  // const url = environment.baseUrl + "/movies/popularatpresent";
-  // const url = environment.baseUrl + "/movies/watchagain";
-  // const url = environment.baseUrl + "/movies/mylist";
   // }
-
-  
 
   movecontent(showMoreContentDirection: string) {
     console.log(showMoreContentDirection);

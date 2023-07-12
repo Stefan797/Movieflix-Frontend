@@ -9,7 +9,7 @@
         width: 100%
         height: 100%
         object-fit: cover
-    
+
     .arrow-back
         z-index: 2
         position: absolute
@@ -21,9 +21,20 @@
             height: 55px
             width: 55px
             &:hover
-                    cursor: pointer
-                    transform: scale(1.03)
-    
+                cursor: pointer
+                transform: scale(1.03)
+
+    .sound
+        position: absolute
+        left: calc( 3.5% + 87.5px )
+        bottom: calc( 10% + 5px )
+        width: 10px
+        height: 100px
+        background-color: gray
+        border-radius: 5px
+        opacity: 0
+        transition: opacity 0.3s
+
     .control-panel
         z-index: 2
         position: absolute
@@ -38,7 +49,7 @@
         display: flex
         justify-content: space-between
         align-items: center
-        
+
         .left-side
             width: 50%
             img
@@ -49,7 +60,6 @@
                 &:hover
                     cursor: pointer
                     transform: scale(1.05)
-
 
         .right-side
             display: flex
@@ -64,4 +74,3 @@
                 &:hover
                     cursor: pointer
                     transform: scale(1.05)
-

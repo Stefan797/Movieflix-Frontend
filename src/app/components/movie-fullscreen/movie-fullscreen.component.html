@@ -3,12 +3,13 @@
     <div class="arrow-back">
        <img (click)="backToHome()" src="/assets/img/zurück-pfeil.png">
     </div>
+
+    <div class="sound" id="volume-scrollbar" [style.opacity]="volumeScrollbarOpacity"></div>
+
     <div class="control-panel">
-        <div class="left-side">
+        <div class="left-side display-flex">
             <img (click)="toggleVideo()" [src]="isVideoPlaying ? '/assets/img/pause-button.png' : '/assets/img/play-button.png'">
-            <!-- <img (click)="playmovie()" src="/assets/img/play-button.png">
-            <img (click)="playmovie()" src="/assets/img/pause-button.png"> -->
-            <img (click)="soundpanel()" src="/assets/img/sound.png">
+            <img id="sound-img" src="/assets/img/sound.png" (mouseenter)="showVolumeScrollbar()" (mouseleave)="hideVolumeScrollbar()" (mousemove)="adjustVolume($event)">
         </div>
         <div class="right-side">
             <img (click)="showNextMovie()" src="/assets/img/next.png">

@@ -15,12 +15,13 @@ import { HeaderNotificationContainerComponent } from './components/header-notifi
 import { HeaderProfileSettingsContainerComponent } from './components/header-profile-settings-container/header-profile-settings-container.component';
 
 // import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RegisterSuccessfullyComponent } from './components/register-successfully/register-successfully.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { HoverDirective } from './directives/hover.directive';
 import { MovieFullscreenComponent } from './components/movie-fullscreen/movie-fullscreen.component';
+import { SearchBoxComponent } from './components/search-box/search-box.component';
 
 @NgModule({
   declarations: [
@@ -37,13 +38,15 @@ import { MovieFullscreenComponent } from './components/movie-fullscreen/movie-fu
     HeaderProfileSettingsContainerComponent,
     RegisterSuccessfullyComponent,
     HoverDirective,
-    MovieFullscreenComponent
+    MovieFullscreenComponent,
+    SearchBoxComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     {

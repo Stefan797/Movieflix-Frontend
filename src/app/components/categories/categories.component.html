@@ -3,7 +3,7 @@
     <div class="different-categories" *ngFor="let popularOnMovieflixMovies of allPopularOnMovieflixMovies; let i = index">
         <img src="{{ popularOnMovieflixMovies['imgpath'] }}">
     </div> -->
-    <span>Mit dem Profil von user['email'] weiterschauen</span>
+    <span>Mit dem Profil {{ userEmailResponse.email }} weiterschauen</span>
     <div class="different-categories">
         <div class="left-side-hover-container center">
             <img class="arrow-left-img" src="./assets/img/arrow.png">
