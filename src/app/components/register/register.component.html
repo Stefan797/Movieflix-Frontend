@@ -5,6 +5,10 @@
             <span>MovieFlix</span>
         </div>
 
+        <div class="guest-account-container">
+            <button (click)="loginAsGuest()" class="guest-account-button primary-button">Mit Gast Account einloggen !</button>
+        </div>
+
         <div class="register-container">
             <h2>Neu registrieren</h2>
             <form [formGroup]="registerForm" (ngSubmit)="registerNewUser()">

@@ -14,7 +14,7 @@
     <div class="soundcontrol">
 
     </div>
-    <video autoplay muted loop src="assets/movie/qualle-33995.mp4"></video>
+    <video *ngIf="firstMovieResponses && firstMovieResponses.length > 0" autoplay muted loop [src]="firstMovieResponses[0]['movie_file']"></video>
 </div>
 
 

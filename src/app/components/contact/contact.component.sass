@@ -1,0 +1,55 @@
+.contact-container
+    width: 86.12%
+    margin-top: 2%
+    margin-left: 6.94%
+
+    .field
+        width: 100%
+        min-height: 60vh
+        position: relative
+        display: flex
+        background: #f5f5f5
+        .test
+            form
+                input
+                    width: calc(80% - 1px)
+                    background: #ffffff
+                    border: 1px solid black
+                    border-radius: 10px
+                    margin-bottom: 35px
+                    padding: 15px 25px
+                    height: 35px
+                    //isolation: isolate;
+                    outline: none
+                    input:focus::placeholder
+                        color: transparent
+
+                textarea
+                    width: calc(80% - 1px)
+                    height: 180px
+                    background: #ffffff
+                    border: 1px solid black
+                    padding: 15px 25px
+                    border-radius: 10px
+                    outline: none
+
+                .send-button-container
+                    button
+                        background-color: black
+                        margin-top: 35px
+
+    .email-send-answer
+        background: radial-gradient(74.22% 74.22% at 19.79% 22.42%, #5988ff 6.25%, #5988ff 51.56%, #0043f0 100%)
+        border: 2px solid white
+        width: fit-content
+        padding: 20px 30px
+        border-radius: 8px
+        position: absolute
+        right: 20%
+        bottom: 3%
+        span
+            color: white
+            font-size: 18px
+
+    .errorred
+        background: radial-gradient(74.22% 74.22% at 19.79% 22.42%,#ff5959 6.25%,#ff5959 51.56%,#f00000 100%) !important

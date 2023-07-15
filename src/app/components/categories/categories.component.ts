@@ -16,10 +16,11 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
   popularAtPresent: any = [];
 
   urls = [
-    environment.baseUrl + "/movies/continuemovies/",
-    environment.baseUrl + "/movies/popularatpresent/",
-    environment.baseUrl + "/movies/watchagain/",
-    environment.baseUrl + "/movies/mylist/"
+    environment.baseUrl + "/movieAPI/?category=keepwatching",
+    environment.baseUrl + "/movieAPI/?category=popularatpresent",
+    // environment.baseUrl + "/movies/popularatpresent/",
+    // environment.baseUrl + "/movies/watchagain/",
+    // environment.baseUrl + "/movies/mylist/"
   ];
 
   movieArrays: any = [];
@@ -31,9 +32,9 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
 
   constructor(private httpService: HttpService) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.loadUserEmail();
-    // this.loadContent();
+    await this.loadContent();
 
     // popularAtPresent.forEach((popularOnMovieflixMovies) => {
     //   this.popularAtPresent.push(Object.assign({}, popularOnMovieflixMovies));
@@ -55,24 +56,23 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // async loadContent() {
-  //   await this.loadAllCategories();
-  // }
+  async loadContent() {
+    await this.loadAllCategories();
+  }
 
-  // loadAllCategories() {
-  //   try {
-  //     for (let i = 0; i < this.urls.length; i++) {
-  //       this.movieArrays[i] = [];
+  async loadAllCategories() {
+    try {
+      for (let i = 0; i < this.urls.length; i++) {
 
-  //       this.httpService.getrequest(this.urls[i]).subscribe((response) => {
-  //         this.movieArrays[i] = response;
-  //       });
-  //     }
-  //   } catch (e) {
-  //     this.error = 'Fehler beim Laden!';
-  //     return null;
-  //   }
-  // }
+       const response = await lastValueFrom(this.httpService.getrequest(this.urls[i]));
+       this.movieArrays[i] = response;
+      }
+      console.log(this.movieArrays);
+    } catch (e) {
+      this.error = 'Fehler beim Laden!';
+      return null;
+    }
+  }
 
   movecontent(showMoreContentDirection: string) {
     console.log(showMoreContentDirection);

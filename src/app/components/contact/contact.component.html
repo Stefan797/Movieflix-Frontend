@@ -1,0 +1,25 @@
+<div class="special-header">
+    <span>MovieFlix</span>
+    <p>Contact</p>
+</div>
+<div class="contact-container">
+    <img class="special-icon" routerLink="/home" src="/assets/img/webIcon.png">
+
+    <div id="contact" class="field">
+        <div class="test">
+            <form #userPost="ngForm" (ngSubmit)="onSubmit(userPost.value); userPost.reset()">
+                <input type="text" placeholder="Your name" autocomplete="off" name="name" ngModel required>
+                <input type="email" placeholder="Your email" autocomplete="off" name="email" ngModel required>
+                <textarea type="text" placeholder="Your message" autocomplete="off" name="message" ngModel
+                    required></textarea>
+                <div class="send-button-container">
+                    <button type="submit" class="primary-button">Abschicken</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="resultcontainer" class="email-send-answer hide">
+        <span id="resulttext"></span>
+    </div>
+</div>

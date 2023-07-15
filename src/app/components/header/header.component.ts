@@ -14,6 +14,12 @@ export class HeaderComponent {
    
   }
 
+  scroll(id: string){
+    document.getElementById(id).scrollIntoView({ 
+      behavior: 'smooth' 
+    });
+  }
+
   handleNotificationHover(){
     console.log("Mouse Over Notification Icon");
     document.getElementById('notificationID')?.classList.remove('hide');

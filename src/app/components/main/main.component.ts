@@ -19,17 +19,18 @@ export class MainComponent {
   constructor(private router: Router, private httpService: HttpService) {}
 
   ngOnInit(): void {
-    // this.loadFirstMovie();
+    this.loadFirstMovie();
   };
 
   async loadFirstMovie() {
     this.firstMovieResponses = await this.load();
+
     console.log(this.firstMovieResponses);
   }
 
   load() {
     try {
-      const url = environment.baseUrl + "/movieST/qualle-33995.mp4/";
+      const url = environment.baseUrl + "/movieAPI/";
       return lastValueFrom(this.httpService.getrequest(url));
     } catch (e) {
       this.error = 'Fehler beim Laden!';
@@ -38,6 +39,6 @@ export class MainComponent {
   }
 
   showMovieFullscreen() {
-    this.router.navigate(['/watch/nameofmovie']);
+    this.router.navigate(['/watch/' + this.firstMovieResponses[0].title]);
   }
 }

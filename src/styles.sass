@@ -1,14 +1,14 @@
-body 
+body
     margin: 0
     padding: 0
     box-sizing: border-box
     font-family: 'Kanit', sans-serif
     //font-family: 'Delicious Handrawn', cursive
 
-.display-flex 
+.display-flex
     display: flex
 
-.center 
+.center
     display: flex
     justify-content: center
     align-items: center
@@ -18,16 +18,16 @@ body
     justify-content: space-evenly
     align-items: center
 
-.center-with-column 
+.center-with-column
     display: flex
     justify-content: center
     align-items: center
     flex-direction: column
 
-.hide 
-  display: none
+.hide
+    display: none
 
-.cursor-pointer 
+.cursor-pointer
     cursor: pointer
 
 .show
@@ -40,9 +40,30 @@ body
     color: red
     font-size: 8px
 
+.special-header
+    height: 100px
+    width: 100vw
+    background-color: black
+    display: flex
+    justify-content: flex-start
+    align-items: center
+    span
+        margin-left: 6.94%
+        color: #d91b0d
+        font-size: 36px
+        letter-spacing: 3px
+        font-weight: 800
+
+.special-icon
+    height: 96px
+    width: 96px
+    object-fit: contain
+    &:hover
+        cursor: pointer
+
 /* Button 1*/
 
-.primary-button 
+.primary-button
     border: 1.5px solid white
     border-radius: 10px
     filter: drop-shadow(5px 5px 15px rgb(255, 255, 255))
@@ -53,7 +74,7 @@ body
     min-width: 158px
     min-height: 47px
     background-color: rgba(0,0,0, 0.1)
-    &:hover 
+    &:hover
         cursor: pointer
         color: white
         transform: scale(1.05)

@@ -22,6 +22,10 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { HoverDirective } from './directives/hover.directive';
 import { MovieFullscreenComponent } from './components/movie-fullscreen/movie-fullscreen.component';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
+import { FaqComponent } from './components/faq/faq.component';
+import { ImprintComponent } from './components/imprint/imprint.component';
+import { DataProtectionComponent } from './components/data-protection/data-protection.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,11 @@ import { SearchBoxComponent } from './components/search-box/search-box.component
     RegisterSuccessfullyComponent,
     HoverDirective,
     MovieFullscreenComponent,
-    SearchBoxComponent
+    SearchBoxComponent,
+    FaqComponent,
+    ImprintComponent,
+    DataProtectionComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,

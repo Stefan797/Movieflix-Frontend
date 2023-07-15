@@ -68,6 +68,10 @@ export class RegisterComponent {
     }
   }
 
+  loginAsGuest() {
+    this.router.navigate(['/home']);
+  }
+
   showPassword(passwordInput: HTMLInputElement) {
     if (passwordInput.type === "password") {
       passwordInput.type = "text";
