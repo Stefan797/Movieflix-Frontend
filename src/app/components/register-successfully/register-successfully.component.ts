@@ -8,21 +8,35 @@ import { RegisterService } from 'src/app/services/register.service';
 })
 export class RegisterSuccessfullyComponent implements OnInit, OnDestroy {
 
+  guestUserRegistration = false;
+  normalUserRegistration = false;
   response: any = [];
+
+  // animateContainer: boolean = false;
 
   private timer: any;
 
   ngOnInit(): void {
     this.showregisterMessage();
+    // setTimeout(() => {
+    //   this.animateContainer = true;
+    // }, 1000);
   }
 
   constructor(private registerService: RegisterService) { }
 
   showregisterMessage(): any {
     this.sethideRegisterSuccessMessage();
-    // debugger;
-    //document.getElementById('register-successfully').classList.remove('hide');
     this.response = this.registerService.getRegisterResponse();
+    if (this.response.username && /^Gast\d+$/.test(this.response.username)) {
+      this.guestUserRegistration = true;
+      this.normalUserRegistration = false;
+      console.log(this.guestUserRegistration);
+    } else {
+      this.guestUserRegistration = false;
+      this.normalUserRegistration = true;
+      console.log(this.normalUserRegistration);
+    }
   }
 
   sethideRegisterSuccessMessage() {
@@ -33,7 +47,7 @@ export class RegisterSuccessfullyComponent implements OnInit, OnDestroy {
 
 
   hideRegisterSuccessMessage() {
-    document.getElementById('register-successfully').classList.add('hide');
+    this.registerService.hideRegisterComponent();
   }
 
   ngOnDestroy(): void {

@@ -54,6 +54,7 @@ export class RegisterComponent {
       console.log(formData);
       this.registerResponse = await this.postData(formData);
       this.registerService.setRegisterResponse(this.registerResponse);
+      this.registerService.setRegisterComponent();
       this.router.navigate(['/home']);
     }
   }
@@ -68,10 +69,44 @@ export class RegisterComponent {
     }
   }
 
-  loginAsGuest() {
+  async loginAsGuest() {
+    this.registerResponse = await this.createNewGuestUser();
+    this.registerService.setRegisterResponse(this.registerResponse);
+    console.log(this.registerResponse);
+    this.registerService.setRegisterComponent();
     this.router.navigate(['/home']);
   }
+  
+  createNewGuestUser() {
+    const username = 'Gast' + this.getRandomNumber(); 
+    const email = username + '@test.com'; 
+    const firstname = 'guest'; 
+    const lastname = 'whoAmI'; 
+    const password = 'guest_password' + this.getRandomNumber(); 
+    console.log(password);
+    // const url = environment.baseUrl + "/sign-up/";
 
+    const newUser = {
+      username: username,
+      email: email,
+      firstname: firstname,
+      lastname: lastname,
+      password: password
+    };
+
+    try {
+      const url = environment.baseUrl + "/sign-up/";
+      return lastValueFrom(this.httpService.postrequest(url, newUser));
+    } catch (e) {
+      this.error = 'Fehler beim Laden!';
+      return null;
+    }
+  }
+
+  getRandomNumber(): number {
+    return Math.floor(Math.random() * 1000) + 1; // Generate a random number between 1 and 1000
+  }
+  
   showPassword(passwordInput: HTMLInputElement) {
     if (passwordInput.type === "password") {
       passwordInput.type = "text";

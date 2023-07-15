@@ -1,5 +1,5 @@
 <!-- Auf Home erst Info zu email bestätigen anzeigen wenn nach register noch nicht passiert ist -->
-<!-- <app-register-successfully id="register-successfully"></app-register-successfully> -->
+<app-register-successfully *ngIf="isRegistered"></app-register-successfully>
 <app-header></app-header>
 <app-header-notification-container id="notificationID" class="hide"></app-header-notification-container>
 <app-header-profile-settings-container id="profilesettingsID" class="hide"></app-header-profile-settings-container>

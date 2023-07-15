@@ -9,6 +9,7 @@ import { ImprintComponent } from './components/imprint/imprint.component';
 import { DataProtectionComponent } from './components/data-protection/data-protection.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { AccountComponent } from './components/account/account.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'de/login', component: LoginComponent},
   { path: 'de/register', component: RegisterComponent},
   { path: 'watch/:movie-title', component: MovieFullscreenComponent},
+  { path: 'account', component: AccountComponent},
   { path: 'FAQ', component: FaqComponent},
   { path: 'imprint', component: ImprintComponent},
   { path: 'data-protection', component: DataProtectionComponent},

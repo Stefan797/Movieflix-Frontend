@@ -26,6 +26,7 @@ import { FaqComponent } from './components/faq/faq.component';
 import { ImprintComponent } from './components/imprint/imprint.component';
 import { DataProtectionComponent } from './components/data-protection/data-protection.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { AccountComponent } from './components/account/account.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { ContactComponent } from './components/contact/contact.component';
     FaqComponent,
     ImprintComponent,
     DataProtectionComponent,
-    ContactComponent
+    ContactComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
