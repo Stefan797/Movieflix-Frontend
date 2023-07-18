@@ -10,4 +10,31 @@
         <div></div>
         <div></div>
     </div> -->
+    <h1>Upload new Movie Formular</h1>
+
+
+    <form (ngSubmit)="submitForm()" #form="ngForm">
+        <div>
+            <label for="search_terms">Suchbegriffe:</label>
+            <input type="text" id="search_terms" name="search_terms" [(ngModel)]="formData.search_terms" required>
+        </div>
+        <div>
+            <label for="title">Titel:</label>
+            <input type="text" id="title" name="title" [(ngModel)]="formData.title" required>
+        </div>
+        <div>
+            <label for="description">Beschreibung:</label>
+            <textarea id="description" name="description" [(ngModel)]="formData.description" required></textarea>
+        </div>
+        <div>
+            <label for="category">Kategorie:</label>
+            <input type="text" id="category" name="category" [(ngModel)]="formData.category" required>
+        </div>
+        <div>
+            <label for="movie_file">MP4-Datei:</label>
+            <input type="file" id="movie_file" name="movie_file" accept="video/mp4" required>
+        </div>
+        <button type="submit">Absenden</button>
+    </form>
+
 </div>

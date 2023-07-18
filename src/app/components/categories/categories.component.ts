@@ -9,36 +9,54 @@ import { environment } from 'src/environments/environment.development';
   styleUrls: ['./categories.component.sass']
 })
 export class CategoriesComponent implements OnInit, AfterViewInit {
-
+  
+  @ViewChild('categoriescontainer') div?: ElementRef;
+  movieDict: any = [];
+  userEmailResponse: any = [];
   error = '';
 
-  // MovieResponse: any = [];
-  popularAtPresent: any = [];
+  moviesrows: any = [
+    {
+      "firstpart": "let",
+      "secondpart": "movieskeepwatching",
+      "thirdpart": "keepwatching"
+    },
+    {
+      "firstpart": "let",
+      "secondpart": "moviespopularatpresent",
+      "thirdpart": "popularatpresent"
+    },
+    {
+      "firstpart": "let",
+      "secondpart": "movieswatchagain",
+      "thirdpart": "watchagain"
+    },
+    {
+      "firstpart": "let",
+      "secondpart": "moviesmylist",
+      "thirdpart": "mylist"
+    }
+  ];
+
+  categoriesText = [
+    'Mit dem Profil {{ userEmailResponse.email }} weiterschauen',
+    'Derzeit beliebt',
+    'Nochmal ansehen',
+    'Meine Liste',
+  ];
 
   urls = [
     environment.baseUrl + "/movieAPI/?category=keepwatching",
     environment.baseUrl + "/movieAPI/?category=popularatpresent",
-    // environment.baseUrl + "/movies/popularatpresent/",
-    // environment.baseUrl + "/movies/watchagain/",
-    // environment.baseUrl + "/movies/mylist/"
+    environment.baseUrl + "/movieAPI/?category=watchagain",
+    environment.baseUrl + "/movieAPI/?category=mylist",
   ];
-
-  movieArrays: any = [];
-  
-  userEmailResponse: any = [];
-
-  @ViewChild('categoriescontainer') div?: ElementRef;
-
 
   constructor(private httpService: HttpService) { }
 
   async ngOnInit(): Promise<void> {
     this.loadUserEmail();
     await this.loadContent();
-
-    // popularAtPresent.forEach((popularOnMovieflixMovies) => {
-    //   this.popularAtPresent.push(Object.assign({}, popularOnMovieflixMovies));
-    // });
   }
 
   async loadUserEmail() {
@@ -65,9 +83,10 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
       for (let i = 0; i < this.urls.length; i++) {
 
        const response = await lastValueFrom(this.httpService.getrequest(this.urls[i]));
-       this.movieArrays[i] = response;
+       const category = response[0].category;
+       this.movieDict[category] = response;
       }
-      console.log(this.movieArrays);
+      console.log(this.movieDict);
     } catch (e) {
       this.error = 'Fehler beim Laden!';
       return null;

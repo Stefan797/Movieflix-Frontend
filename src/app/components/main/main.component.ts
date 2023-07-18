@@ -29,8 +29,9 @@ export class MainComponent {
   }
 
   load() {
+    // const id = 3;
     try {
-      const url = environment.baseUrl + "/movieAPI/";
+      const url = environment.baseUrl + "/movieAPI/"; //"/movieAPI/"; movies/${id}/load_movie/
       return lastValueFrom(this.httpService.getrequest(url));
     } catch (e) {
       this.error = 'Fehler beim Laden!';

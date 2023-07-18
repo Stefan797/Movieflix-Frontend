@@ -14,6 +14,7 @@ import { RegisterService } from 'src/app/services/register.service';
 export class RegisterComponent {
 
   registerResponse: any = [];
+  isActiveResponse: any = [];
 
   error = '';
 
@@ -74,17 +75,27 @@ export class RegisterComponent {
     this.registerService.setRegisterResponse(this.registerResponse);
     console.log(this.registerResponse);
     this.registerService.setRegisterComponent();
+    this.isActiveResponse = await this.setGuestUserIsActive(this.registerResponse.user_id);
     this.router.navigate(['/home']);
   }
-  
+
+  setGuestUserIsActive(pkUser) {
+    try {
+      const url = environment.baseUrl + `/activate/${pkUser}/`;
+      return lastValueFrom(this.httpService.getrequest(url));
+    } catch (e) {
+      this.error = 'Fehler beim Aktivieren des Accounts!';
+      return null;
+    }
+  }
+
   createNewGuestUser() {
-    const username = 'Gast' + this.getRandomNumber(); 
-    const email = username + '@test.com'; 
-    const firstname = 'guest'; 
-    const lastname = 'whoAmI'; 
-    const password = 'guest_password' + this.getRandomNumber(); 
+    const username = 'Gast' + this.getRandomNumber();
+    const email = username + '@test.com';
+    const firstname = 'guest';
+    const lastname = 'whoAmI';
+    const password = 'guest_password' + this.getRandomNumber();
     console.log(password);
-    // const url = environment.baseUrl + "/sign-up/";
 
     const newUser = {
       username: username,
@@ -106,7 +117,7 @@ export class RegisterComponent {
   getRandomNumber(): number {
     return Math.floor(Math.random() * 1000) + 1; // Generate a random number between 1 and 1000
   }
-  
+
   showPassword(passwordInput: HTMLInputElement) {
     if (passwordInput.type === "password") {
       passwordInput.type = "text";
