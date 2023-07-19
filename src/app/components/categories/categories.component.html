@@ -1,42 +1,26 @@
 <div class="categories-section">
-    <!-- <div class="categories-row" *ngFor="let moviesrow of moviesrows; let i = index">
-        <span>{{ categoriesText[i] }}</span>
-        <div class="different-categories">
-            <div class="left-side-hover-container center">
-                <img class="arrow-left-img" src="./assets/img/arrow.png">
-            </div>
-            <img class="movie-img" [src]="movie.screenshot" *ngFor="let movieObject of movieDict[moviesrow[i]?.thirdpart]">
-
-            <div class="right-side-hover-container center">
-                <img class="arrow-right-img" src="./assets/img/arrow-right.png">
-            </div>
-        </div>
-    </div> -->
     <div class="categories-row">
         <span class="category-text">Mit dem Profil {{ userEmailResponse.email }} weiterschauen</span>
-        <div class="different-categories">
-            <div class="left-side-hover-container center">
+        <div class="different-categories" #categoriescontainer>
+            <div (click)="movecontent('left')" class="left-side-hover-container center">
                 <img class="arrow-left-img" src="./assets/img/arrow.png">
             </div>
-            <img class="movie-img" src="{{ movieskeepwatching.screenshot }}"
-                *ngFor="let movieskeepwatching of movieDict['keepwatching']">
-         
-    
-            <div class="right-side-hover-container center">
+
+            <img class="movie-img" src="{{ movieskeepwatching.screenshot }}" *ngFor="let movieskeepwatching of movieDict['keepwatching']">
+            
+            <div (click)="movecontent('right')" class="right-side-hover-container center">
                 <img class="arrow-right-img" src="./assets/img/arrow-right.png">
             </div>
         </div> 
     </div>
     <div class="categories-row">
         <span class="category-text" id="popularAtPresent">Derzeit beliebt</span>
-        <div class="different-categories">
-            <div class="left-side-hover-container center">
+        <div class="different-categories" #categoriescontainer>
+            <div (click)="movecontent('left')" class="left-side-hover-container center">
                 <img class="arrow-left-img" src="./assets/img/arrow.png">
             </div>
-            <img class="movie-img" src="./assets/img/first-page-background.png">
-            <img class="movie-img" src="./assets/img/first-page-background.png">
-            <img class="movie-img" src="./assets/img/first-page-background.png">
-            <div class="right-side-hover-container center">
+            <img class="movie-img" src="{{ moviespopularatpresent.screenshot }}" *ngFor="let moviespopularatpresent of movieDict['popularatpresent']">
+            <div (click)="movecontent('right')" class="right-side-hover-container center">
                 <img class="arrow-right-img" src="./assets/img/arrow-right.png">
             </div>
         </div>
@@ -44,14 +28,12 @@
     
     <div class="categories-row">
         <span class="category-text" id="watchagain">Nochmal ansehen</span>
-        <div class="different-categories">
-            <div class="left-side-hover-container center">
+        <div class="different-categories" #categoriescontainer>
+            <div (click)="movecontent('left')" class="left-side-hover-container center">
                 <img class="arrow-left-img" src="./assets/img/arrow.png">
             </div>
-            <img class="movie-img" src="./assets/img/first-page-background.png">
-            <img class="movie-img" src="./assets/img/first-page-background.png">
-            <img class="movie-img" src="./assets/img/first-page-background.png">
-            <div class="right-side-hover-container center">
+            <img class="movie-img" src="{{ movieswatchagain.screenshot }}" *ngFor="let movieswatchagain of movieDict['watchagain']">
+            <div (click)="movecontent('right')" class="right-side-hover-container center">
                 <img class="arrow-right-img" src="./assets/img/arrow-right.png">
             </div>
         </div>
@@ -62,21 +44,10 @@
             <div class="left-side-hover-container center">
                 <img (click)="movecontent('left')" class="arrow-left-img" src="./assets/img/arrow.png">
             </div>
-            <img class="movie-img" src="./assets/img/first-page-background.png">
-            <img class="movie-img" src="./assets/img/first-page-background.png">
-            <img class="movie-img" src="./assets/img/first-page-background.png">
-            <img class="movie-img" src="./assets/img/first-page-background.png">
-            <img class="movie-img" src="./assets/img/first-page-background.png">
-            <img class="movie-img" src="./assets/img/first-page-background.png">
-            <img class="movie-img" src="./assets/img/first-page-background.png">
-            <img class="movie-img" src="./assets/img/first-page-background.png">
-            <img class="movie-img" src="./assets/img/first-page-background.png">
+            <img class="movie-img" src="{{ moviesmylist.screenshot }}" *ngFor="let moviesmylist of movieDict['mylist']">
             <div class="right-side-hover-container center">
                 <img (click)="movecontent('right')" class="arrow-right-img" src="./assets/img/arrow-right.png">
             </div>
         </div>
     </div>
 </div>
-
-<!-- *ngFor="let movieskeepwatching of movieDict['keepwatching']" -->
-<!-- src="./assets/img/first-page-background.png"-->

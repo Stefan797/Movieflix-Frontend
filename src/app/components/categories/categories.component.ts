@@ -93,17 +93,31 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
     }
   }
 
+  // startIndex = 0;
+  // numVisibleMovies = 3;
+  currentShift = 0;
+ 
+
   movecontent(showMoreContentDirection: string) {
     console.log(showMoreContentDirection);
+
+    const containerElement = this.div?.nativeElement;
+
+    const visibleAreaWidth = containerElement.offsetWidth;
+
+    const maxShift = (containerElement.scrollWidth - containerElement.clientWidth) * -1;
+
+    if (showMoreContentDirection === 'left') {
+      // Verschiebe den Inhalt nach links, aber nicht weiter als das Ende.
+      this.currentShift = Math.min(this.currentShift + visibleAreaWidth, 0);
+    } else if (showMoreContentDirection === 'right') {
+      // Verschiebe den Inhalt nach rechts, aber nicht weiter als den Anfang.
+      this.currentShift = Math.max(this.currentShift - visibleAreaWidth, maxShift);
+    }
+
+    // Aktualisiere die Verschiebung des containers.
+    containerElement.style.transform = `translateX(${this.currentShift}px)`;
   }
-
-  // prevBtn.addEventListener('click', function() {
-  //   menuList.scrollLeft -= 100;
-  // });
-
-  // nextBtn.addEventListener('click', function() {
-  //   menuList.scrollLeft += 100;
-  // });
 
   ngAfterViewInit() {
     console.log(this.div?.nativeElement);

@@ -14,10 +14,11 @@
     <div class="soundcontrol">
 
     </div>
-    <video *ngIf="firstMovieResponses && firstMovieResponses.length > 0" autoplay muted loop [src]="firstMovieResponses[0]['movie_file']"></video>
+    <video autoplay muted loop [src]="firstMovieResponses['movie_file']"></video>
 </div>
 
-
+<!-- <video autoplay muted loop [src]="firstMovieResponses['movie_file']"></video> -->
+<!--*ngIf="firstMovieResponses && firstMovieResponses.length > 0"-->
 <!-- <video autoplay muted loop src="http://127.0.0.1:8000/media/movie/qualle-33995.mp4"></video> -->
 <!-- <video src="http://127.0.0.1:8000/media/movie/bug.mp4"></video> -->
 <!-- http://127.0.0.1:8000/movieST/qualle-33995.mp4/ -->
