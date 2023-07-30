@@ -13,9 +13,11 @@ export class HoverService {
 
   notificationIconIsHovered = false;
   profileSettingsIconIsHovered = false;
+  categorieImgIsHovered = false;
 
   showNotificationContainer = false;
   showProfilesettingsContainer = false;
+  showMovieHoverContainer = false;
 
   set isHovered(value: boolean) {
     this._isHovered.next(value);
@@ -25,5 +27,8 @@ export class HoverService {
     if (this.profileSettingsIconIsHovered == true) {
       this.showProfilesettingsContainer = value;
     }
+    if (this.categorieImgIsHovered == true) {
+      this.showMovieHoverContainer = value;
+    } 
   }
 }

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { HttpService } from 'src/app/services/http.service';
+import { LoadSingleMovieService } from 'src/app/services/load-single-movie.service';
 import { environment } from 'src/environments/environment.development';
 
 @Component({
@@ -9,24 +10,28 @@ import { environment } from 'src/environments/environment.development';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.sass']
 })
-export class MainComponent {
+export class MainComponent implements OnInit {
   // arrayurlmovies = [] = any;
 
+  furtherInformations: boolean = false;
   firstMovieResponses: any = [];
 
   error = '';
 
-  constructor(private router: Router, private httpService: HttpService) {}
+  constructor(private router: Router, private httpService: HttpService, private loadSingleMovieService: LoadSingleMovieService) {}
 
-  ngOnInit(): void {
-    this.loadFirstMovie();
-  };
-
-  async loadFirstMovie() {
+  async ngOnInit(): Promise<void> {
+    //this.loadFirstMovie();
     this.firstMovieResponses = await this.load();
 
     console.log(this.firstMovieResponses);
-  }
+  };
+
+  // async loadFirstMovie() {
+  //   this.firstMovieResponses = await this.load();
+
+  //   console.log(this.firstMovieResponses);
+  // }
 
   load() {
     const id = 40;
@@ -40,6 +45,16 @@ export class MainComponent {
   }
 
   showMovieFullscreen() {
-    this.router.navigate(['/watch/' + this.firstMovieResponses[0].title]);
+    this.loadSingleMovieService.loadSingleM(this.firstMovieResponses.id).then(()=> {
+      this.router.navigate(['/watch/' + this.firstMovieResponses.title]);
+    });
+  }
+
+  showMovieInfos() {
+    this.furtherInformations = true;
+  }
+
+  closeMovieInfos() {
+    this.furtherInformations = false;
   }
 }

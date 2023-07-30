@@ -1,5 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
+import { HoverService } from 'src/app/services/hover.service';
 import { HttpService } from 'src/app/services/http.service';
 import { environment } from 'src/environments/environment.development';
 
@@ -8,42 +9,14 @@ import { environment } from 'src/environments/environment.development';
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.sass']
 })
-export class CategoriesComponent implements OnInit, AfterViewInit {
+export class CategoriesComponent implements OnInit {
   
-  @ViewChild('categoriescontainer') div?: ElementRef;
+  // @ViewChild('categoriescontainer') div?: ElementRef;
   movieDict: any = [];
   userEmailResponse: any = [];
   error = '';
 
-  moviesrows: any = [
-    {
-      "firstpart": "let",
-      "secondpart": "movieskeepwatching",
-      "thirdpart": "keepwatching"
-    },
-    {
-      "firstpart": "let",
-      "secondpart": "moviespopularatpresent",
-      "thirdpart": "popularatpresent"
-    },
-    {
-      "firstpart": "let",
-      "secondpart": "movieswatchagain",
-      "thirdpart": "watchagain"
-    },
-    {
-      "firstpart": "let",
-      "secondpart": "moviesmylist",
-      "thirdpart": "mylist"
-    }
-  ];
-
-  categoriesText = [
-    'Mit dem Profil {{ userEmailResponse.email }} weiterschauen',
-    'Derzeit beliebt',
-    'Nochmal ansehen',
-    'Meine Liste',
-  ];
+  showHover: boolean = false;
 
   urls = [
     environment.baseUrl + "/movieAPI/?category=keepwatching",
@@ -52,7 +25,7 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
     environment.baseUrl + "/movieAPI/?category=mylist",
   ];
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService, public hoverService: HoverService) { }
 
   async ngOnInit(): Promise<void> {
     this.loadUserEmail();
@@ -93,33 +66,40 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
     }
   }
 
+  handleMoviePreviewHover(i: number){
+    console.log("Mouse Over Image");
+    document.getElementById(`movieImgHover_${i}`)?.classList.remove('hide');
+    this.hoverService.categorieImgIsHovered = true;
+    this.hoverService.isHovered = true;
+  }
+
   // startIndex = 0;
   // numVisibleMovies = 3;
-  currentShift = 0;
+  // currentShift = 0;
  
 
   movecontent(showMoreContentDirection: string) {
     console.log(showMoreContentDirection);
 
-    const containerElement = this.div?.nativeElement;
+    // const containerElement = this.div?.nativeElement;
 
-    const visibleAreaWidth = containerElement.offsetWidth;
+    // const visibleAreaWidth = containerElement.offsetWidth;
 
-    const maxShift = (containerElement.scrollWidth - containerElement.clientWidth) * -1;
+    // const maxShift = (containerElement.scrollWidth - containerElement.clientWidth) * -1;
 
-    if (showMoreContentDirection === 'left') {
-      // Verschiebe den Inhalt nach links, aber nicht weiter als das Ende.
-      this.currentShift = Math.min(this.currentShift + visibleAreaWidth, 0);
-    } else if (showMoreContentDirection === 'right') {
-      // Verschiebe den Inhalt nach rechts, aber nicht weiter als den Anfang.
-      this.currentShift = Math.max(this.currentShift - visibleAreaWidth, maxShift);
-    }
+    // if (showMoreContentDirection === 'left') {
+    //   // Verschiebe den Inhalt nach links, aber nicht weiter als das Ende.
+    //   this.currentShift = Math.min(this.currentShift + visibleAreaWidth, 0);
+    // } else if (showMoreContentDirection === 'right') {
+    //   // Verschiebe den Inhalt nach rechts, aber nicht weiter als den Anfang.
+    //   this.currentShift = Math.max(this.currentShift - visibleAreaWidth, maxShift);
+    // }
 
-    // Aktualisiere die Verschiebung des containers.
-    containerElement.style.transform = `translateX(${this.currentShift}px)`;
+    // // Aktualisiere die Verschiebung des containers.
+    // containerElement.style.transform = `translateX(${this.currentShift}px)`;
   }
 
-  ngAfterViewInit() {
-    console.log(this.div?.nativeElement);
-  }
+  // ngAfterViewInit() {
+  //   console.log(this.div?.nativeElement);
+  // }
 }

@@ -17,11 +17,16 @@
             display: flex
             position: relative
             margin-top: 5px
-            .movie-img
-                margin-left: 10px
-                margin-right: 10px
-                height: 180px
-                min-width: 20vw
+            .a
+                display: flex
+                .b
+                    .movie-img
+                        margin-left: 10px
+                        margin-right: 10px
+                        height: 180px
+                        min-width: 20vw
+                        &:hover
+                            cursor: pointer
 
             .left-side-hover-container
                 position: absolute
@@ -45,12 +50,8 @@
                     height: 40px
                     width: 40px
 
+.move-left
+    transform: translateX(-40%)
 
-
-.move-left 
-  transform: translateX(-40%)
-
-
-.move-right 
-  transform: translateX(40%)
-
+.move-right
+    transform: translateX(40%)

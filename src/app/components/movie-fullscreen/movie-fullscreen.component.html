@@ -1,5 +1,5 @@
 <div class="movie-fullscreen-container">
-    <video id="movie" autoplay loop src="assets/movie/qualle-33995.mp4" (keydown)="handleKeyDown($event)"></video>
+    <video id="movie" autoplay loop src="{{ response.movie_file }}" (keydown)="handleKeyDown($event)"></video>
     <div class="arrow-back">
        <img (click)="backToHome()" src="/assets/img/zurück-pfeil.png">
     </div>

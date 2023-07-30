@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from 'src/app/services/http.service';
+import { LoadSingleMovieService } from 'src/app/services/load-single-movie.service';
 
 @Component({
   selector: 'app-movie-fullscreen',
@@ -8,12 +9,15 @@ import { HttpService } from 'src/app/services/http.service';
   styleUrls: ['./movie-fullscreen.component.sass']
 })
 export class MovieFullscreenComponent {
+  response: any = [];
 
-  constructor(private router: Router, private httpService: HttpService, private elementRef: ElementRef) {
+  constructor(private router: Router, private httpService: HttpService, private elementRef: ElementRef, private loadSingleMovieService: LoadSingleMovieService) {
 
   }
 
   ngOnInit(): void {
+    this.response = this.loadSingleMovieService.getSingleM();
+    console.log(this.response);
   }
 
   backToHome() {

@@ -25,8 +25,8 @@ import { SearchBoxComponent } from './components/search-box/search-box.component
 import { FaqComponent } from './components/faq/faq.component';
 import { ImprintComponent } from './components/imprint/imprint.component';
 import { DataProtectionComponent } from './components/data-protection/data-protection.component';
-import { ContactComponent } from './components/contact/contact.component';
 import { AccountComponent } from './components/account/account.component';
+import { MovieHoverContainerComponent } from './components/movie-hover-container/movie-hover-container.component';
 
 @NgModule({
   declarations: [
@@ -48,8 +48,8 @@ import { AccountComponent } from './components/account/account.component';
     FaqComponent,
     ImprintComponent,
     DataProtectionComponent,
-    ContactComponent,
-    AccountComponent
+    AccountComponent,
+    MovieHoverContainerComponent
   ],
   imports: [
     BrowserModule,

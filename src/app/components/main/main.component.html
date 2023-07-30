@@ -1,12 +1,37 @@
 <div class="movie-preview-container">
-    <div class="movie center-with-column ">
-        <h2>Movie title</h2>
-        <span>Beschreibung</span>
+    <div class="movie center-with-column">
+        <h2>{{ firstMovieResponses['title'] }}</h2>
+        <span>{{ firstMovieResponses['description'] }}</span>
         <div class="buttons-container display-flex">
             <button (click)="showMovieFullscreen()" class="play-button">Abspielen</button>
-            <div class="info-button center">
+            <div (click)="showMovieInfos()" class="info-button center">
                 <img src="/assets/img/icons8-ausrufezeichen-100.png">
                 Weitere Infos
+            </div>
+            <div class="further-informations center" *ngIf="furtherInformations">
+                <div class="inside-further-informations">
+
+                    <img (click)="closeMovieInfos()" class="close-further-informations" src="/assets/img/x.png">
+                    <img src="{{ firstMovieResponses.screenshot }}">
+                    <div class="a display-flex">
+                        <div class="left-side">
+                            <div class="date-and-time display-flex">
+                                <p class="new">Neu</p>
+                                <p>{{ firstMovieResponses['created_at'] }}</p>
+                                <p>{{ firstMovieResponses['movie_time'] }}</p>
+                            </div>
+                            <p>{{ firstMovieResponses['title'] }}</p>
+                            <span>{{ firstMovieResponses['description'] }}</span>
+                        </div>
+                        
+                        <div class="right-side  display-flex">
+                            <p class="category-color">Kategorie:</p>
+                            <p>{{ firstMovieResponses['category_german'] }}</p>
+                        </div>
+                        
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>

@@ -35,13 +35,4 @@ export class HeaderNotificationContainerComponent implements OnInit {
       return null;
     }
   }
-  
-  movierecommendation = [
-    {id: 1, imgpath:'test1.jpg', text:'Durchstöbern Sie ihre Empfehlungen'},
-    {id: 2, imgpath:'test2.jpg', text:'Neu auf Movieflix Water Example: The Story'},
-    {id: 3, imgpath:'test3.jpg', text:'Jetzt verfügbar Neue Folgen von You. '},
-    {id: 4, imgpath:'test4.jpg', text:'Dieser Titel könnte auch zu ihrem Geschmack passen '},
-    {id: 5, imgpath:'test3.jpg', text:'Jetzt verfügbar Neue Folgen von You. '},
-    {id: 6, imgpath:'test4.jpg', text:'Dieser Titel könnte auch zu ihrem Geschmack passen '}
-  ];
 }

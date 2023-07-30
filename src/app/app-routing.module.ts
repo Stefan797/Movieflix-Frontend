@@ -8,7 +8,6 @@ import { MovieFullscreenComponent } from './components/movie-fullscreen/movie-fu
 import { ImprintComponent } from './components/imprint/imprint.component';
 import { DataProtectionComponent } from './components/data-protection/data-protection.component';
 import { FaqComponent } from './components/faq/faq.component';
-import { ContactComponent } from './components/contact/contact.component';
 import { AccountComponent } from './components/account/account.component';
 
 const routes: Routes = [
@@ -22,7 +21,6 @@ const routes: Routes = [
   { path: 'FAQ', component: FaqComponent},
   { path: 'imprint', component: ImprintComponent},
   { path: 'data-protection', component: DataProtectionComponent},
-  { path: 'contact', component: ContactComponent},
   { path: '**', component: FirstPageComponent},
 ];
 
