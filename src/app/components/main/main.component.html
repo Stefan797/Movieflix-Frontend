@@ -13,24 +13,22 @@
 
                     <img (click)="closeMovieInfos()" class="close-further-informations" src="/assets/img/x.png">
                     <img src="{{ firstMovieResponses.screenshot }}">
-                    <div class="a display-flex">
+                    <div class="infos">
                         <div class="left-side">
-                            <div class="date-and-time display-flex">
+                            <div class="date-and-time">
                                 <p class="new">Neu</p>
                                 <p>{{ firstMovieResponses['created_at'] }}</p>
-                                <p>{{ firstMovieResponses['movie_time'] }}</p>
+                                <p>{{ firstMovieResponses['movie_time'] }} Std</p>
                             </div>
                             <p>{{ firstMovieResponses['title'] }}</p>
                             <span>{{ firstMovieResponses['description'] }}</span>
                         </div>
                         
-                        <div class="right-side  display-flex">
+                        <div class="right-side">
                             <p class="category-color">Kategorie:</p>
                             <p>{{ firstMovieResponses['category_german'] }}</p>
                         </div>
-                        
                     </div>
-
                 </div>
             </div>
         </div>

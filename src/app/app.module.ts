@@ -27,6 +27,9 @@ import { ImprintComponent } from './components/imprint/imprint.component';
 import { DataProtectionComponent } from './components/data-protection/data-protection.component';
 import { AccountComponent } from './components/account/account.component';
 import { MovieHoverContainerComponent } from './components/movie-hover-container/movie-hover-container.component';
+import { SearchResponseComponent } from './components/search-response/search-response.component';
+import { SearchCategoriesComponent } from './components/search-categories/search-categories.component';
+import { MylistComponent } from './components/mylist/mylist.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,10 @@ import { MovieHoverContainerComponent } from './components/movie-hover-container
     ImprintComponent,
     DataProtectionComponent,
     AccountComponent,
-    MovieHoverContainerComponent
+    MovieHoverContainerComponent,
+    SearchResponseComponent,
+    SearchCategoriesComponent,
+    MylistComponent
   ],
   imports: [
     BrowserModule,

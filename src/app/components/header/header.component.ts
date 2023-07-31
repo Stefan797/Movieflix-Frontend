@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { HoverService } from 'src/app/services/hover.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { HoverService } from 'src/app/services/hover.service';
 })
 export class HeaderComponent {
 
-  constructor(public hoverService: HoverService) { }
+  constructor(private router: Router, public hoverService: HoverService) { }
 
   ngOnInit(): void {
    
@@ -18,6 +19,19 @@ export class HeaderComponent {
     document.getElementById(id).scrollIntoView({ 
       behavior: 'smooth' 
     });
+  }
+
+  loadSearchCategoriesPage() {
+    this.router.navigate(['search/categories']);
+  }
+
+  loadMylistPage() {
+    this.router.navigate(['mylist']);
+  }
+
+  showSearchInput() {
+    document.getElementById('search')?.classList.remove('hide');
+    document.getElementById('test')?.classList.add('hide');
   }
 
   handleNotificationHover(){

@@ -1,13 +1,11 @@
 .header
     background-color: rgb(4,3,3)
-    // background-color: rgba(0, 0, 0, 0.8)
     display: flex
     justify-content: space-between
     align-items: center
     min-height: 8vh
 
     .left
-        // background-color: rgba(0, 0, 0, 0.3)
         padding-left: 3.5%
         h1
             color: #d91b0d
@@ -18,16 +16,18 @@
                 list-style-type: none
 
             li
-                margin: 0px 6px 0
+                margin: 0px 7px 0
 
             a
                 color: white
                 text-decoration: none
-
+                &:hover
+                    cursor: pointer
+     
     .right
         display: flex
         padding-right: 3%
-       
+
         .search-icon-container
             margin-right: 20px
             .search-icon
@@ -42,14 +42,12 @@
                 width: 30px
 
         .profile-img-container
-            background-color: white
-            height: 40px
-            width: 40px
+            height: 50px
+            width: 50px
             margin-left: 20px
             border-radius: 8px
             .profile-img
-                height: 40px
-                width: 40px
-
+                height: 50px
+                width: 50px
 
 @import "src/assets/sass/width-responsive-600.sass"

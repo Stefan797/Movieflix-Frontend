@@ -19,10 +19,10 @@ export class CategoriesComponent implements OnInit {
   showHover: boolean = false;
 
   urls = [
-    environment.baseUrl + "/movieAPI/?category=keepwatching",
     environment.baseUrl + "/movieAPI/?category=popularatpresent",
-    environment.baseUrl + "/movieAPI/?category=watchagain",
-    environment.baseUrl + "/movieAPI/?category=mylist",
+    environment.baseUrl + "/movieAPI/?category=sea",
+    environment.baseUrl + "/movieAPI/?category=nature",
+    environment.baseUrl + "/movieAPI/?category=funny",
   ];
 
   constructor(private httpService: HttpService, public hoverService: HoverService) { }

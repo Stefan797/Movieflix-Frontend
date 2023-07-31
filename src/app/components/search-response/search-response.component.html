@@ -1,0 +1,17 @@
+<app-header></app-header>
+<div class="search-response">
+    <div *ngIf="results" class="search-results">
+        <img src="/assets/img/first-page-background.png">
+    </div>
+    <div *ngIf="nothingFound" class="search-failed">
+        <div class="inside-search-failed">
+            <p>Ihre Suche nach "{{ searchResult }}" hat keine Treffer ergeben.</p>
+            <p>Vorschläge:</p>
+            <ul>
+                <li>Versuchen Sie andere Stichwörter.</li>
+                <li>Versuchen Sie es mit Genres wie zum Beispiel Komödien, Natur, Tieren.</li>
+                <li>Versuchen Sie es mit einer Kategorie, zum Beispiel Neu und Beliebt, etc.</li>
+            </ul>
+        </div>
+    </div>
+</div>

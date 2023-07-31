@@ -1,0 +1,24 @@
+<app-header></app-header>
+<div class="search-categories">
+    <div class="search-categories-header">
+        <h1>Nach Kategorien durchsuchen</h1>
+        <div class="choose-category">
+            <p>Kategorie auswählen</p>
+            <select name="Neu und beliebt">
+                <option value="Neu und beliebt">Neu und beliebt</option>
+                <option value="Meine Liste">Meine Liste</option>
+                <option value="Natur">Natur</option>
+            </select>
+            <p class="ml-10">Sortieren nach</p>
+            <select name="Erscheinungsdatum"> 
+                <option value="Erscheinungsdatum">Erscheinungsdatum</option>
+                <option value="A-Z">A-Z</option>
+                <option value="Z-A">Z-A</option>
+            </select>
+        </div>
+    </div>
+    
+    <div *ngIf="results" class="search-results">
+        <img src="/assets/img/first-page-background.png">
+    </div>
+</div>

@@ -1,8 +1,4 @@
-<div>
-    <input type="text" [(ngModel)]="searchTerm" placeholder="Suche nach Titel" (ngModelChange)="search()">
-</div>
-<div>
-    <ul>
-        <li *ngFor="let result of searchResults">{{ result.title }}</li>
-    </ul>
+<div class="search-container center">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Titel, Kategorien, Genres" (ngModelChange)="search()">
+    <img (click)="closeSearchInput()" src="/assets/img/x.png">
 </div>

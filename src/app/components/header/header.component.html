@@ -1,20 +1,21 @@
 <div class="header">
     <div class="left display-flex">
-        <h1>MOVIEFLIX</h1>
+        <h1>MovieFlix</h1>
         <div class="navigation-menu display-flex hide-smartphone">
             <ul class="center">
-                <li><a (click)="scroll('myList')">Startseite</a></li>
-                <li><a (click)="scroll('myList')">Filme</a></li>
-                <li><a (click)="scroll('myList')">Neu und beliebt</a></li>
-                <li><a (click)="scroll('myList')">Meine Liste</a></li>
-                <li><a (click)="scroll('myList')">Nach Kategorien durchsuchen</a></li>
+                <li><a routerLink="/home">Startseite</a></li>
+                <!-- <li><a (click)="scroll('myList')">Filme</a></li> -->
+                <li><a (click)="scroll('popularatpresent')">Derzeit beliebt</a></li>
+                <li><a (click)="loadMylistPage()">Meine Liste</a></li>
+                <li><a (click)="loadSearchCategoriesPage()">Nach Kategorien durchsuchen</a></li>
             </ul>
         </div> 
     </div>
-    <app-search-box id="search" class="hide"></app-search-box>
+   
     <div class="right center hide-smartphone">
+        <app-search-box id="search" class="hide"></app-search-box>
         <div class="search-icon-container">
-            <img class="search-icon cursor-pointer" src="assets/img/search-60.png">
+            <img (click)="showSearchInput()" id="test" class="search-icon cursor-pointer" src="assets/img/search-60.png">
         </div>
         
         <div class="notification-icon-container">
@@ -22,7 +23,7 @@
         </div>
         
         <div class="profile-img-container">
-            <img (mouseover)="handleProfileSettingsHover()" class="profile-img cursor-pointer" src="assets/img/profile-icon.png">
+            <img (mouseover)="handleProfileSettingsHover()" class="profile-img cursor-pointer" src="/assets/img/profile-icon.png">
         </div>
     </div>
 </div>

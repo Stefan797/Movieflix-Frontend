@@ -9,6 +9,9 @@ import { ImprintComponent } from './components/imprint/imprint.component';
 import { DataProtectionComponent } from './components/data-protection/data-protection.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { AccountComponent } from './components/account/account.component';
+import { SearchResponseComponent } from './components/search-response/search-response.component';
+import { SearchCategoriesComponent } from './components/search-categories/search-categories.component';
+import { MylistComponent } from './components/mylist/mylist.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent},
@@ -17,6 +20,9 @@ const routes: Routes = [
   { path: 'de/login', component: LoginComponent},
   { path: 'de/register', component: RegisterComponent},
   { path: 'watch/:movie-title', component: MovieFullscreenComponent},
+  { path: 'search', component: SearchResponseComponent},
+  { path: 'search/categories', component: SearchCategoriesComponent},
+  { path: 'mylist', component: MylistComponent},
   { path: 'account', component: AccountComponent},
   { path: 'FAQ', component: FaqComponent},
   { path: 'imprint', component: ImprintComponent},

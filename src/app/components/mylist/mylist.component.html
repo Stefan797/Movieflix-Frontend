@@ -1,0 +1,17 @@
+<app-header></app-header>
+<div class="mylist-page">
+    <h2>Meine Liste</h2>
+
+    <div *ngIf="results" class="mylist-results">
+        <div class="inside-mylist-results">
+            <img src="/assets/img/first-page-background.png">
+        </div>
+    </div>
+
+    <div *ngIf="mylistEmpty" class="mylist-empty">
+        <div class="inside-mylist-empty">
+            <p>Fügen Sie über diesen Add Button Titel zu ihrer Liste hinzu.</p>
+            <img routerLink="/home" src="/assets/img/movie-hover-plus.png">
+        </div>
+    </div>
+</div>
