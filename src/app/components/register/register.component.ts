@@ -94,7 +94,7 @@ export class RegisterComponent {
     const email = username + '@test.com';
     const firstname = 'guest';
     const lastname = 'whoAmI';
-    const password = 'guest_password' + this.getRandomNumber();
+    const password = 'guest_password' + username;
     console.log(password);
 
     const newUser = {

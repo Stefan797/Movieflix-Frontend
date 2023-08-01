@@ -3,38 +3,83 @@
         <span>MovieFlix</span>
         <p>Konto</p>
     </div>
-    <!-- <div class="account-datas">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div> -->
-    <h1>Upload new Movie Formular</h1>
+    <div class="inside-account-container">
+        <div class="account-datas">
+            <h2>Account Informationen</h2>
+            <div class="user-login-datas">
+                <div class="data-container">
+                    <p>User Email</p>
+                    <p class="value">{{ response.email }}</p>
+                </div>
+                <div class="data-container">
+                    <p>Username</p>
+                    <p class="value">{{ response.username }}</p>
+                </div>
+                <div class="data-container">
+                    <p>Passwort</p>
+                    <p class="value">guest_password{{ response.username }} | Nur bei Gast Accounts einsehbar.</p>
+                </div>
+            </div>
+            <div class="first-and-last-name">
+                <div class="data-container">
+                    <p>Vorname</p>
+                    <p class="value">guest_password{{ response.first_name }}</p>
+                </div>
+                <div class="data-container">
+                    <p>Nachname</p>
+                    <p class="value">guest_password{{ response.last_name }}</p>
+                </div>
+            </div>
+            
+            <div  class="user-status">
+                <div class="data-container">
+                    <p>User Status</p>
+                    <div class="test">
+                        <div class="a">
+                            <p>Is_active</p> 
+                            <div (click)="changeCheckboxValue()" class="show-checkbox" [ngClass]="{ 'show-checkbox': !checkboxVisible, 'hide-checkbox': checkboxVisible }">
+                                <img [ngStyle]="{ 'display': checkboxVisible ? 'block' : 'none' }" src="./assets/img/checkbox-white.png">
+                            </div>
+                        </div>
+                        
+                        <div class="a">
+                            <p>Is_Staff</p>
+                            <div (click)="changeCheckboxValue()" class="show-checkbox" [ngClass]="{ 'show-checkbox': !checkboxVisible, 'hide-checkbox': checkboxVisible }">
+                                <img [ngStyle]="{ 'display': checkboxVisible ? 'block' : 'none' }" src="./assets/img/checkbox-white.png">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-
-    <form (ngSubmit)="submitForm()" #form="ngForm">
-        <div>
-            <label for="search_terms">Suchbegriffe:</label>
-            <input type="text" id="search_terms" name="search_terms" [(ngModel)]="formData.search_terms" required>
-        </div>
-        <div>
-            <label for="title">Titel:</label>
-            <input type="text" id="title" name="title" [(ngModel)]="formData.title" required>
-        </div>
-        <div>
-            <label for="description">Beschreibung:</label>
-            <textarea id="description" name="description" [(ngModel)]="formData.description" required></textarea>
-        </div>
-        <div>
-            <label for="category">Kategorie:</label>
-            <input type="text" id="category" name="category" [(ngModel)]="formData.category" required>
-        </div>
-        <div>
-            <label for="movie_file">MP4-Datei:</label>
-            <input type="file" id="movie_file" name="movie_file" accept="video/mp4" required>
-        </div>
-        <button type="submit">Absenden</button>
-    </form>
-
+        <!-- <div *ngIf="userIsStaffUser">
+            <h1>Upload new Movie Formular</h1>
+            <form (ngSubmit)="submitForm()" #form="ngForm">
+                <div>
+                    <label for="search_terms">Suchbegriffe:</label>
+                    <input type="text" id="search_terms" name="search_terms" [(ngModel)]="formData.search_terms"
+                        required>
+                </div>
+                <div>
+                    <label for="title">Titel:</label>
+                    <input type="text" id="title" name="title" [(ngModel)]="formData.title" required>
+                </div>
+                <div>
+                    <label for="description">Beschreibung:</label>
+                    <textarea id="description" name="description" [(ngModel)]="formData.description"
+                        required></textarea>
+                </div>
+                <div>
+                    <label for="category">Kategorie:</label>
+                    <input type="text" id="category" name="category" [(ngModel)]="formData.category" required>
+                </div>
+                <div>
+                    <label for="movie_file">MP4-Datei:</label>
+                    <input type="file" id="movie_file" name="movie_file" accept="video/mp4" required>
+                </div>
+                <button type="submit">Absenden</button>
+            </form>
+        </div> -->
+    </div>
 </div>
