@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { HoverService } from 'src/app/services/hover.service';
 import { HttpService } from 'src/app/services/http.service';
+import { TransferMovieDatasService } from 'src/app/services/transfer-movie-datas.service';
 import { environment } from 'src/environments/environment.development';
 
 @Component({
@@ -25,7 +26,7 @@ export class CategoriesComponent implements OnInit {
     environment.baseUrl + "/movieAPI/?category=funny",
   ];
 
-  constructor(private httpService: HttpService, public hoverService: HoverService) { }
+  constructor(private httpService: HttpService, public hoverService: HoverService, private transferMovieDatas: TransferMovieDatasService) { }
 
   async ngOnInit(): Promise<void> {
     this.loadUserEmail();
@@ -66,37 +67,29 @@ export class CategoriesComponent implements OnInit {
     }
   }
 
-  handleMoviePreviewHover(i: number){
+  handleMoviePreviewHover(i: number, movieDictcategory: string){
     console.log("Mouse Over Image");
     document.getElementById(`movieImgHover_${i}`)?.classList.remove('hide');
     this.hoverService.categorieImgIsHovered = true;
     this.hoverService.isHovered = true;
+    debugger;
+    this.transferMovieDatas.setMovieDataResponse(this.movieDict[movieDictcategory][i]);
+    // console.log(test);
+  }
+ 
+  contentmoveleft(id: string) {
+    let htmlContainer: any = document.getElementById(id);
+    let scrollAmount = 300;
+    htmlContainer.scrollLeft += scrollAmount;
+    console.log(htmlContainer.scrollLeft);
   }
 
-  // startIndex = 0;
-  // numVisibleMovies = 3;
-  // currentShift = 0;
- 
-
-  movecontent(showMoreContentDirection: string) {
-    console.log(showMoreContentDirection);
-
-    // const containerElement = this.div?.nativeElement;
-
-    // const visibleAreaWidth = containerElement.offsetWidth;
-
-    // const maxShift = (containerElement.scrollWidth - containerElement.clientWidth) * -1;
-
-    // if (showMoreContentDirection === 'left') {
-    //   // Verschiebe den Inhalt nach links, aber nicht weiter als das Ende.
-    //   this.currentShift = Math.min(this.currentShift + visibleAreaWidth, 0);
-    // } else if (showMoreContentDirection === 'right') {
-    //   // Verschiebe den Inhalt nach rechts, aber nicht weiter als den Anfang.
-    //   this.currentShift = Math.max(this.currentShift - visibleAreaWidth, maxShift);
-    // }
-
-    // // Aktualisiere die Verschiebung des containers.
-    // containerElement.style.transform = `translateX(${this.currentShift}px)`;
+  contentmoveright(id: string) {
+    // debugger;
+    let htmlContainer: any = document.getElementById(id);
+    let scrollAmount = 100;
+    htmlContainer.scrollLeft -= scrollAmount;
+    console.log(htmlContainer.scrollLeft);
   }
 
   // ngAfterViewInit() {

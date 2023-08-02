@@ -2,64 +2,82 @@
 
     <div class="categories-row">
         <span id="popularatpresent" class="category-text">Derzeit beliebt</span>
+        
         <div class="different-categories">
-            <div (click)="movecontent('left')" class="left-side-hover-container center">
+            <div (click)="contentmoveleft('scrolling_div_1')" class="left-side-hover-container center">
                 <img class="arrow-left-img" src="./assets/img/arrow.png">
             </div>
-
-            <div class="a">
+            <div class="a scrollbar-move" id="scrolling_div_1">
                 <div class="b" *ngFor="let moviespopularatpresent of movieDict['popularatpresent']; let i = index">
-                    <app-movie-hover-container #movieHoverContainer id="movieImgHover_{{i}}" class="hide"></app-movie-hover-container>
-                    <img class="movie-img" (mouseover)="handleMoviePreviewHover(i)" src="{{ moviespopularatpresent.screenshot }}">
+                    <app-movie-hover-container #movieHoverContainer id="movieImgHover_{{i}}"
+                        class="hide"></app-movie-hover-container>
+                    <img class="movie-img" (mouseover)="handleMoviePreviewHover(i, 'popularatpresent')"
+                        src="{{ moviespopularatpresent.screenshot }}">
                 </div>
-            </div> 
-           
-            <div (click)="movecontent('right')" class="right-side-hover-container center">
+            </div>
+            <div (click)="contentmoveright('scrolling_div_1')" class="right-side-hover-container center">
                 <img class="arrow-right-img" src="./assets/img/arrow-right.png">
             </div>
-        </div> 
-    </div> 
+        </div>
+    </div>
 
     <!-- <div class="categories-row">
         <span class="category-text">Meer</span>
         <div class="different-categories">
-            <div (click)="movecontent('left')" class="left-side-hover-container center">
+            <div (click)="contentmoveleft('scrolling_div_2')" class="left-side-hover-container center">
                 <img class="arrow-left-img" src="./assets/img/arrow.png">
             </div>
 
-            <div class="a">
+            <div class="a scrollbar-move" id="scrolling_div_2">
                 <div class="b" *ngFor="let moviessea of movieDict['sea']; let i = index">
                     <app-movie-hover-container #movieHoverContainer id="movieImgHover_{{i}}" class="hide"></app-movie-hover-container>
                     <img class="movie-img" (mouseover)="handleMoviePreviewHover(i)" src="{{ moviessea.screenshot }}">
                 </div>
             </div> 
            
-            <div (click)="movecontent('right')" class="right-side-hover-container center">
+            <div (click)="contentmoveright('scrolling_div_2')" class="right-side-hover-container center">
                 <img class="arrow-right-img" src="./assets/img/arrow-right.png">
             </div>
         </div> 
-    </div> 
+    </div>   -->
 
-    <div class="categories-row">
-        <span class="category-text">Lustiges</span>
+    <!-- <div class="categories-row">
+        <span class="category-text">Natur</span>
         <div class="different-categories">
-            <div (click)="movecontent('left')" class="left-side-hover-container center">
+            <div (click)="contentmoveleft('scrolling_div_3')" class="left-side-hover-container center">
                 <img class="arrow-left-img" src="./assets/img/arrow.png">
             </div>
 
-            <div class="a">
+            <div class="a scrollbar-move" id="scrolling_div_3">
+                <div class="b" *ngFor="let moviesnature of movieDict['nature']; let i = index">
+                    <app-movie-hover-container #movieHoverContainer id="movieImgHover_{{i}}" class="hide"></app-movie-hover-container>
+                    <img class="movie-img" (mouseover)="handleMoviePreviewHover(i)" src="{{ moviesnature.screenshot }}">
+                </div>
+            </div> 
+           
+            <div (click)="contentmoveright('scrolling_div_3')" class="right-side-hover-container center">
+                <img class="arrow-right-img" src="./assets/img/arrow-right.png">
+            </div>
+        </div> 
+    </div>  -->
+
+    <!-- <div class="categories-row">
+        <span class="category-text">Lustiges</span>
+        <div class="different-categories">
+            <div (click)="contentmoveleft('scrolling_div_4')" class="left-side-hover-container center">
+                <img class="arrow-left-img" src="./assets/img/arrow.png">
+            </div>
+
+            <div class="a scrollbar-move" id="scrolling_div_4">
                 <div class="b" *ngFor="let moviesfunny of movieDict['funny']; let i = index">
                     <app-movie-hover-container #movieHoverContainer id="movieImgHover_{{i}}" class="hide"></app-movie-hover-container>
                     <img class="movie-img" (mouseover)="handleMoviePreviewHover(i)" src="{{ moviesfunny.screenshot }}">
                 </div>
             </div> 
            
-            <div (click)="movecontent('right')" class="right-side-hover-container center">
+            <div (click)="contentmoveright('scrolling_div_4')" class="right-side-hover-container center">
                 <img class="arrow-right-img" src="./assets/img/arrow-right.png">
             </div>
         </div> 
-    </div>  -->
-
-
-    
+    </div> -->
 </div>

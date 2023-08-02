@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./search-response.component.sass']
 })
 export class SearchResponseComponent {
-  results: boolean = true;
-  nothingFound: boolean = false;
+  results: boolean = false;
+  nothingFound: boolean = true;
   searchResult: string = 'Eingegebener Input Text';
 }
