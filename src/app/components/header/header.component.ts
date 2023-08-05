@@ -9,10 +9,14 @@ import { HoverService } from 'src/app/services/hover.service';
 })
 export class HeaderComponent {
 
+  inputIsSearchOpen: boolean = false;
+
+  public url1: string = "";
+
   constructor(private router: Router, public hoverService: HoverService) { }
 
   ngOnInit(): void {
-   
+    this.url1 = this.router.url;
   }
 
   scroll(id: string){
@@ -30,7 +34,7 @@ export class HeaderComponent {
   }
 
   showSearchInput() {
-    document.getElementById('search')?.classList.remove('hide');
+    this.inputIsSearchOpen = true;
     document.getElementById('test')?.classList.add('hide');
   }
 

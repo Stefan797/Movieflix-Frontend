@@ -1,29 +1,22 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransferMovieDatasService {
   private movieDataResponse: any;
+  public movieDataResponse$ = new BehaviorSubject(undefined);
 
-  // constructor() { 
-  //   this.isRegistered = false; 
-  // }
+  constructor() {}
 
   setMovieDataResponse(response: any) {
     this.movieDataResponse = response;
     console.log(this.movieDataResponse);
+    this.movieDataResponse$.next(response);
   }
 
   getMovieDataResponse(): any {
     return this.movieDataResponse;
   }
-
-  // handleRegisterComponent() {
-  //   if (this.isRegistered == true) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
 }

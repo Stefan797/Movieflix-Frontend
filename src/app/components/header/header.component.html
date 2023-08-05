@@ -13,7 +13,7 @@
     </div>
    
     <div class="right center hide-smartphone">
-        <app-search-box id="search" class="hide"></app-search-box>
+        <app-search-box id="search" [ngClass]="{'hide': url1 !== 'search'}"></app-search-box>
         <div class="search-icon-container">
             <img (click)="showSearchInput()" id="test" class="search-icon cursor-pointer" src="assets/img/search-60.png">
         </div>

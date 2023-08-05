@@ -20,14 +20,43 @@
             .a
                 display: flex
                 overflow-x: scroll
-                .b
-                    .movie-img
-                        margin-left: 10px
-                        margin-right: 10px
-                        height: 180px
-                        min-width: 20vw
-                        &:hover
-                            cursor: pointer
+                .element
+                    height: 200px
+                    min-width: 21vw
+                    .b
+                        .f
+                            position: relative
+                            width: 100%
+                            .hover-container
+                                position: absolute
+                                bottom: 0
+                                z-index: 3
+                                background-color: #141414
+                                color: white
+                                padding: 10px
+                                border-radius: 5px
+                                height: 250px
+                                min-width: 20vw
+                                max-width: 20vw
+                                font-size: 1.2rem
+                                .view-movie
+                                    height: 150px
+                                    min-width: 22vw
+                                    video
+                                        height: 100%
+                                        width: 100%
+
+                                .action-bottons
+                                    .left-side
+                                        img
+                                            width: 50px
+                                            height: 50px
+                                    .right-side
+                                        img
+                                            width: 50px
+                                            height: 50px
+                                        &:hover
+                                            cursor: pointer
 
             .left-side-hover-container
                 position: absolute
@@ -58,3 +87,9 @@
 
 // .move-right
 //     transform: translateX(40%)
+
+.movie-img
+    margin-left: 10px
+    margin-right: 10px
+    height: 180px
+    min-width: 20vw

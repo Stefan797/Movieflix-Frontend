@@ -17,6 +17,9 @@ export class CategoriesComponent implements OnInit {
   userEmailResponse: any = [];
   error = '';
 
+
+  imgIsHovered: boolean[] = [];
+
   showHover: boolean = false;
 
   urls = [
@@ -26,11 +29,39 @@ export class CategoriesComponent implements OnInit {
     environment.baseUrl + "/movieAPI/?category=funny",
   ];
 
-  constructor(private httpService: HttpService, public hoverService: HoverService, private transferMovieDatas: TransferMovieDatasService) { }
+  constructor(private httpService: HttpService, public hoverService: HoverService, private transferMovieDatas: TransferMovieDatasService) {}
+   
 
   async ngOnInit(): Promise<void> {
     this.loadUserEmail();
     await this.loadContent();
+    this.movieDict['popularatpresent'].forEach(moviehovercontainer => {
+      console.log(moviehovercontainer); // Gibt jedes Element des Arrays aus
+      console.log(this.imgIsHovered); // Gibt jedes Element des Arrays aus
+      this.imgIsHovered.push(false);
+    });
+    console.log(this.movieDict['popularatpresent']);
+  }
+
+  handleMoviePreviewHover(i: number, movieDictcategory: string){
+    // debugger;
+    this.imgIsHovered = this.imgIsHovered.map((val, index) => index === i);
+    console.log(this.imgIsHovered);
+
+    // console.log("Mouse Over Image");
+    // document.getElementById(`movieImgHover_${i}`)?.classList.remove('hide');
+    // this.hoverService.categorieImgIsHovered = true;
+    // this.hoverService.isHovered = true;
+    // debugger;
+    // this.transferMovieDatas.setMovieDataResponse(this.movieDict[movieDictcategory][i]);
+    // console.log(test);
+  }
+
+  handleCloseMoviePreviewHover(i: number, movieDictcategory: string) {
+    // debugger;
+    this.imgIsHovered[i] = false;
+    console.log(this.imgIsHovered[i]);
+    console.log(this.imgIsHovered);
   }
 
   async loadUserEmail() {
@@ -67,15 +98,8 @@ export class CategoriesComponent implements OnInit {
     }
   }
 
-  handleMoviePreviewHover(i: number, movieDictcategory: string){
-    console.log("Mouse Over Image");
-    document.getElementById(`movieImgHover_${i}`)?.classList.remove('hide');
-    this.hoverService.categorieImgIsHovered = true;
-    this.hoverService.isHovered = true;
-    debugger;
-    this.transferMovieDatas.setMovieDataResponse(this.movieDict[movieDictcategory][i]);
-    // console.log(test);
-  }
+
+  
  
   contentmoveleft(id: string) {
     let htmlContainer: any = document.getElementById(id);
@@ -95,4 +119,12 @@ export class CategoriesComponent implements OnInit {
   // ngAfterViewInit() {
   //   console.log(this.div?.nativeElement);
   // }
+
+  // initMovieDataResponse() {
+  //   let response: any =  this.transferMovieDatas.getMovieDataResponse();
+  //   this.transferMovieDatas.movieDataResponse$.subscribe(response => {
+  //     this.response = response;
+  //     console.log(this.response);
+  //   })
+  // };
 }
