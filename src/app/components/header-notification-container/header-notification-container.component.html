@@ -1,12 +1,19 @@
 <div class="notification-container" appHover [class.show]="hoverService.showNotificationContainer">
     <div class="inside-container center-with-column">
-        <div *ngFor="let notificationResponse of notificationResponses; let i = index" class="movie-recommendation-container center">
-            <div class="img-box center">
-                <img class="img-design" src="assets/img/{{notificationResponse['imgpath']}}">
-            </div>
-            
-            <div class="text-box">
-                <span>{{notificationResponse['recommendation']}}</span>
+        <div *ngIf="UserIsGuest && UserAccountIsnotConfirmed" class="no-notifications">
+            <span>Erstellen Sie einen persönlichen Account oder bestätigen Sie Ihre E-Mail, um Benachrichtigungen
+                einzusehen.</span>
+        </div>
+        <div *ngIf="UserAccountIsConfirmed">
+            <div *ngFor="let notificationResponse of notificationResponses; let i = index"
+                class="movie-recommendation-container center">
+                <div class="img-box center">
+                    <img class="img-design" src="assets/img/{{notificationResponse['imgpath']}}">
+                </div>
+
+                <div class="text-box">
+                    <span>{{notificationResponse['recommendation']}}</span>
+                </div>
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { HoverService } from 'src/app/services/hover.service';
 
@@ -9,14 +9,22 @@ import { HoverService } from 'src/app/services/hover.service';
 })
 export class HeaderComponent {
 
-  inputIsSearchOpen: boolean = false;
+  @Input() inputSearchFieldIsOpen: boolean = false;
 
-  public url1: string = "";
+  public currentpath: string = '';
 
   constructor(private router: Router, public hoverService: HoverService) { }
 
   ngOnInit(): void {
-    this.url1 = this.router.url;
+    this.currentpath = this.router.url;
+    this.checkpath();
+    console.log('', this.currentpath);
+  }
+
+  checkpath() {
+    if (this.currentpath !== '/search') {
+      document.getElementById('loupe')?.classList.remove('hide');
+    }
   }
 
   scroll(id: string){
@@ -34,8 +42,8 @@ export class HeaderComponent {
   }
 
   showSearchInput() {
-    this.inputIsSearchOpen = true;
-    document.getElementById('test')?.classList.add('hide');
+    this.inputSearchFieldIsOpen = true;
+    document.getElementById('loupe')?.classList.add('hide');
   }
 
   handleNotificationHover(){

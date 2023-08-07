@@ -10,8 +10,11 @@ import { environment } from 'src/environments/environment.development';
   styleUrls: ['./header-notification-container.component.sass']
 })
 export class HeaderNotificationContainerComponent implements OnInit {
-
-  notificationResponses: any = [];
+  
+  UserAccountIsConfirmed: boolean = false; 
+  UserAccountIsnotConfirmed: boolean = true; 
+  UserIsGuest: boolean = true;
+  notificationResponses: any = [] || undefined;
 
   error = '';
   

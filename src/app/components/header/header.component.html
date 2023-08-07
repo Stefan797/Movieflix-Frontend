@@ -13,9 +13,9 @@
     </div>
    
     <div class="right center hide-smartphone">
-        <app-search-box id="search" [ngClass]="{'hide': url1 !== 'search'}"></app-search-box>
+        <app-search-box id="search" [ngClass]="{'hide': currentpath !== '/search' || !inputSearchFieldIsOpen, 'open-input': inputSearchFieldIsOpen}"></app-search-box>
         <div class="search-icon-container">
-            <img (click)="showSearchInput()" id="test" class="search-icon cursor-pointer" src="assets/img/search-60.png">
+            <img (click)="showSearchInput()" id="loupe" class="search-icon cursor-pointer hide" src="assets/img/loupe.png">
         </div>
         
         <div class="notification-icon-container">
