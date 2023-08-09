@@ -23,8 +23,7 @@ export class MainComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     //this.loadFirstMovie();
     this.firstMovieResponses = await this.load();
-
-    console.log(this.firstMovieResponses);
+    // console.log(this.firstMovieResponses);
   };
 
   // async loadFirstMovie() {

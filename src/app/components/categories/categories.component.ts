@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, HostListener } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { HoverService } from 'src/app/services/hover.service';
 import { HttpService } from 'src/app/services/http.service';
@@ -11,12 +11,17 @@ import { environment } from 'src/environments/environment.development';
   styleUrls: ['./categories.component.sass']
 })
 export class CategoriesComponent implements OnInit {
-  
-  // @ViewChild('categoriescontainer') div?: ElementRef;
+
+  @ViewChild('moviePreviewVideo', { static: false }) moviePreviewVideo!: ElementRef<HTMLVideoElement>;
   movieDict: any = [];
+  currentMoviePreviewDataRecord: any = [];
   userEmailResponse: any = [];
   error = '';
 
+  public showPreview: boolean = false;
+  public currentXPosition: number = 0;
+  public currentYPosition: number = 0;
+  private pageIsScrolled: boolean = false;
 
   imgIsHovered: boolean[] = [];
 
@@ -31,37 +36,45 @@ export class CategoriesComponent implements OnInit {
 
   constructor(private httpService: HttpService, public hoverService: HoverService, private transferMovieDatas: TransferMovieDatasService) {}
    
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event: any) {
+    this.pageIsScrolled = true;
+    if (this.pageIsScrolled) {
+      this.showPreview = false;
+    }
+  }
 
   async ngOnInit(): Promise<void> {
     this.loadUserEmail();
     await this.loadContent();
-    this.movieDict['popularatpresent'].forEach(moviehovercontainer => {
-      console.log(moviehovercontainer); // Gibt jedes Element des Arrays aus
-      console.log(this.imgIsHovered); // Gibt jedes Element des Arrays aus
-      this.imgIsHovered.push(false);
-    });
-    console.log(this.movieDict['popularatpresent']);
   }
 
-  handleMoviePreviewHover(i: number, movieDictcategory: string){
-    // debugger;
-    this.imgIsHovered = this.imgIsHovered.map((val, index) => index === i);
-    console.log(this.imgIsHovered);
+  async handleMoviePreviewHover(i: number, movieDictcategory: string){
+    await this.setMoviePreviewContainer(i);
+    let currentMoviePreviewDataRecord = this.movieDict[movieDictcategory][i];
+    console.log('', currentMoviePreviewDataRecord);
 
-    // console.log("Mouse Over Image");
-    // document.getElementById(`movieImgHover_${i}`)?.classList.remove('hide');
-    // this.hoverService.categorieImgIsHovered = true;
-    // this.hoverService.isHovered = true;
-    // debugger;
-    // this.transferMovieDatas.setMovieDataResponse(this.movieDict[movieDictcategory][i]);
-    // console.log(test);
+    const videoElement: HTMLVideoElement | null = this.moviePreviewVideo.nativeElement;
+    if (videoElement) {
+      videoElement.src = currentMoviePreviewDataRecord['movie_file'];
+    }
   }
 
-  handleCloseMoviePreviewHover(i: number, movieDictcategory: string) {
-    // debugger;
-    this.imgIsHovered[i] = false;
-    console.log(this.imgIsHovered[i]);
-    console.log(this.imgIsHovered);
+  setMoviePreviewContainer(i) {
+    let categoryImageCoordinates = document.getElementById(`categoryImage_${i}`)?.getBoundingClientRect();
+    // let scrollingDivCoordinates = document.getElementById('scrolling_div_1')?.getBoundingClientRect();
+    this.currentXPosition = categoryImageCoordinates.x;
+    this.currentYPosition = categoryImageCoordinates.y;
+    console.log('', this.currentXPosition);
+    console.log('', this.currentYPosition);
+    this.showPreview = true;
+    console.log('coordinatesCategoryImage is', categoryImageCoordinates);
+  }
+
+  handleCloseMoviePreviewHover() {
+    // this.showPreview = false;
+    let currentMoviePreviewDataRecord = '';
+    console.log('', currentMoviePreviewDataRecord);
   }
 
   async loadUserEmail() {
@@ -98,9 +111,21 @@ export class CategoriesComponent implements OnInit {
     }
   }
 
+  async increaseLikes() {
+    let likes = await this.increaseLikesBackend();
+  }
 
-  
- 
+  async increaseLikesBackend() {
+    let movieID = this.currentMoviePreviewDataRecord.id;
+    try {
+      const url = environment.baseUrl + `movie/${movieID}/increase_likes/`;
+      return lastValueFrom(this.httpService.getrequest(url));
+    } catch (e) {
+      this.error = 'Fehler beim Laden!';
+      return null;
+    }
+  }
+
   contentmoveleft(id: string) {
     let htmlContainer: any = document.getElementById(id);
     let scrollAmount = 300;

@@ -18,7 +18,7 @@ export class HeaderComponent {
   ngOnInit(): void {
     this.currentpath = this.router.url;
     this.checkpath();
-    console.log('', this.currentpath);
+    // console.log('', this.currentpath);
   }
 
   checkpath() {
@@ -47,14 +47,14 @@ export class HeaderComponent {
   }
 
   handleNotificationHover(){
-    console.log("Mouse Over Notification Icon");
+    // console.log("Mouse Over Notification Icon");
     document.getElementById('notificationID')?.classList.remove('hide');
     this.hoverService.notificationIconIsHovered = true;
     this.hoverService.isHovered = true;
   }
 
   handleProfileSettingsHover(){
-    console.log("Mouse Over Profile Settings Icon");
+    // console.log("Mouse Over Profile Settings Icon");
     document.getElementById('profilesettingsID')?.classList.remove('hide');
     this.hoverService.profileSettingsIconIsHovered = true;
     this.hoverService.isHovered = true;

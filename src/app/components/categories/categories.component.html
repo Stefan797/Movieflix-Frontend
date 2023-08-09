@@ -1,7 +1,18 @@
-<!-- <div class="video-preview" [hidden]="!showPreview" [style]="'position: fixed; top: ' + currentXPosition + ' px; left: ' + currentYPosition + ' px; '">
-     weißes viereck
-    showPreview ist true, wenn etwas angezeigt wird
-</div> -->
+<div id="moviePreviw" (mouseleave)="handleCloseMoviePreviewHover()" class="movie-preview" [hidden]="!showPreview"
+    [style.position]="'fixed'" [style.top.px]="currentYPosition" [style.left.px]="currentXPosition">
+    <div class="inside-movie-preview center-with-column">
+        <div class="view-movie">
+            <video autoplay muted loop [src]="currentMoviePreviewDataRecord?.movie_file" #moviePreviewVideo></video>
+        </div>
+        <div class="action-bottons">
+            <img src="/assets/img/movie-hover-play.png">
+            <img src="/assets/img/movie-hover-plus.png">
+            <img (click)="increaseLikes()" src="/assets/img/movie-hover-like.png">
+
+            <span>Likes</span>
+        </div>
+    </div>
+</div>
 
 <div class="categories-section">
 
@@ -16,27 +27,8 @@
                 <div class="element"
                     *ngFor="let moviespopularatpresent of movieDict['popularatpresent']; let i = index">
                     <div class="inside-element">
-                        <!-- <div class="f center-with-column"> -->
-                        <div class="hover-container center-with-column"
-                            (mouseleave)="handleCloseMoviePreviewHover(i, 'popularatpresent')" *ngIf="imgIsHovered[i]">
-                            <div class="view-movie">
-                                <video autoplay muted loop src="{{ moviespopularatpresent.movie_file }}"></video>
-                            </div>
-                            <div class="action-bottons">
-                                <div class="left-side">
-                                    <img src="/assets/img/movie-hover-play.png">
-                                    <img src="/assets/img/movie-hover-plus.png">
-                                    <img src="/assets/img/movie-hover-like.png">
-                                </div>
-                                <div class="right-side">
-                                    <img src="/assets/img/movie-hover-bottom.png">
-                                </div>
-                            </div>
-                        </div>
-                        <!-- </div> -->
-
-
-                        <img class="movie-img" (mouseover)="handleMoviePreviewHover(i, 'popularatpresent')"
+                        <img id="categoryImage_{{i}}" class="movie-img"
+                            (mouseover)="handleMoviePreviewHover(i, 'popularatpresent')"
                             src="{{ moviespopularatpresent.screenshot }}">
                     </div>
                 </div>
@@ -47,68 +39,6 @@
             </div>
         </div>
     </div>
-
-    <!-- <div class="categories-row"> kopie 5 min
-        <span id="popularatpresent" class="category-text">Derzeit beliebt</span>
-
-        <div class="different-categories">
-            <div (click)="contentmoveleft('scrolling_div_1')" class="left-side-hover-container center">
-                <img class="arrow-left-img" src="./assets/img/arrow.png">
-            </div>
-            <div class="a scrollbar-move" id="scrolling_div_1">
-                <div class="element" *ngFor="let moviespopularatpresent of movieDict['popularatpresent']; let i = index">
-                    <div class="b">
-                        <div class="f center-with-column" (mouseleave)="handleCloseMoviePreviewHover(i, 'popularatpresent')" *ngIf="imgIsHovered[i]">
-                            <div class="hover-container center-with-column">
-                                <div class="view-movie">
-                                    <video src="{{ moviespopularatpresent.movie_file }}"></video>
-                                </div>
-                                <div class="action-bottons">
-                                    <div class="left-side">
-                                        <img src="/assets/img/movie-hover-play.png">
-                                        <img src="/assets/img/movie-hover-plus.png">
-                                        <img src="/assets/img/movie-hover-like.png">
-                                    </div>
-                                    <div class="right-side">
-                                        <img src="/assets/img/movie-hover-bottom.png">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <img class="movie-img" (mouseover)="handleMoviePreviewHover(i, 'popularatpresent')"
-                            src="{{ moviespopularatpresent.screenshot }}">
-                    </div>
-                </div>
-
-            </div>
-            <div (click)="contentmoveright('scrolling_div_1')" class="right-side-hover-container center">
-                <img class="arrow-right-img" src="./assets/img/arrow-right.png">
-            </div>
-        </div>
-    </div> -->
-
-    <!-- <div class="categories-row"> // kopie oben
-        <span id="popularatpresent" class="category-text">Derzeit beliebt</span>
-        
-        <div class="different-categories">
-            <div (click)="contentmoveleft('scrolling_div_1')" class="left-side-hover-container center">
-                <img class="arrow-left-img" src="./assets/img/arrow.png">
-            </div>
-            <div class="a scrollbar-move" id="scrolling_div_1">
-                <div class="b" *ngFor="let moviespopularatpresent of movieDict['popularatpresent']; let i = index">
-                    <app-movie-hover-container #movieHoverContainer id="movieImgHover_{{i}}"
-                        class="hide"></app-movie-hover-container>
-                    <img class="movie-img" (mouseover)="handleMoviePreviewHover(i, 'popularatpresent')"
-                        src="{{ moviespopularatpresent.screenshot }}">
-                </div>
-            </div>
-            <div (click)="contentmoveright('scrolling_div_1')" class="right-side-hover-container center">
-                <img class="arrow-right-img" src="./assets/img/arrow-right.png">
-            </div>
-        </div>
-    </div> -->
 
     <!-- <div class="categories-row">
         <span class="category-text">Meer</span>

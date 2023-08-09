@@ -27,6 +27,9 @@ body
 .hide
     display: none
 
+.hidden
+    display: none
+
 .cursor-pointer
     cursor: pointer
 
@@ -74,6 +77,45 @@ body
 
 .z-index-4
     z-index: 4
+
+/* Movie preview Container */
+
+.movie-preview
+    height: 37vh
+    width: 25vw
+    z-index: 4
+    margin-top: -6vh
+    margin-left: -2vw
+    background-color: #141414
+    border-radius: 5px
+    scale: (1.2)
+    .inside-movie-preview
+        z-index: 5
+        height: 100%
+        width: 100%
+        border-radius: 5px
+        .view-movie
+            height: 60%
+            width: 100%
+            video
+                height: 100%
+                width: 100%
+                object-fit: cover
+                border-top-left-radius: 5px
+                border-top-right-radius: 5px
+
+        .action-bottons
+            height: 40%
+            width: 100%
+            img
+                width: 36px
+                height: 36px
+                margin: 10px 6px 0px 6px
+                &:hover
+                    cursor: pointer
+            
+            img:first-child
+                margin-left: 16px
 
 /* Button 1*/
 
