@@ -9,21 +9,21 @@
                 <li><a routerLink="/home">Startseite</a></li>
                 <!-- <li><a (click)="scroll('myList')">Filme</a></li> -->
                 <li><a (click)="scroll('popularatpresent')">Derzeit beliebt</a></li>
-                <li><a (click)="loadMylistPage()">Meine Liste</a></li>
-                <li><a (click)="loadSearchCategoriesPage()">Nach Kategorien durchsuchen</a></li>
+                <!-- <li><a (click)="loadMylistPage()">Meine Liste</a></li> -->
+                <!-- <li><a (click)="loadSearchCategoriesPage()">Nach Kategorien durchsuchen</a></li> -->
             </ul>
         </div> 
     </div>
    
     <div class="right center hide-smartphone">
-        <app-search-box id="search" [ngClass]="{'hide': currentpath !== '/search' || !inputSearchFieldIsOpen, 'open-input': inputSearchFieldIsOpen}"></app-search-box>
+        <!-- <app-search-box id="search" [ngClass]="{'hide': currentpath !== '/search' || !inputSearchFieldIsOpen, 'open-input': inputSearchFieldIsOpen}"></app-search-box>
         <div class="search-icon-container">
             <img (click)="showSearchInput()" id="loupe" class="search-icon cursor-pointer hide" src="assets/img/loupe.png">
         </div>
         
         <div class="notification-icon-container">
             <img (mouseover)="handleNotificationHover()" class="notification-icon cursor-pointer" src="assets/img/notification.png">
-        </div>
+        </div> -->
         
         <div class="profile-img-container">
             <img (mouseover)="handleProfileSettingsHover()" class="profile-img cursor-pointer" src="/assets/img/profile-icon.png">

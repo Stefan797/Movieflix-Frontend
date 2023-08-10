@@ -5,11 +5,16 @@
             <video autoplay muted loop [src]="currentMoviePreviewDataRecord?.movie_file" #moviePreviewVideo></video>
         </div>
         <div class="action-bottons">
-            <img src="/assets/img/movie-hover-play.png">
-            <img src="/assets/img/movie-hover-plus.png">
-            <img (click)="increaseLikes()" src="/assets/img/movie-hover-like.png">
-
-            <span>Likes</span>
+            <div class="top-part center-with-space-between">
+                <div class="left-side">
+                    <img (click)="showMovieFullscreen()" src="/assets/img/movie-hover-play.png">
+                    <!-- <img (click)="addMovieToMyList()" src="/assets/img/movie-hover-plus.png">
+                    <img (click)="increaseLikes()" src="/assets/img/movie-hover-like.png"> -->
+                </div>
+                <div class="right-side">
+                    <span>5 Likes</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -40,45 +45,49 @@
         </div>
     </div>
 
-    <!-- <div class="categories-row">
-        <span class="category-text">Meer</span>
+    <div class="categories-row">
+        <span id="popularatpresent" class="category-text">Meer</span>
+
         <div class="different-categories">
             <div (click)="contentmoveleft('scrolling_div_2')" class="left-side-hover-container center">
                 <img class="arrow-left-img" src="./assets/img/arrow.png">
             </div>
-
             <div class="a scrollbar-move" id="scrolling_div_2">
-                <div class="b" *ngFor="let moviessea of movieDict['sea']; let i = index">
-                    <app-movie-hover-container #movieHoverContainer id="movieImgHover_{{i}}" class="hide"></app-movie-hover-container>
-                    <img class="movie-img" (mouseover)="handleMoviePreviewHover(i)" src="{{ moviessea.screenshot }}">
+                <div class="element" *ngFor="let moviessea of movieDict['sea']; let i = index">
+                    <div class="inside-element">
+                        <img id="categoryImage_{{i}}" class="movie-img" (mouseover)="handleMoviePreviewHover(i, 'sea')"
+                            src="{{ moviessea.screenshot }}">
+                    </div>
                 </div>
-            </div> 
-           
+
+            </div>
             <div (click)="contentmoveright('scrolling_div_2')" class="right-side-hover-container center">
                 <img class="arrow-right-img" src="./assets/img/arrow-right.png">
             </div>
-        </div> 
-    </div>   -->
+        </div>
+    </div>
 
-    <!-- <div class="categories-row">
-        <span class="category-text">Natur</span>
+    <div class="categories-row">
+        <span id="popularatpresent" class="category-text">Natur</span>
+
         <div class="different-categories">
             <div (click)="contentmoveleft('scrolling_div_3')" class="left-side-hover-container center">
                 <img class="arrow-left-img" src="./assets/img/arrow.png">
             </div>
-
             <div class="a scrollbar-move" id="scrolling_div_3">
-                <div class="b" *ngFor="let moviesnature of movieDict['nature']; let i = index">
-                    <app-movie-hover-container #movieHoverContainer id="movieImgHover_{{i}}" class="hide"></app-movie-hover-container>
-                    <img class="movie-img" (mouseover)="handleMoviePreviewHover(i)" src="{{ moviesnature.screenshot }}">
+                <div class="element" *ngFor="let moviesnature of movieDict['nature']; let i = index">
+                    <div class="inside-element">
+                        <img id="categoryImage_{{i}}" class="movie-img"
+                            (mouseover)="handleMoviePreviewHover(i, 'nature')" src="{{ moviesnature.screenshot }}">
+                    </div>
                 </div>
-            </div> 
-           
+            </div>
             <div (click)="contentmoveright('scrolling_div_3')" class="right-side-hover-container center">
                 <img class="arrow-right-img" src="./assets/img/arrow-right.png">
             </div>
-        </div> 
-    </div>  -->
+        </div>
+    </div>
+
 
     <!-- <div class="categories-row">
         <span class="category-text">Lustiges</span>

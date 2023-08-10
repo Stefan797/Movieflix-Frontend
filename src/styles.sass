@@ -24,6 +24,11 @@ body
     align-items: center
     flex-direction: column
 
+.center-with-space-between
+    display: flex
+    justify-content: space-between
+    align-items: center
+
 .hide
     display: none
 
@@ -107,16 +112,31 @@ body
         .action-bottons
             height: 40%
             width: 100%
-            img
-                width: 36px
-                height: 36px
-                margin: 10px 6px 0px 6px
-                &:hover
-                    cursor: pointer
-            
-            img:first-child
-                margin-left: 16px
+            .top-part
+                height: 40%
+                width: 100%
+                .left-side
+                    height: 100%
+                    width: 70%
+                    img
+                        width: 36px
+                        height: 36px
+                        margin: 10px 6px 0px 6px
+                    &:hover
+                        cursor: pointer
 
+                    img:first-child
+                        margin-left: 16px
+
+                .right-side
+                    height: 100%
+                    width: 30%
+                    display: flex
+                    justify-content: flex-end
+                    align-items: center
+                    span
+                        margin-right: 16px
+                        color: #45CD67
 /* Button 1*/
 
 .primary-button

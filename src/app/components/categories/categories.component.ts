@@ -1,7 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { HoverService } from 'src/app/services/hover.service';
 import { HttpService } from 'src/app/services/http.service';
+import { LoadSingleMovieService } from 'src/app/services/load-single-movie.service';
 import { TransferMovieDatasService } from 'src/app/services/transfer-movie-datas.service';
 import { environment } from 'src/environments/environment.development';
 
@@ -34,7 +36,7 @@ export class CategoriesComponent implements OnInit {
     environment.baseUrl + "/movieAPI/?category=funny",
   ];
 
-  constructor(private httpService: HttpService, public hoverService: HoverService, private transferMovieDatas: TransferMovieDatasService) {}
+  constructor(private router: Router, private httpService: HttpService, public hoverService: HoverService, private transferMovieDatas: TransferMovieDatasService, private loadSingleMovieService: LoadSingleMovieService) {}
    
   @HostListener('window:scroll', ['$event'])
   onScroll(event: any) {
@@ -72,7 +74,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   handleCloseMoviePreviewHover() {
-    // this.showPreview = false;
+    this.showPreview = false;
     let currentMoviePreviewDataRecord = '';
     console.log('', currentMoviePreviewDataRecord);
   }
@@ -105,6 +107,27 @@ export class CategoriesComponent implements OnInit {
        this.movieDict[category] = response;
       }
       console.log(this.movieDict);
+    } catch (e) {
+      this.error = 'Fehler beim Laden!';
+      return null;
+    }
+  }
+
+  showMovieFullscreen() {
+    this.loadSingleMovieService.loadSingleM(this.currentMoviePreviewDataRecord.id).then(()=> {
+      this.router.navigate(['/watch/' + this.currentMoviePreviewDataRecord.title]);
+    });
+  }
+
+  async addMovieToMyList() {
+    let myList = await this.changeMovieToMyListBackend();
+  }
+
+  async changeMovieToMyListBackend() {
+    let movieID = this.currentMoviePreviewDataRecord.id;
+    try {
+      const url = environment.baseUrl + `movies/<int:pk>/change-category/`;
+      return lastValueFrom(this.httpService.getrequest(url));
     } catch (e) {
       this.error = 'Fehler beim Laden!';
       return null;

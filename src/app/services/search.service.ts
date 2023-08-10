@@ -9,22 +9,25 @@ export class SearchService {
 
   private searchTermSubject = new BehaviorSubject<string>('');
 
+  constructor() {}
+
   get searchTerm$() {
     return this.searchTermSubject.asObservable();
   }
 
   setSearchTerm(searchTerm: string) {
     this.searchTermSubject.next(searchTerm);
-    console.log('', this.searchTermSubject);
   }
 
-  // //private apiUrl = 'http://example.com/api/search';
-  // private apiUrl = 'http://127.0.0.1:8000/api/search';
-  // //private apiUrlServer = 'http://example.com/api/search';
+  // private searchTermSubject = new BehaviorSubject<string>('');
 
-  // constructor(private http: HttpClient) {}
+  // constructor() {}
 
-  // searchByTitle(title: string) {
-  //   return this.http.get<any[]>(`${this.apiUrl}?title=${title}`);
+  // get searchTerm$() {
+  //   return this.searchTermSubject.asObservable();
+  // }
+
+  // setSearchTerm(searchTerm: string) {
+  //   this.searchTermSubject.next(searchTerm);
   // }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+// import { debounceTime, map } from 'rxjs';
 import { SearchService } from 'src/app/services/search.service';
 
 @Component({
@@ -13,13 +14,16 @@ export class SearchResponseComponent implements OnInit {
   nothingFound: boolean = true;
   searchResult: string = 'Eingegebener Input Text';
 
-  constructor(private searchService: SearchService) {}
+  constructor(private searchService: SearchService) {
+    
+  }
 
   ngOnInit() {
     // this.searchService.searchTerm$.subscribe(searchTerm => {
     //   // Hier kannst du den gespeicherten Suchbegriff verwenden
     //   this.searchResults = []; // Führe deine Suche mit dem Suchbegriff aus und aktualisiere die Ergebnisse
-    //   console.log('', this.searchTerm);
+      
+    //   console.log('Neue Suche: ', searchTerm);
     // });
   }
 }

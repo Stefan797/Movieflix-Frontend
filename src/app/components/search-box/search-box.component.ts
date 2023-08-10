@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { debounceTime, lastValueFrom } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { debounceTime, lastValueFrom, map } from 'rxjs';
 import { HttpService } from 'src/app/services/http.service';
 import { SearchService } from 'src/app/services/search.service';
 import { environment } from 'src/environments/environment.development';
@@ -19,7 +19,13 @@ export class SearchBoxComponent {
 
   public currentpath: string = '';
 
-  constructor(public router: Router, private searchService: SearchService, private httpService: HttpService) { }
+  constructor(public router: Router, private searchService: SearchService, private httpService: HttpService, private route: ActivatedRoute) { 
+    // this.route.paramMap.subscribe(pm => {
+    //   if(pm['q']){
+    //     this.searchrequest(pm['q'])
+    //   }
+    // })
+  }
 
   ngOnInit() {
     this.currentpath = this.router.url;
@@ -33,15 +39,17 @@ export class SearchBoxComponent {
   search(): void {
     this.navigateToSearch();
     this.searchService.setSearchTerm(this.searchTerm);
-  
-    // this.result = this.searchAll(this.searchTerm).pipe(
-    //   debounceTime(300)),
-    //   this.searchrequest();
-        
-    // );
-
-    
+    this.result = this.searchrequest(this.searchTerm);
+    console.log('', this.result);
   }
+
+  // sendNewRequestIfInputIsChanging() {
+    // debugger;
+    // this.result = this.searchService.searchTerm$.pipe(
+    //   map((searchTerm)=> this.searchrequest(searchTerm))
+    // );
+    // console.log('', this.result);
+  // }
 
   searchrequest(searchTerm) {
     try {
@@ -53,8 +61,10 @@ export class SearchBoxComponent {
     }
   }
 
+  // www.strato.de/hosting/ holen vllt
+
   navigateToSearch() {
-    if (this.currentpath !== '/search' && this.searchTerm.length > 3) {
+    if (this.currentpath !== '/search' && this.searchTerm.length > 2) {
       this.router.navigate(['/search']);
     }
   }
