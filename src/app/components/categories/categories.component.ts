@@ -53,7 +53,6 @@ export class CategoriesComponent implements OnInit {
 
   async handleMoviePreviewHover(i: number, movieDictcategory: string){
     await this.setMoviePreviewContainer(i, movieDictcategory);
-    debugger;
     let currentMoviePreviewDataRecord = this.movieDict[movieDictcategory][i];
     this.currentMoviePreviewDataRecord.push(this.movieDict[movieDictcategory][i]);
     

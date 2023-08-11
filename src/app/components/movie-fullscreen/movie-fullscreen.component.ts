@@ -1,5 +1,6 @@
 import { Component, ElementRef, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
+import { GenerallyFunctionsService } from 'src/app/services/generally-functions.service';
 import { HttpService } from 'src/app/services/http.service';
 import { LoadSingleMovieService } from 'src/app/services/load-single-movie.service';
 
@@ -11,17 +12,13 @@ import { LoadSingleMovieService } from 'src/app/services/load-single-movie.servi
 export class MovieFullscreenComponent {
   response: any = [];
 
-  constructor(private router: Router, private httpService: HttpService, private elementRef: ElementRef, private loadSingleMovieService: LoadSingleMovieService) {
+  constructor(private router: Router, private httpService: HttpService, private elementRef: ElementRef, private loadSingleMovieService: LoadSingleMovieService, public generallyFunctionsService: GenerallyFunctionsService) {
 
   }
 
   ngOnInit(): void {
     this.response = this.loadSingleMovieService.getSingleM();
     console.log(this.response);
-  }
-
-  backToHome() {
-    this.router.navigate(['/home']);
   }
 
   isVideoPlaying = false;

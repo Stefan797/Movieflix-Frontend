@@ -1,7 +1,7 @@
 <div class="movie-fullscreen-container">
     <video id="movie" autoplay loop src="{{ response.movie_file }}" (keydown)="handleKeyDown($event)"></video>
     <div class="arrow-back">
-       <img (click)="backToHome()" src="/assets/img/zurück-pfeil.png">
+       <img (click)="this.generallyFunctionsService.backToHome()" src="/assets/img/zurück-pfeil.png">
     </div>
 
     <!-- <div class="sound" id="volume-scrollbar" [style.opacity]="volumeScrollbarOpacity"></div> -->

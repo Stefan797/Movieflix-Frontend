@@ -1,5 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { GenerallyFunctionsService } from 'src/app/services/generally-functions.service';
 import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
@@ -14,7 +16,7 @@ export class AccountComponent implements OnInit {
   normalUserRegistration = false;
   response: any = [];
 
-  constructor(private registerService: RegisterService) { }
+  constructor(private registerService: RegisterService, private router: Router, public generallyFunctionsService: GenerallyFunctionsService) { }
 
   ngOnInit(): void {
     this.getRegisterInformations();
