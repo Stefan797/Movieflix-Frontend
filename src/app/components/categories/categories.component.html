@@ -32,7 +32,7 @@
                 <div class="element"
                     *ngFor="let moviespopularatpresent of movieDict['popularatpresent']; let i = index">
                     <div class="inside-element">
-                        <img id="categoryImage_{{i}}" class="movie-img"
+                        <img id="popularatpresent_Images_{{i}}" class="movie-img"
                             (mouseover)="handleMoviePreviewHover(i, 'popularatpresent')"
                             src="{{ moviespopularatpresent.screenshot }}">
                     </div>
@@ -50,19 +50,19 @@
 
         <div class="different-categories">
             <div (click)="contentmoveleft('scrolling_div_2')" class="left-side-hover-container center">
-                <img class="arrow-left-img" src="./assets/img/arrow.png">
+                <img id="arrow_left" class="arrow-left-img" src="./assets/img/arrow.png">
             </div>
             <div class="a scrollbar-move" id="scrolling_div_2">
                 <div class="element" *ngFor="let moviessea of movieDict['sea']; let i = index">
                     <div class="inside-element">
-                        <img id="categoryImage_{{i}}" class="movie-img" (mouseover)="handleMoviePreviewHover(i, 'sea')"
+                        <img id="sea_Images_{{i}}" class="movie-img" (mouseover)="handleMoviePreviewHover(i, 'sea')"
                             src="{{ moviessea.screenshot }}">
                     </div>
                 </div>
 
             </div>
             <div (click)="contentmoveright('scrolling_div_2')" class="right-side-hover-container center">
-                <img class="arrow-right-img" src="./assets/img/arrow-right.png">
+                <img id="arrow_right" class="arrow-right-img" src="./assets/img/arrow-right.png">
             </div>
         </div>
     </div>
@@ -77,7 +77,7 @@
             <div class="a scrollbar-move" id="scrolling_div_3">
                 <div class="element" *ngFor="let moviesnature of movieDict['nature']; let i = index">
                     <div class="inside-element">
-                        <img id="categoryImage_{{i}}" class="movie-img"
+                        <img id="nature_Images_{{i}}" class="movie-img"
                             (mouseover)="handleMoviePreviewHover(i, 'nature')" src="{{ moviesnature.screenshot }}">
                     </div>
                 </div>

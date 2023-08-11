@@ -52,31 +52,27 @@ export class CategoriesComponent implements OnInit {
   }
 
   async handleMoviePreviewHover(i: number, movieDictcategory: string){
-    await this.setMoviePreviewContainer(i);
+    await this.setMoviePreviewContainer(i, movieDictcategory);
     let currentMoviePreviewDataRecord = this.movieDict[movieDictcategory][i];
-    console.log('', currentMoviePreviewDataRecord);
-
+    //console.log('', currentMoviePreviewDataRecord);
+    
     const videoElement: HTMLVideoElement | null = this.moviePreviewVideo.nativeElement;
     if (videoElement) {
       videoElement.src = currentMoviePreviewDataRecord['movie_file'];
     }
   }
 
-  setMoviePreviewContainer(i) {
-    let categoryImageCoordinates = document.getElementById(`categoryImage_${i}`)?.getBoundingClientRect();
-    // let scrollingDivCoordinates = document.getElementById('scrolling_div_1')?.getBoundingClientRect();
+  setMoviePreviewContainer(i: number, movieDictcategory: string) {
+    let categoryImageCoordinates = document.getElementById(`${movieDictcategory}_Images_${i}`)?.getBoundingClientRect();
     this.currentXPosition = categoryImageCoordinates.x;
     this.currentYPosition = categoryImageCoordinates.y;
-    console.log('', this.currentXPosition);
-    console.log('', this.currentYPosition);
     this.showPreview = true;
-    console.log('coordinatesCategoryImage is', categoryImageCoordinates);
   }
 
   handleCloseMoviePreviewHover() {
     this.showPreview = false;
     let currentMoviePreviewDataRecord = '';
-    console.log('', currentMoviePreviewDataRecord);
+    //console.log('', currentMoviePreviewDataRecord); // gibt es eine saubere Methode?
   }
 
   async loadUserEmail() {
@@ -157,22 +153,10 @@ export class CategoriesComponent implements OnInit {
   }
 
   contentmoveright(id: string) {
-    // debugger;
     let htmlContainer: any = document.getElementById(id);
     let scrollAmount = 100;
     htmlContainer.scrollLeft -= scrollAmount;
     console.log(htmlContainer.scrollLeft);
   }
 
-  // ngAfterViewInit() {
-  //   console.log(this.div?.nativeElement);
-  // }
-
-  // initMovieDataResponse() {
-  //   let response: any =  this.transferMovieDatas.getMovieDataResponse();
-  //   this.transferMovieDatas.movieDataResponse$.subscribe(response => {
-  //     this.response = response;
-  //     console.log(this.response);
-  //   })
-  // };
 }
