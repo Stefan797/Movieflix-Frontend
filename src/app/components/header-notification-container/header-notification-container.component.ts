@@ -21,21 +21,21 @@ export class HeaderNotificationContainerComponent implements OnInit {
   constructor(public hoverService: HoverService, private httpService: HttpService) {}
 
   ngOnInit(): void {
-    this.loadNotifications();
+    // this.loadNotifications();
   };
 
-  async loadNotifications() {
-    this.notificationResponses = await this.load();
-    console.log(this.notificationResponses);
-  }
+  // async loadNotifications() {
+  //   this.notificationResponses = await this.load();
+  //   console.log(this.notificationResponses);
+  // }
 
-  load() {
-    try {
-      const url = environment.baseUrl + "/notifications/";
-      return lastValueFrom(this.httpService.getrequest(url));
-    } catch (e) {
-      this.error = 'Fehler beim Laden!';
-      return null;
-    }
-  }
+  // load() {
+  //   try {
+  //     const url = environment.baseUrl + "/notifications/";
+  //     return lastValueFrom(this.httpService.getrequest(url));
+  //   } catch (e) {
+  //     this.error = 'Fehler beim Laden!';
+  //     return null;
+  //   }
+  // }
 }

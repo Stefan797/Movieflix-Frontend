@@ -14,8 +14,6 @@ export class LoadSingleMovieService {
 
   async loadSingleM(givenID: number) {
     this.SingleMovieResponse = await this.loadSingleData(givenID);
-
-    console.log(this.SingleMovieResponse);
   }
 
   loadSingleData(givenID: number) {

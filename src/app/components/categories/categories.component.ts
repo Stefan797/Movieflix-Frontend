@@ -47,14 +47,15 @@ export class CategoriesComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.loadUserEmail();
+    // this.loadUserEmail();
     await this.loadContent();
   }
 
   async handleMoviePreviewHover(i: number, movieDictcategory: string){
     await this.setMoviePreviewContainer(i, movieDictcategory);
+    debugger;
     let currentMoviePreviewDataRecord = this.movieDict[movieDictcategory][i];
-    //console.log('', currentMoviePreviewDataRecord);
+    this.currentMoviePreviewDataRecord.push(this.movieDict[movieDictcategory][i]);
     
     const videoElement: HTMLVideoElement | null = this.moviePreviewVideo.nativeElement;
     if (videoElement) {
@@ -71,14 +72,13 @@ export class CategoriesComponent implements OnInit {
 
   handleCloseMoviePreviewHover() {
     this.showPreview = false;
-    let currentMoviePreviewDataRecord = '';
-    //console.log('', currentMoviePreviewDataRecord); // gibt es eine saubere Methode?
+    this.currentMoviePreviewDataRecord = [];
   }
 
-  async loadUserEmail() {
-    this.userEmailResponse = await this.load();
-    console.log(this.userEmailResponse);
-  }
+  // async loadUserEmail() {
+  //   this.userEmailResponse = await this.load();
+  //   console.log(this.userEmailResponse);
+  // }
 
   load() {
     try {
@@ -110,8 +110,8 @@ export class CategoriesComponent implements OnInit {
   }
 
   showMovieFullscreen() {
-    this.loadSingleMovieService.loadSingleM(this.currentMoviePreviewDataRecord.id).then(()=> {
-      this.router.navigate(['/watch/' + this.currentMoviePreviewDataRecord.title]);
+    this.loadSingleMovieService.loadSingleM(this.currentMoviePreviewDataRecord[0].id).then(()=> {
+      this.router.navigate(['/watch/' + this.currentMoviePreviewDataRecord[0].title]);
     });
   }
 
@@ -149,14 +149,14 @@ export class CategoriesComponent implements OnInit {
     let htmlContainer: any = document.getElementById(id);
     let scrollAmount = 300;
     htmlContainer.scrollLeft += scrollAmount;
-    console.log(htmlContainer.scrollLeft);
+    //console.log(htmlContainer.scrollLeft);
   }
 
   contentmoveright(id: string) {
     let htmlContainer: any = document.getElementById(id);
     let scrollAmount = 100;
     htmlContainer.scrollLeft -= scrollAmount;
-    console.log(htmlContainer.scrollLeft);
+    // console.log(htmlContainer.scrollLeft);
   }
 
 }
