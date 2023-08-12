@@ -43,7 +43,7 @@ export class RegisterComponent {
   });
 
   constructor(private router: Router, private httpService: HttpService, private registerService: RegisterService) {
-    this.registerForm.valueChanges.subscribe(console.log);
+    //this.registerForm.valueChanges.subscribe(console.log);
   }
 
   ngOnInit(): void {
@@ -52,7 +52,7 @@ export class RegisterComponent {
   async registerNewUser() {
     if (this.registerForm.valid) {
       const formData = this.registerForm.value;
-      console.log(formData);
+      // console.log(formData);
       this.registerResponse = await this.postData(formData);
       this.registerService.setRegisterResponse(this.registerResponse);
       this.registerService.setRegisterComponent();
@@ -92,10 +92,10 @@ export class RegisterComponent {
   createNewGuestUser() {
     const username = 'Gast' + this.getRandomNumber();
     const email = username + '@test.com';
-    const firstname = 'guest';
-    const lastname = 'whoAmI';
+    const firstname = 'guest' + username;
+    const lastname = 'whoAmI' + username;
     const password = 'guest_password' + username;
-    console.log(password);
+    //console.log(password);
 
     const newUser = {
       username: username,

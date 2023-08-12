@@ -12,25 +12,27 @@ import { RegisterService } from 'src/app/services/register.service';
 export class AccountComponent implements OnInit {
   // userIsStaffUser: boolean = false;
 
-  guestUserRegistration = false;
-  normalUserRegistration = false;
-  response: any = [];
+  // guestUserRegistration = false;
+  // normalUserRegistration = false;
+  // response: any = [];
 
   constructor(private registerService: RegisterService, private router: Router, public generallyFunctionsService: GenerallyFunctionsService) { }
 
   ngOnInit(): void {
-    this.getRegisterInformations();
+    // this.getRegisterInformations();
   }
 
-  getRegisterInformations() {
-    this.response = this.registerService.getRegisterResponse();
-    console.log(this.response);
-  }
+  // getRegisterInformations() {
+  //   this.response = this.registerService.getRegisterResponse();
+  //   console.log(this.response);
+  // }
 
-  checkboxVisible = true;
+  
 
-  changeCheckboxValue() {
-    this.checkboxVisible = !this.checkboxVisible;
-  }
+  // checkboxVisible = true;
+
+  // changeCheckboxValue() {
+  //   this.checkboxVisible = !this.checkboxVisible;
+  // }
 
 }

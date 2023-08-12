@@ -29,6 +29,7 @@ import { AccountComponent } from './components/account/account.component';
 import { SearchResponseComponent } from './components/search-response/search-response.component';
 import { SearchCategoriesComponent } from './components/search-categories/search-categories.component';
 import { MylistComponent } from './components/mylist/mylist.component';
+import { AccountInformationsComponent } from './components/account-informations/account-informations.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { MylistComponent } from './components/mylist/mylist.component';
     AccountComponent,
     SearchResponseComponent,
     SearchCategoriesComponent,
-    MylistComponent
+    MylistComponent,
+    AccountInformationsComponent
   ],
   imports: [
     BrowserModule,
