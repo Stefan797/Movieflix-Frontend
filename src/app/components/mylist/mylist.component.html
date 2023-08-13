@@ -5,8 +5,8 @@
     <h2>Meine Liste</h2>
 
     <div *ngIf="results" class="mylist-results">
-        <div class="inside-mylist-results">
-            <img src="/assets/img/first-page-background.png">
+        <div class="inside-mylist-results" *ngFor="let moviesmylist of myListResponseArray[0]; let i = index">
+            <img src="{{ moviesmylist.screenshot }}">
         </div>
     </div>
 

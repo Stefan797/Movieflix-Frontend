@@ -2,7 +2,7 @@
     min-height: 92vh
     width: 100%
     background-color: #141414
-    padding: 2% 3.5% 0 3.5%
+    padding: 2% 3.5% 0 3%
     box-sizing: border-box
 
     h2
@@ -10,12 +10,19 @@
         margin-bottom: 30px
 
     .mylist-results
+        width: 100%
+        display: flex
+        flex-wrap: wrap
+        //justify-content: space-between
         .inside-mylist-results
+            width: 18%
+            box-sizing: border-box
+            margin-bottom: 2%
+            margin-right: 2%
             img
-                min-width: 350px
+                width: 100%
+                height: auto
                 min-height: 270px
-                max-width: 22%
-                max-height: 20vh
 
     .mylist-empty
         padding: 2% 3.5% 0 3.5%

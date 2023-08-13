@@ -33,7 +33,7 @@ export class MainComponent implements OnInit {
   // }
 
   load() {
-    const id = 17; // 3 local // 17 ist Server
+    const id = 3; // 3 local // 17 ist Server
     try {
       const url = environment.baseUrl + `/movie/${id}/load_movie/`; //"/movieAPI/"; movie/${id}/load_movie/ movie/{id}/load_movie/
       return lastValueFrom(this.httpService.getrequest(url));

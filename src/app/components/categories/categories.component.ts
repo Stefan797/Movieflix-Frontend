@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment.development';
 })
 export class CategoriesComponent implements OnInit {
 
+  @ViewChild('likenumber', { static: false }) likeNumberRef: ElementRef;
   @ViewChild('moviePreviewVideo', { static: false }) moviePreviewVideo!: ElementRef<HTMLVideoElement>;
   movieDict: any = [];
   currentMoviePreviewDataRecord: any = [];
@@ -33,7 +34,7 @@ export class CategoriesComponent implements OnInit {
     environment.baseUrl + "/movieAPI/?category=popularatpresent",
     environment.baseUrl + "/movieAPI/?category=sea",
     environment.baseUrl + "/movieAPI/?category=nature",
-    environment.baseUrl + "/movieAPI/?category=funny",
+    // environment.baseUrl + "/movieAPI/?category=funny",
   ];
 
   constructor(private router: Router, private httpService: HttpService, public hoverService: HoverService, private transferMovieDatas: TransferMovieDatasService, private loadSingleMovieService: LoadSingleMovieService) {}
@@ -55,11 +56,14 @@ export class CategoriesComponent implements OnInit {
     await this.setMoviePreviewContainer(i, movieDictcategory);
     let currentMoviePreviewDataRecord = this.movieDict[movieDictcategory][i];
     this.currentMoviePreviewDataRecord.push(this.movieDict[movieDictcategory][i]);
+    console.log(this.currentMoviePreviewDataRecord);
     
     const videoElement: HTMLVideoElement | null = this.moviePreviewVideo.nativeElement;
     if (videoElement) {
       videoElement.src = currentMoviePreviewDataRecord['movie_file'];
     }
+    const likeNumberElement: HTMLElement = this.likeNumberRef.nativeElement;
+    likeNumberElement.innerHTML = currentMoviePreviewDataRecord['likes'];
   }
 
   setMoviePreviewContainer(i: number, movieDictcategory: string) {
@@ -72,6 +76,7 @@ export class CategoriesComponent implements OnInit {
   handleCloseMoviePreviewHover() {
     this.showPreview = false;
     this.currentMoviePreviewDataRecord = [];
+    console.log(this.currentMoviePreviewDataRecord);
   }
 
   // async loadUserEmail() {
@@ -119,9 +124,9 @@ export class CategoriesComponent implements OnInit {
   }
 
   async changeMovieToMyListBackend() {
-    let movieID = this.currentMoviePreviewDataRecord.id;
+    let movieID = this.currentMoviePreviewDataRecord[0].id;
     try {
-      const url = environment.baseUrl + `movies/<int:pk>/change-category/`;
+      const url = environment.baseUrl + `/movie/${movieID}/change-category/`;
       return lastValueFrom(this.httpService.getrequest(url));
     } catch (e) {
       this.error = 'Fehler beim Laden!';
@@ -130,13 +135,17 @@ export class CategoriesComponent implements OnInit {
   }
 
   async increaseLikes() {
-    let likes = await this.increaseLikesBackend();
+    let likesResponse = await this.increaseLikesBackend();
+    console.log(likesResponse);
+    // den Hovercontainer new laden!
+    //window.location.reload();
   }
 
-  async increaseLikesBackend() {
-    let movieID = this.currentMoviePreviewDataRecord.id;
+  increaseLikesBackend() {
+    let movieID = this.currentMoviePreviewDataRecord[0].id;
+    console.log(movieID);
     try {
-      const url = environment.baseUrl + `movie/${movieID}/increase_likes/`;
+      const url = environment.baseUrl + `/movie/${movieID}/increase_likes/`;
       return lastValueFrom(this.httpService.getrequest(url));
     } catch (e) {
       this.error = 'Fehler beim Laden!';

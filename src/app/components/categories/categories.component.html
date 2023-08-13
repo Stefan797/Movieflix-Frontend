@@ -8,11 +8,12 @@
             <div class="top-part center-with-space-between">
                 <div class="left-side">
                     <img (click)="showMovieFullscreen()" src="/assets/img/movie-hover-play.png">
-                    <!-- <img (click)="addMovieToMyList()" src="/assets/img/movie-hover-plus.png">
-                    <img (click)="increaseLikes()" src="/assets/img/movie-hover-like.png"> -->
+                    <img (click)="addMovieToMyList()" src="/assets/img/movie-hover-plus.png">
+                    <img (click)="increaseLikes()" src="/assets/img/movie-hover-like.png">
                 </div>
                 <div class="right-side">
-                    <span>5 Likes</span>
+                    <p #likenumber></p>
+                    <span>Likes</span>
                 </div>
             </div>
         </div>
