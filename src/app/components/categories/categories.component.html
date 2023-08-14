@@ -9,7 +9,7 @@
                 <div class="left-side">
                     <img (click)="showMovieFullscreen()" src="/assets/img/movie-hover-play.png">
                     <img (click)="addMovieToMyList()" src="/assets/img/movie-hover-plus.png">
-                    <img (click)="increaseLikes()" src="/assets/img/movie-hover-like.png">
+                    <img [class.showLike]="likeIsTrue" (click)="increaseLikes()" src="/assets/img/movie-hover-like.png"> 
                 </div>
                 <div class="right-side">
                     <p #likenumber></p>

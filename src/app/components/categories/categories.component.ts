@@ -29,6 +29,7 @@ export class CategoriesComponent implements OnInit {
   imgIsHovered: boolean[] = [];
 
   showHover: boolean = false;
+  likeIsTrue: boolean = false;
 
   urls = [
     environment.baseUrl + "/movieAPI/?category=popularatpresent",
@@ -37,8 +38,8 @@ export class CategoriesComponent implements OnInit {
     // environment.baseUrl + "/movieAPI/?category=funny",
   ];
 
-  constructor(private router: Router, private httpService: HttpService, public hoverService: HoverService, private transferMovieDatas: TransferMovieDatasService, private loadSingleMovieService: LoadSingleMovieService) {}
-   
+  constructor(private router: Router, private httpService: HttpService, public hoverService: HoverService, private transferMovieDatas: TransferMovieDatasService, private loadSingleMovieService: LoadSingleMovieService) { }
+
   @HostListener('window:scroll', ['$event'])
   onScroll(event: any) {
     this.pageIsScrolled = true;
@@ -47,23 +48,35 @@ export class CategoriesComponent implements OnInit {
     }
   }
 
+  // End scroll event is using for hide hover Container if user is scrolling.  
+
   async ngOnInit(): Promise<void> {
-    // this.loadUserEmail();
-    await this.loadContent();
+    await this.loadAllCategories();
   }
 
-  async handleMoviePreviewHover(i: number, movieDictcategory: string){
+  async loadAllCategories() {
+    try {
+      for (let i = 0; i < this.urls.length; i++) {
+        const response = await lastValueFrom(this.httpService.getrequest(this.urls[i]));
+        const category = response[0].category;
+        this.movieDict[category] = response;
+      }
+      // console.log(this.movieDict);
+    } catch (e) {
+      this.error = 'Fehler beim Laden!';
+      return null;
+    }
+  }
+
+  // End Movies loading 
+
+  async handleMoviePreviewHover(i: number, movieDictcategory: string) {
     await this.setMoviePreviewContainer(i, movieDictcategory);
     let currentMoviePreviewDataRecord = this.movieDict[movieDictcategory][i];
     this.currentMoviePreviewDataRecord.push(this.movieDict[movieDictcategory][i]);
-    console.log(this.currentMoviePreviewDataRecord);
-    
-    const videoElement: HTMLVideoElement | null = this.moviePreviewVideo.nativeElement;
-    if (videoElement) {
-      videoElement.src = currentMoviePreviewDataRecord['movie_file'];
-    }
-    const likeNumberElement: HTMLElement = this.likeNumberRef.nativeElement;
-    likeNumberElement.innerHTML = currentMoviePreviewDataRecord['likes'];
+    //console.log(this.currentMoviePreviewDataRecord);
+    this.setElementsInHoverContainer(currentMoviePreviewDataRecord);
+    this.checkMovieIsLikedStatus(currentMoviePreviewDataRecord);
   }
 
   setMoviePreviewContainer(i: number, movieDictcategory: string) {
@@ -73,48 +86,34 @@ export class CategoriesComponent implements OnInit {
     this.showPreview = true;
   }
 
+  setElementsInHoverContainer(currentMoviePreviewDataRecord: any) {
+    const videoElement: HTMLVideoElement | null = this.moviePreviewVideo.nativeElement;
+    if (videoElement) {
+      videoElement.src = currentMoviePreviewDataRecord['movie_file'];
+    }
+    const likeNumberElement: HTMLElement = this.likeNumberRef.nativeElement;
+    likeNumberElement.innerHTML = currentMoviePreviewDataRecord['likes'];
+  }
+
+  checkMovieIsLikedStatus(currentMoviePreviewDataRecord: any) {
+    if (currentMoviePreviewDataRecord['is_liked'] == true) {
+      this.likeIsTrue = true;
+    }
+    if (currentMoviePreviewDataRecord['is_liked'] == false) {
+      this.likeIsTrue = false;
+    }
+  }
+
   handleCloseMoviePreviewHover() {
     this.showPreview = false;
     this.currentMoviePreviewDataRecord = [];
-    console.log(this.currentMoviePreviewDataRecord);
+    // console.log(this.currentMoviePreviewDataRecord);
   }
 
-  // async loadUserEmail() {
-  //   this.userEmailResponse = await this.load();
-  //   console.log(this.userEmailResponse);
-  // }
-
-  load() {
-    try {
-      const url = environment.baseUrl + "/useremail/";
-      return lastValueFrom(this.httpService.getrequest(url));
-    } catch (e) {
-      this.error = 'Fehler beim Laden!';
-      return null;
-    }
-  }
-
-  async loadContent() {
-    await this.loadAllCategories();
-  }
-
-  async loadAllCategories() {
-    try {
-      for (let i = 0; i < this.urls.length; i++) {
-
-       const response = await lastValueFrom(this.httpService.getrequest(this.urls[i]));
-       const category = response[0].category;
-       this.movieDict[category] = response;
-      }
-      console.log(this.movieDict);
-    } catch (e) {
-      this.error = 'Fehler beim Laden!';
-      return null;
-    }
-  }
+  // End set Hover Container loading 
 
   showMovieFullscreen() {
-    this.loadSingleMovieService.loadSingleM(this.currentMoviePreviewDataRecord[0].id).then(()=> {
+    this.loadSingleMovieService.loadSingleM(this.currentMoviePreviewDataRecord[0].id).then(() => {
       this.router.navigate(['/watch/' + this.currentMoviePreviewDataRecord[0].title]);
     });
   }
@@ -136,9 +135,13 @@ export class CategoriesComponent implements OnInit {
 
   async increaseLikes() {
     let likesResponse = await this.increaseLikesBackend();
-    console.log(likesResponse);
-    // den Hovercontainer new laden!
-    //window.location.reload();
+    //console.log(likesResponse);
+    this.currentMoviePreviewDataRecord[0].likes = likesResponse['movieLikes'];
+    this.currentMoviePreviewDataRecord[0].is_liked = likesResponse['movieLikeStatus'];
+    this.checkMovieIsLikedStatus(this.currentMoviePreviewDataRecord[0]);
+    if (this.likeNumberRef) {
+      this.likeNumberRef.nativeElement.innerHTML = likesResponse['movieLikes'];
+    }
   }
 
   increaseLikesBackend() {
@@ -153,18 +156,20 @@ export class CategoriesComponent implements OnInit {
     }
   }
 
+  // End change movie properties and use HoverContainer functions
+
   contentmoveleft(id: string) {
     let htmlContainer: any = document.getElementById(id);
     let scrollAmount = 300;
     htmlContainer.scrollLeft += scrollAmount;
-    //console.log(htmlContainer.scrollLeft);
   }
 
   contentmoveright(id: string) {
     let htmlContainer: any = document.getElementById(id);
     let scrollAmount = 100;
     htmlContainer.scrollLeft -= scrollAmount;
-    // console.log(htmlContainer.scrollLeft);
   }
+
+  // End scroll between categories divs
 
 }
