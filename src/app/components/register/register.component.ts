@@ -5,6 +5,7 @@ import { HttpService } from 'src/app/services/http.service';
 import { environment } from 'src/environments/environment.development';
 import { lastValueFrom } from 'rxjs';
 import { RegisterService } from 'src/app/services/register.service';
+import { GeneralFunctionsService } from 'src/app/services/general-functions.service';
 
 @Component({
   selector: 'app-register',
@@ -43,31 +44,31 @@ export class RegisterComponent {
     ], [])
   });
 
-  constructor(private router: Router, private httpService: HttpService, private registerService: RegisterService) {}
+  constructor(private router: Router, private httpService: HttpService, private registerService: RegisterService, public generalFunctionsService: GeneralFunctionsService) {}
 
   ngOnInit(): void {
   };
 
   async registerNewUser() {
     if (this.registerForm.valid) {
-      const formData = this.registerForm.value;
-      this.registerResponse = await this.postData(formData);
+      let formData = this.registerForm.value;
+      this.registerResponse = await this.generalFunctionsService.tryPostLoading('/sign-up/', formData);
+      await this.setUserEmailAndPassword(formData);
+      localStorage.setItem('token', this.loginResponse['token']);
+      console.log(this.registerResponse);
       this.registerService.setRegisterResponse(this.registerResponse);
       this.registerService.setRegisterComponent();
-      this.loginResponse = await this.loginpostData();
       localStorage.setItem('CurrentUserID', this.registerResponse['id']);
       this.router.navigate(['/home']);
     }
   }
 
-  postData(formData: any) {
-    try {
-      const url = environment.baseUrl + "/sign-up/";
-      return lastValueFrom(this.httpService.postrequest(url, formData));
-    } catch (e) {
-      this.error = 'Fehler beim Laden!';
-      return null;
-    }
+  async setUserEmailAndPassword(formData: any) {
+    let loginFormdata = {
+      'email': formData.email,
+      'password': formData.password,
+    };
+    return this.loginResponse = await this.generalFunctionsService.tryPostLoading('/api-user-login/', loginFormdata);
   }
 
   // End Create Normal User 
@@ -86,10 +87,6 @@ export class RegisterComponent {
   }
 
   loginpostData() {
-    // let formData = {
-    //   'email': 'pppppppppppppp@test1.de',
-    //   'password': 'pppppppppppppp'
-    // }
     let formData = {
       'email': this.setnewGastUser.email,
       'password': this.setnewGastUser.password

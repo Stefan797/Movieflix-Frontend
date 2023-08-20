@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { HoverService } from 'src/app/services/hover.service';
+import { GeneralFunctionsService } from 'src/app/services/general-functions.service';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,7 @@ export class HeaderComponent {
 
   public currentpath: string = '';
 
-  constructor(private router: Router, public hoverService: HoverService) { }
+  constructor(private router: Router, public hoverService: HoverService, public generalFunctionsService: GeneralFunctionsService) { }
 
   ngOnInit(): void {
     this.currentpath = this.router.url;

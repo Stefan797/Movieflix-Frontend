@@ -5,6 +5,7 @@ import { HttpService } from 'src/app/services/http.service';
 import { LoadSingleMovieService } from 'src/app/services/load-single-movie.service';
 import { environment } from 'src/environments/environment.development';
 
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',

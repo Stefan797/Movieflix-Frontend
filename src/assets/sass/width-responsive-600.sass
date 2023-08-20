@@ -14,6 +14,9 @@
     .hide-smartphone
         display: none !important
 
+    // .addbottom
+    //     bottom: 10px
+
     /* First Page */
 
     .first-page-container
@@ -48,9 +51,22 @@
         background-size: cover
         background-repeat: no-repeat
         background-position: center center
+        .guest-account-container
+            top: 0 !important
+            right: 6% !important
+            .guest-account-button
+                font-size: 17px !important
+
         .register-container
             padding: 46px 38px 48px !important
             min-width: 200px !important
+
+    /*  register-successfully */
+    .register-response-container
+        width: 75vw !important
+        .show-reponse
+            span
+                font-size: 14px !important
 
     /* other pages */ 
 
@@ -71,7 +87,22 @@
                 p
                     font-size: 14px
                     word-wrap: break-word
-    // imprint etc.
+    
+    /* MyList*/
+    .mylist-page
+        padding: 2% 3.5% 0 5.5% !important
+        .mylist-results
+            .inside-mylist-results
+                width: 48% !important
+                img
+                    min-height: 200px !important
+
+    .mylist-empty
+        .inside-mylist-empty
+            min-width: 300px !important
+            p
+                font-size: 13px !important
+
 
     /* header-profile-settings*/
     .konto-box
@@ -130,3 +161,26 @@
         //     z-index: unset
         //     .arrow-right-img
         //         z-index: unset
+
+    .movie-preview
+        height: 37vh
+        width: 81% !important
+        z-index: 6
+        left: 9% !important
+        margin-top: -6vh
+        margin-left: 0% !important
+
+    /*IN DER ALLgemeinen Style */
+    .inside-further-informations
+        .infos
+            .right-side
+                p
+                    font-size: 12px
+
+
+    .inside-further-informations
+        .play-button-position
+            top: 56% !important
+            height: 55px !important
+            width: 40px !important
+       

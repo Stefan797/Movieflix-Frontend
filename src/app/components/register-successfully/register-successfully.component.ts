@@ -28,6 +28,7 @@ export class RegisterSuccessfullyComponent implements OnInit, OnDestroy {
   showregisterMessage(): any {
     this.sethideRegisterSuccessMessage();
     this.response = this.registerService.getRegisterResponse();
+    console.log('Get register response', this.response);
     if (this.response.username && /^Gast\d+$/.test(this.response.username)) {
       this.guestUserRegistration = true;
       this.normalUserRegistration = false;
@@ -42,7 +43,7 @@ export class RegisterSuccessfullyComponent implements OnInit, OnDestroy {
   sethideRegisterSuccessMessage() {
     this.timer = setTimeout(() => {
       this.hideRegisterSuccessMessage();
-    }, 10000);
+    }, 15000);
   }
 
 

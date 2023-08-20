@@ -27,13 +27,14 @@ export class GeneralFunctionsService {
     }
   }
 
-  // tryPostLoading(linkEnding: string) {
-  //   try {
-  //     const url = environment.baseUrl + `${linkEnding}`;
-  //     return lastValueFrom(this.httpService.getrequest(url)); <-- Formdata hinzufügen
-  //   } catch (e) {
-  //     this.error = 'Fehler beim Laden!';
-  //     return null;
-  //   }
-  // }
+  tryPostLoading(linkEnding: string, datas: any) {
+    try {
+      const url = environment.baseUrl + `${linkEnding}`;
+      const formData = datas;
+      return lastValueFrom(this.httpService.postrequest(url, formData));
+    } catch (e) {
+      this.error = 'Fehler beim Laden!';
+      return null;
+    }
+  }
 }

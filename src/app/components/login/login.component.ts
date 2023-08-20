@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { HttpService } from 'src/app/services/http.service';
 import { environment } from 'src/environments/environment.development';
+import { GeneralFunctionsService } from 'src/app/services/general-functions.service';
 
 @Component({
   selector: 'app-login',
@@ -29,28 +30,17 @@ export class LoginComponent {
     ], [])
   });
 
-  constructor(private router: Router, private httpService: HttpService) {}
+  constructor(private router: Router, private httpService: HttpService, public generalFunctionsService: GeneralFunctionsService) {}
 
   ngOnInit(): void {
   }
 
   async login() {
     if (this.loginForm.valid) {
-      const formData = this.loginForm.value;
-      this.loginResponse = await this.postData(formData);
+      let formData = this.loginForm.value;
+      this.loginResponse = await this.generalFunctionsService.tryPostLoading('/api-user-login/', formData);
       this.router.navigate(['/home']);
-      console.log(this.loginResponse);
       localStorage.setItem('token', this.loginResponse['token']);
-    }
-  }
-
-  postData(formData: any) {
-    try {
-      const url = environment.baseUrl + "/api-user-login/";
-      return lastValueFrom(this.httpService.postrequest(url, formData));
-    } catch (e) {
-      this.error = 'Fehler beim Laden!';
-      return null;
     }
   }
 
@@ -58,6 +48,9 @@ export class LoginComponent {
 
   changeCheckboxValue() {
     this.checkboxVisible = !this.checkboxVisible;
+    if (!this.checkboxVisible) {
+      
+    }
   }
 
   showPassword(passwordInput: HTMLInputElement) {
