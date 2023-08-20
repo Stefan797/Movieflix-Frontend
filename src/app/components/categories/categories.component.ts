@@ -71,7 +71,7 @@ export class CategoriesComponent implements OnInit {
         const category = response[0].category;
         this.movieDict[category] = response;
       }
-      // console.log('Full Movie Dict', this.movieDict);
+      console.log('Full Movie Dict', this.movieDict);
     } catch (e) {
       this.error = 'Fehler beim Laden!';
       return null;

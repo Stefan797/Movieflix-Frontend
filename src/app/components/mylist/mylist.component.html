@@ -5,7 +5,7 @@
     <h2>Meine Liste</h2>
 
     <div *ngIf="results" class="mylist-results">
-        <div class="inside-mylist-results" *ngFor="let moviesmylist of myListResponseArray[0]; let i = index">
+        <div class="inside-mylist-results" *ngFor="let moviesmylist of myListMovieDict; let i = index">
             <img (click)="showMovieInfos(i)" src="{{ moviesmylist.screenshot }}">
         </div>
     </div>
