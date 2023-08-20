@@ -44,16 +44,41 @@ export class MainComponent implements OnInit {
   }
 
   showMovieFullscreen() {
-    this.loadSingleMovieService.loadSingleM(this.firstMovieResponses.id).then(()=> {
+    this.loadSingleMovieService.loadSingleM(this.firstMovieResponses.id, 'home').then(()=> {
       this.router.navigate(['/watch/' + this.firstMovieResponses.title]);
     });
   }
-
+ 
   showMovieInfos() {
     this.furtherInformations = true;
+    document.getElementById('arrow-left-1').classList.add('index-unset');
+    document.getElementById('arrow-right-1').classList.add('index-unset');
+    document.getElementById('arrow-left-img-1').classList.add('index-unset');
+    document.getElementById('arrow-right-img-1').classList.add('index-unset');
+    document.getElementById('arrow-left-2').classList.add('index-unset');
+    document.getElementById('arrow-right-2').classList.add('index-unset');
+    document.getElementById('arrow-left-img-2').classList.add('index-unset');
+    document.getElementById('arrow-right-img-2').classList.add('index-unset');
+    document.getElementById('arrow-left-3').classList.add('index-unset');
+    document.getElementById('arrow-right-3').classList.add('index-unset');
+    document.getElementById('arrow-left-img-3').classList.add('index-unset');
+    document.getElementById('arrow-right-img-3').classList.add('index-unset');
   }
 
   closeMovieInfos() {
     this.furtherInformations = false;
+    document.getElementById('arrow-left-1').classList.remove('index-unset');
+    document.getElementById('arrow-right-1').classList.remove('index-unset');
+    document.getElementById('arrow-left-img-1').classList.remove('index-unset');
+    document.getElementById('arrow-right-img-1').classList.remove('index-unset');
+    document.getElementById('arrow-left-2').classList.remove('index-unset');
+    document.getElementById('arrow-right-2').classList.remove('index-unset');
+    document.getElementById('arrow-left-img-2').classList.remove('index-unset');
+    document.getElementById('arrow-right-img-2').classList.remove('index-unset');
+    document.getElementById('arrow-left-3').classList.remove('index-unset');
+    document.getElementById('arrow-right-3').classList.remove('index-unset');
+    document.getElementById('arrow-left-img-3').classList.remove('index-unset');
+    document.getElementById('arrow-right-img-3').classList.remove('index-unset');
   }
+ 
 }

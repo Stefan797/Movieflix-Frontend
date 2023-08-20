@@ -6,9 +6,43 @@
 
     <div *ngIf="results" class="mylist-results">
         <div class="inside-mylist-results" *ngFor="let moviesmylist of myListResponseArray[0]; let i = index">
-            <img src="{{ moviesmylist.screenshot }}">
+            <img (click)="showMovieInfos(i)" src="{{ moviesmylist.screenshot }}">
         </div>
     </div>
+
+    <div class="further-informations center" *ngIf="furtherInformations">
+        <div class="inside-further-informations">
+
+            <img (click)="closeMovieInfos()" class="close-further-informations" src="/assets/img/x.png">
+            <img src="{{ currentMoviePreviewDataRecord.screenshot }}">
+            <div class="play-button-position">
+                <img (click)="showMovieFullscreen()" src="/assets/img/setfullscreen.png">
+                <!-- <img (click)="startMovieInThisView()" src="/assets/img/movie-hover-play.png"> -->
+            </div>
+
+            <div *ngIf="startMovie" class="show-movie-position">
+                <video autoplay muted loop [src]="currentMoviePreviewDataRecord['movie_file']"></video>
+            </div>
+            
+            <div class="infos">
+                <div class="left-side">
+                    <div class="date-and-time">
+                        <p class="new">Neu</p>
+                        <p>{{ currentMoviePreviewDataRecord['created_at'] }}</p>
+                        <p>{{ currentMoviePreviewDataRecord['movie_time'] }} Std</p>
+                    </div>
+                    <p>{{ currentMoviePreviewDataRecord['title'] }}</p>
+                    <span>{{ currentMoviePreviewDataRecord['description'] }}</span>
+                </div>
+
+                <div class="right-side">
+                    <p class="category-color">Kategorie:</p>
+                    <p>{{ currentMoviePreviewDataRecord['category_german'] }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div *ngIf="mylistEmpty" class="mylist-empty">
         <div class="inside-mylist-empty">

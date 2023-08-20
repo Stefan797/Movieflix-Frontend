@@ -44,3 +44,37 @@
                 height: 40px
                 &:hover
                     cursor: pointer
+
+.inside-further-informations
+    border: 1px solid #687282
+    .play-button-position
+        display: flex
+        position: absolute
+        top: 62%
+        right: 5%
+        height: 32px
+        width: 32px
+        object-fit: cover
+        img
+            height: 38px
+            width: 38px
+            // margin-left: 4px
+            // margin-right: 4px
+        &:hover
+            cursor: pointer
+
+    .show-movie-position
+        position: absolute
+        top: 0
+        left: 0
+        z-index: 7
+        video
+            width: 100%
+            min-height: 70%
+            object-fit: cover
+            border-top-right-radius: 12px
+            border-top-left-radius: 12px
+
+@import "src/assets/sass/width-responsive-600.sass"
+@import "src/assets/sass/width-responsive-smartphone-landscape.sass"
+

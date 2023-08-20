@@ -85,6 +85,10 @@ body
 .z-index-4
     z-index: 4
 
+
+.index-unset
+    z-index: unset !important
+
 // ngClass verwende 
 // .test    
 //     transform: 0
@@ -158,6 +162,78 @@ body
 
 
 
+/* Other Ansicht */
+
+.further-informations
+    position: fixed
+    top: 0
+    left: 0
+    height: 100vh
+    width: 100vw
+
+    .inside-further-informations
+        height: 90%
+        width: 40%
+        background-color: #141414
+        border-radius: 12px
+        position: relative
+        .close-further-informations
+            position: absolute
+            top: 8%
+            right: 5%
+            height: 32px
+            width: 32px
+            object-fit: cover
+            z-index: 8
+            &:hover
+                cursor: pointer
+
+        img
+            width: 100%
+            height: 70%
+            object-fit: fill
+            border-top-right-radius: 12px
+            border-top-left-radius: 12px
+
+        .infos
+            display: flex
+            .left-side
+                width: 65%
+                height: 100%
+                padding-left: 12px
+                box-sizing: border-box
+                .date-and-time
+                    display: flex
+
+                    p
+                        color: white
+                        margin-right: 16px
+
+                    .new
+                        color: #45CD67
+                        margin-right: 8px
+                p
+                    color: white
+                    font-size: 24px
+
+                span
+                    color: white
+
+            .right-side
+                display: flex
+                width: 35%
+                height: 100%
+
+                .category-color
+                    color: #6b7173
+                    margin-right: 4px
+                    // margin-top: 16px
+
+                p
+                    color: white
+
+
+
     
 /* Button 1*/
 
@@ -199,3 +275,4 @@ body
 ::-webkit-scrollbar-thumb
     background-color: #615759
     border-radius: 4px
+

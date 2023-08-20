@@ -15,7 +15,8 @@ export class RegisterComponent {
 
   registerResponse: any = [];
   isActiveResponse: any = [];
-
+  loginResponse: any = [];
+  setnewGastUser: any = {};
   error = '';
 
   public registerForm: FormGroup = new FormGroup({
@@ -42,9 +43,7 @@ export class RegisterComponent {
     ], [])
   });
 
-  constructor(private router: Router, private httpService: HttpService, private registerService: RegisterService) {
-    //this.registerForm.valueChanges.subscribe(console.log);
-  }
+  constructor(private router: Router, private httpService: HttpService, private registerService: RegisterService) {}
 
   ngOnInit(): void {
   };
@@ -52,10 +51,11 @@ export class RegisterComponent {
   async registerNewUser() {
     if (this.registerForm.valid) {
       const formData = this.registerForm.value;
-      // console.log(formData);
       this.registerResponse = await this.postData(formData);
       this.registerService.setRegisterResponse(this.registerResponse);
       this.registerService.setRegisterComponent();
+      this.loginResponse = await this.loginpostData();
+      localStorage.setItem('CurrentUserID', this.registerResponse['id']);
       this.router.navigate(['/home']);
     }
   }
@@ -70,13 +70,37 @@ export class RegisterComponent {
     }
   }
 
+  // End Create Normal User 
+
   async loginAsGuest() {
     this.registerResponse = await this.createNewGuestUser();
     this.registerService.setRegisterResponse(this.registerResponse);
     console.log(this.registerResponse);
     this.registerService.setRegisterComponent();
     this.isActiveResponse = await this.setGuestUserIsActive(this.registerResponse.user_id);
+    this.loginResponse = await this.loginpostData();
+    localStorage.setItem('token', this.loginResponse['token']);
+    console.log('This is the current user Register Response', this.registerResponse);
+    localStorage.setItem('CurrentUserID', this.registerResponse['user_id']);
     this.router.navigate(['/home']);
+  }
+
+  loginpostData() {
+    // let formData = {
+    //   'email': 'pppppppppppppp@test1.de',
+    //   'password': 'pppppppppppppp'
+    // }
+    let formData = {
+      'email': this.setnewGastUser.email,
+      'password': this.setnewGastUser.password
+    }
+    try {
+      const url = environment.baseUrl + "/api-user-login/";
+      return lastValueFrom(this.httpService.postrequest(url, formData));
+    } catch (e) {
+      this.error = 'Fehler beim Laden!';
+      return null;
+    }
   }
 
   setGuestUserIsActive(pkUser) {
@@ -95,7 +119,6 @@ export class RegisterComponent {
     const firstname = 'guest' + username;
     const lastname = 'whoAmI' + username;
     const password = 'guest_password' + username;
-    //console.log(password);
 
     const newUser = {
       username: username,
@@ -105,6 +128,8 @@ export class RegisterComponent {
       password: password
     };
 
+    this.setnewGastUser = newUser;
+    
     try {
       const url = environment.baseUrl + "/sign-up/";
       return lastValueFrom(this.httpService.postrequest(url, newUser));
@@ -118,6 +143,8 @@ export class RegisterComponent {
     return Math.floor(Math.random() * 1000) + 1; // Generate a random number between 1 and 1000
   }
 
+  // End Create Guest User 
+
   showPassword(passwordInput: HTMLInputElement) {
     if (passwordInput.type === "password") {
       passwordInput.type = "text";
@@ -125,4 +152,6 @@ export class RegisterComponent {
       passwordInput.type = "password";
     }
   }
+
+  // End Other functions
 }

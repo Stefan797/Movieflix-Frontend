@@ -40,7 +40,7 @@
             </form>
             <div class="save-user-datas">
                 <div (click)="changeCheckboxValue()" class="show-checkbox" [ngClass]="{ 'show-checkbox': !checkboxVisible, 'hide-checkbox': checkboxVisible }">
-                    <img [ngStyle]="{ 'display': checkboxVisible ? 'block' : 'none' }" src="./assets/img/checkbox-white.png">
+                    <img class="cursor-pointer" [ngStyle]="{ 'display': checkboxVisible ? 'block' : 'none' }" src="./assets/img/checkbox-white.png">
                 </div>
 
                 <p>Benutzerdaten merken</p>

@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
+import { GeneralFunctionsService } from 'src/app/services/general-functions.service';
 import { HoverService } from 'src/app/services/hover.service';
 import { HttpService } from 'src/app/services/http.service';
 import { LoadSingleMovieService } from 'src/app/services/load-single-movie.service';
@@ -18,7 +19,9 @@ export class CategoriesComponent implements OnInit {
   @ViewChild('moviePreviewVideo', { static: false }) moviePreviewVideo!: ElementRef<HTMLVideoElement>;
   movieDict: any = [];
   currentMoviePreviewDataRecord: any = [];
-  userEmailResponse: any = [];
+  currentMovieID: number = 0;
+  currentUserResponse: any = [];
+  // userEmailResponse: any = [];
   error = '';
 
   public showPreview: boolean = false;
@@ -38,7 +41,7 @@ export class CategoriesComponent implements OnInit {
     // environment.baseUrl + "/movieAPI/?category=funny",
   ];
 
-  constructor(private router: Router, private httpService: HttpService, public hoverService: HoverService, private transferMovieDatas: TransferMovieDatasService, private loadSingleMovieService: LoadSingleMovieService) { }
+  constructor(private router: Router, private httpService: HttpService, public hoverService: HoverService, private transferMovieDatas: TransferMovieDatasService, private loadSingleMovieService: LoadSingleMovieService, public generalFunctionsService: GeneralFunctionsService) { }
 
   @HostListener('window:scroll', ['$event'])
   onScroll(event: any) {
@@ -52,6 +55,14 @@ export class CategoriesComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     await this.loadAllCategories();
+    await this.loadCurrentUser();
+  }
+
+  async loadCurrentUser() {
+    let currentuserID = localStorage.getItem('CurrentUserID');
+    console.log('localStorage.getItem', currentuserID);
+    this.currentUserResponse = await this.generalFunctionsService.tryLoading(`/userAPI/${currentuserID}/`);
+    console.log('TrycatchResponse localStorage CurrentUserID', this.currentUserResponse);
   }
 
   async loadAllCategories() {
@@ -61,7 +72,7 @@ export class CategoriesComponent implements OnInit {
         const category = response[0].category;
         this.movieDict[category] = response;
       }
-      // console.log(this.movieDict);
+      console.log('Full Movie Dict', this.movieDict);
     } catch (e) {
       this.error = 'Fehler beim Laden!';
       return null;
@@ -74,9 +85,15 @@ export class CategoriesComponent implements OnInit {
     await this.setMoviePreviewContainer(i, movieDictcategory);
     let currentMoviePreviewDataRecord = this.movieDict[movieDictcategory][i];
     this.currentMoviePreviewDataRecord.push(this.movieDict[movieDictcategory][i]);
-    //console.log(this.currentMoviePreviewDataRecord);
+    this.setCurrentMovieID(currentMoviePreviewDataRecord);
+    console.log(currentMoviePreviewDataRecord);
     this.setElementsInHoverContainer(currentMoviePreviewDataRecord);
     this.checkMovieIsLikedStatus(currentMoviePreviewDataRecord);
+  }
+
+  setCurrentMovieID(currentMoviePreviewDataRecord) {
+    this.currentMovieID = currentMoviePreviewDataRecord['id'];
+    console.log(this.currentMovieID);
   }
 
   setMoviePreviewContainer(i: number, movieDictcategory: string) {
@@ -96,10 +113,11 @@ export class CategoriesComponent implements OnInit {
   }
 
   checkMovieIsLikedStatus(currentMoviePreviewDataRecord: any) {
-    if (currentMoviePreviewDataRecord['is_liked'] == true) {
-      this.likeIsTrue = true;
-    }
-    if (currentMoviePreviewDataRecord['is_liked'] == false) {
+    if (this.currentUserResponse['liked_movies']) {
+      const likedMovieIDs = this.currentUserResponse['liked_movies'];
+      const currentMovieID = currentMoviePreviewDataRecord['id'];
+      this.likeIsTrue = likedMovieIDs.includes(currentMovieID);
+    } else {
       this.likeIsTrue = false;
     }
   }
@@ -107,53 +125,50 @@ export class CategoriesComponent implements OnInit {
   handleCloseMoviePreviewHover() {
     this.showPreview = false;
     this.currentMoviePreviewDataRecord = [];
+    this.likeIsTrue = false;
     // console.log(this.currentMoviePreviewDataRecord);
   }
 
   // End set Hover Container loading 
 
   showMovieFullscreen() {
-    this.loadSingleMovieService.loadSingleM(this.currentMoviePreviewDataRecord[0].id).then(() => {
+    this.loadSingleMovieService.loadSingleM(this.currentMoviePreviewDataRecord[0].id, 'home').then(() => {
       this.router.navigate(['/watch/' + this.currentMoviePreviewDataRecord[0].title]);
     });
   }
 
   async addMovieToMyList() {
-    let myList = await this.changeMovieToMyListBackend();
-  }
-
-  async changeMovieToMyListBackend() {
-    let movieID = this.currentMoviePreviewDataRecord[0].id;
-    try {
-      const url = environment.baseUrl + `/movie/${movieID}/change-category/`;
-      return lastValueFrom(this.httpService.getrequest(url));
-    } catch (e) {
-      this.error = 'Fehler beim Laden!';
-      return null;
-    }
+    let myList = await this.generalFunctionsService.tryLoading(`/movie/${this.currentMovieID}/change-category/`);
+    console.log(myList);
   }
 
   async increaseLikes() {
-    let likesResponse = await this.increaseLikesBackend();
-    //console.log(likesResponse);
-    this.currentMoviePreviewDataRecord[0].likes = likesResponse['movieLikes'];
-    this.currentMoviePreviewDataRecord[0].is_liked = likesResponse['movieLikeStatus'];
-    this.checkMovieIsLikedStatus(this.currentMoviePreviewDataRecord[0]);
+    this.likeIsTrue = true;
+    let likesResponse = await this.generalFunctionsService.tryLoading(`/movie/${this.currentMovieID}/increase_likes/`);
+    console.log(likesResponse);
+    await this.updateUser();
+    await this.updateMovie();
     if (this.likeNumberRef) {
       this.likeNumberRef.nativeElement.innerHTML = likesResponse['movieLikes'];
     }
   }
 
-  increaseLikesBackend() {
-    let movieID = this.currentMoviePreviewDataRecord[0].id;
-    console.log(movieID);
-    try {
-      const url = environment.baseUrl + `/movie/${movieID}/increase_likes/`;
-      return lastValueFrom(this.httpService.getrequest(url));
-    } catch (e) {
-      this.error = 'Fehler beim Laden!';
-      return null;
-    }
+  async updateUser() {
+    let currentuserID = localStorage.getItem('CurrentUserID');
+    this.currentUserResponse = await this.generalFunctionsService.tryLoading(`/userAPI/${currentuserID}/`);
+  }
+
+  async updateMovie() {
+    this.currentMoviePreviewDataRecord = [];
+    this.currentMoviePreviewDataRecord[0] = await this.generalFunctionsService.tryLoading(`/movieAPI/${this.currentMovieID}/`);
+    console.log(this.currentMoviePreviewDataRecord[0]);
+    // for (let i = 8; i > 0; i++) {
+    //   if (this.movieDict['nature'][i].id == this.currentMoviePreviewDataRecord[0].id) {
+
+    //     this.movieDict['nature'][i] = this.currentMoviePreviewDataRecord[0];
+    //     break;
+    //   }
+    // }
   }
 
   // End change movie properties and use HoverContainer functions
@@ -161,13 +176,13 @@ export class CategoriesComponent implements OnInit {
   contentmoveleft(id: string) {
     let htmlContainer: any = document.getElementById(id);
     let scrollAmount = 300;
-    htmlContainer.scrollLeft += scrollAmount;
+    htmlContainer.scrollLeft -= scrollAmount;
   }
 
   contentmoveright(id: string) {
     let htmlContainer: any = document.getElementById(id);
     let scrollAmount = 100;
-    htmlContainer.scrollLeft -= scrollAmount;
+    htmlContainer.scrollLeft += scrollAmount;
   }
 
   // End scroll between categories divs

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RegisterService } from 'src/app/services/register.service';
+import { GeneralFunctionsService } from 'src/app/services/general-functions.service';
 
 @Component({
   selector: 'app-account-informations',
@@ -7,43 +7,43 @@ import { RegisterService } from 'src/app/services/register.service';
   styleUrls: ['./account-informations.component.sass']
 })
 export class AccountInformationsComponent implements OnInit {
-  userIsNormalUser: boolean = false;
-  userIsGuestUser: boolean = false;
-  errorMessage: boolean = false;
+  
+  currentUserResponse: any = {};
 
+  constructor(public generalFunctionsService: GeneralFunctionsService) { }
 
-  guestUserRegistration = false;
-  normalUserRegistration = false;
-  response: any = [];
-
-  constructor(private registerService: RegisterService) { }
-
-  ngOnInit(): void {
-    this.getRegisterInformations();
+  async ngOnInit(): Promise<void> {
+    let currentuserID = localStorage.getItem('CurrentUserID');
+    this.currentUserResponse = await this.generalFunctionsService.tryLoading(`/userAPI/${currentuserID}/`);
+    this.setUserInformations();
   }
 
-  getRegisterInformations() {
-    this.response = this.registerService.getRegisterResponse();
-    if (this.response.username.includes('Gast')) {
-      this.userIsGuestUser = true;
+  setUserInformations() {
+    if (this.currentUserResponse['username'].includes('Gast')) {
+      document.getElementById('password').innerHTML = `guest_password${this.currentUserResponse['username']}`;
     } else {
-      this.userIsNormalUser = true;
+      document.getElementById('password').innerHTML = 'Unbekannt';
+    }
+
+    if (this.currentUserResponse['first_name'] == null) {
+      document.getElementById('firstname').innerHTML = 'Unbekannt';
+    }
+    if (this.currentUserResponse['last_name'] == null) {
+      document.getElementById('lastname').innerHTML = 'Unbekannt';
     }
   }
 
+  // End set User Informations
+  
   showUserStatusInfo(userStatusMessage: string) {
     if (userStatusMessage == 'show Active Information') {
-      alert('User Status kann akktuell nicht geändert werden!');
+      alert('User Status kann aktuell nicht geändert werden!');
     }
 
     if (userStatusMessage == 'show Is_Staff Information') {
-      alert('User Status kann akktuell nicht geändert werden!');
+      alert('User Status kann aktuell nicht geändert werden!');
     }
   }
 
-  // ngAfterViewInit() {
-  //   if (this.userIsNormalUser == false && this.userIsGuestUser == false) {
-  //     this.errorMessage = true;
-  //   }
-  // }
+  // End Other functions
 }

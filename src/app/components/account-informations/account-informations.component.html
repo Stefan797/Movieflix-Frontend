@@ -1,30 +1,32 @@
 <div class="account-informations-container"> 
-    <!-- Container wird angezeigt wenn der User über das richtige Registrierungsformular erstellt wird. -->
-    <div *ngIf="userIsNormalUser" class="account-informations">
+    
+    <div class="account-informations">
         <div class="user-login-datas">
             <div class="data-container">
                 <p>User Email</p>
-                <p class="value">{{ response.email }}</p>
+                <p class="value">{{ currentUserResponse.email }}</p>
             </div>
             <div class="data-container">
                 <p>Username</p>
-                <p class="value">{{ response.username }}</p>
+                <p class="value">{{ currentUserResponse.username }}</p>
             </div>
             <div class="data-container">
                 <p>Passwort</p>
-                <p class="value">Nur bei Gast Accounts einsehbar.</p>
+                <p id="password" class="value">
+                    guest_password{{ currentUserResponse.username }}
+                </p>
             </div>
         </div>
-        <!-- <div class="first-and-last-name">
+        <div class="first-and-last-name">
             <div class="data-container">
                 <p>Vorname</p>
-                <p class="value">{{ response.user_first_name }}</p>
+                <p id="firstname" class="value">{{ currentUserResponse.first_name }}</p>
             </div>
             <div class="data-container">
                 <p>Nachname</p>
-                <p class="value">{{ response.user_last_name }}</p>
+                <p id="lastname" class="value">{{ currentUserResponse.last_name }}</p>
             </div>
-        </div> -->
+        </div>
         <div  class="user-status">
             <div class="user-status-container">
                 <p>User Status</p>
@@ -45,49 +47,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Container wird angezeigt wenn der User über den Gast Button erstellt wird. -->
-    <div *ngIf="userIsGuestUser" class="account-informations">
-        <div class="user-login-datas">
-            <div class="data-container">
-                <p>User Email</p>
-                <p class="value">{{ response.email }}</p>
-            </div>
-            <div class="data-container">
-                <p>Username</p>
-                <p class="value">{{ response.username }}</p>
-            </div>
-            <div class="data-container">
-                <p>Passwort</p>
-                <p class="value">guest_password{{ response.username }}</p>
-            </div>
-        </div>
-        <div class="user-status">
-            <div class="user-status-container">
-                <p>User Status</p>
-                <div class="test">
-                    <div class="a">
-                        <p>Is_active</p> 
-                        <div class="show-checkbox">
-                            <img (click)="showUserStatusInfo('show Active Information')" src="/assets/img/checkbox-white.png">
-                        </div>
-                    </div>
-                    
-                    <div class="a">
-                        <p>Is_Staff</p>
-                        <div class="show-checkbox" >
-                            <img (click)="showUserStatusInfo('show Is_Staff Information')" src="/assets/img/checkbox.png">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Error beim Laden -->
-    <div *ngIf="errorMessage" class="account-informations-error">
-        <p>errorMessage 404</p> 
     </div>
 </div>
 

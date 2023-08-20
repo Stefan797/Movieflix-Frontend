@@ -26,8 +26,8 @@
         <span id="popularatpresent" class="category-text">Derzeit beliebt</span>
 
         <div class="different-categories">
-            <div (click)="contentmoveleft('scrolling_div_1')" class="left-side-hover-container center">
-                <img class="arrow-left-img" src="./assets/img/arrow.png">
+            <div id="arrow-left-1" (click)="contentmoveleft('scrolling_div_1')" class="left-side-hover-container center">
+                <img id="arrow-left-img-1" class="arrow-left-img" src="./assets/img/arrow.png">
             </div>
             <div class="a scrollbar-move" id="scrolling_div_1">
                 <div class="element"
@@ -40,8 +40,8 @@
                 </div>
 
             </div>
-            <div (click)="contentmoveright('scrolling_div_1')" class="right-side-hover-container center">
-                <img class="arrow-right-img" src="./assets/img/arrow-right.png">
+            <div id="arrow-right-1" (click)="contentmoveright('scrolling_div_1')" class="right-side-hover-container center">
+                <img id="arrow-right-img-1" class="arrow-right-img" src="./assets/img/arrow-right.png">
             </div>
         </div>
     </div>
@@ -50,8 +50,8 @@
         <span id="popularatpresent" class="category-text">Meer</span>
 
         <div class="different-categories">
-            <div (click)="contentmoveleft('scrolling_div_2')" class="left-side-hover-container center">
-                <img id="arrow_left" class="arrow-left-img" src="./assets/img/arrow.png">
+            <div id="arrow-left-2" (click)="contentmoveleft('scrolling_div_2')" class="left-side-hover-container center">
+                <img id="arrow-left-img-2" class="arrow-left-img" src="./assets/img/arrow.png">
             </div>
             <div class="a scrollbar-move" id="scrolling_div_2">
                 <div class="element" *ngFor="let moviessea of movieDict['sea']; let i = index">
@@ -62,8 +62,8 @@
                 </div>
 
             </div>
-            <div (click)="contentmoveright('scrolling_div_2')" class="right-side-hover-container center">
-                <img id="arrow_right" class="arrow-right-img" src="./assets/img/arrow-right.png">
+            <div id="arrow-right-2" (click)="contentmoveright('scrolling_div_2')" class="right-side-hover-container center">
+                <img id="arrow-right-img-2" class="arrow-right-img" src="./assets/img/arrow-right.png">
             </div>
         </div>
     </div>
@@ -72,8 +72,8 @@
         <span id="popularatpresent" class="category-text">Natur</span>
 
         <div class="different-categories">
-            <div (click)="contentmoveleft('scrolling_div_3')" class="left-side-hover-container center">
-                <img class="arrow-left-img" src="./assets/img/arrow.png">
+            <div id="arrow-left-3" (click)="contentmoveleft('scrolling_div_3')" class="left-side-hover-container center">
+                <img id="arrow-left-img-3" class="arrow-left-img" src="./assets/img/arrow.png">
             </div>
             <div class="a scrollbar-move" id="scrolling_div_3">
                 <div class="element" *ngFor="let moviesnature of movieDict['nature']; let i = index">
@@ -83,8 +83,8 @@
                     </div>
                 </div>
             </div>
-            <div (click)="contentmoveright('scrolling_div_3')" class="right-side-hover-container center">
-                <img class="arrow-right-img" src="./assets/img/arrow-right.png">
+            <div id="arrow-right-3" (click)="contentmoveright('scrolling_div_3')" class="right-side-hover-container center">
+                <img id="arrow-right-img-3" class="arrow-right-img" src="./assets/img/arrow-right.png">
             </div>
         </div>
     </div>

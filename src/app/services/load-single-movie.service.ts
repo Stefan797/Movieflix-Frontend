@@ -9,11 +9,13 @@ import { environment } from 'src/environments/environment.development';
 export class LoadSingleMovieService {
   SingleMovieResponse: any = [];
   error = '';
+  lastpath = '';
 
   constructor(private http: HttpClient) { }
 
-  async loadSingleM(givenID: number) {
+  async loadSingleM(givenID: number, lastpath: string) {
     this.SingleMovieResponse = await this.loadSingleData(givenID);
+    this.lastpath = lastpath; 
   }
 
   loadSingleData(givenID: number) {
@@ -28,6 +30,9 @@ export class LoadSingleMovieService {
   }
 
   getSingleM() {
-    return this.SingleMovieResponse;
+    let newArray: any = [];
+    newArray.push(this.SingleMovieResponse);
+    newArray.push(this.lastpath);
+    return newArray;
   }
 }

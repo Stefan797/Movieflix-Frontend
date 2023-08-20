@@ -11,10 +11,10 @@ import { environment } from 'src/environments/environment.development';
   styleUrls: ['./login.component.sass']
 })
 export class LoginComponent {
+
   checkboxSrc = './assets/img/checkbox-white.png';
-
+  checkboxVisible = true;
   error = '';
-
   loginResponse: any = [];
 
   public loginForm: FormGroup = new FormGroup({
@@ -29,9 +29,7 @@ export class LoginComponent {
     ], [])
   });
 
-  constructor(private router: Router, private httpService: HttpService) {
-    this.loginForm.valueChanges.subscribe(console.log);
-  }
+  constructor(private router: Router, private httpService: HttpService) {}
 
   ngOnInit(): void {
   }
@@ -56,7 +54,7 @@ export class LoginComponent {
     }
   }
 
-  checkboxVisible = true;
+  // End Login User 
 
   changeCheckboxValue() {
     this.checkboxVisible = !this.checkboxVisible;
@@ -69,4 +67,6 @@ export class LoginComponent {
       passwordInput.type = "password";
     }
   }
+
+  // End Other functions 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { HttpService } from 'src/app/services/http.service';
+import { LoadSingleMovieService } from 'src/app/services/load-single-movie.service';
 import { environment } from 'src/environments/environment.development';
 
 @Component({
@@ -12,11 +13,15 @@ import { environment } from 'src/environments/environment.development';
 export class MylistComponent implements OnInit {
   public results: boolean = false;
   public mylistEmpty: boolean = true;
+  furtherInformations: boolean = false;
+  startMovie: boolean = false;
 
   myListResponseArray: any = [];
   error = '';
 
-  constructor(private router: Router, private httpService: HttpService) {}
+  currentMoviePreviewDataRecord: any = [];
+
+  constructor(private router: Router, private httpService: HttpService, private loadSingleMovieService: LoadSingleMovieService) {}
 
 
   async ngOnInit(): Promise<void> {
@@ -31,8 +36,6 @@ export class MylistComponent implements OnInit {
     if (this.myListResponseArray[0]) { 
       this.results = true;
       this.mylistEmpty = false;
-      // console.log(this.results);
-      // console.log(this.mylistEmpty);
     }
   }
 
@@ -44,5 +47,25 @@ export class MylistComponent implements OnInit {
       this.error = 'Fehler beim Laden!';
       return null;
     }
+  }
+
+  showMovieFullscreen() {
+    this.loadSingleMovieService.loadSingleM(this.currentMoviePreviewDataRecord.id, 'mylist').then(()=> {
+      this.router.navigate(['/watch/' + this.currentMoviePreviewDataRecord.title]);
+    });
+  }
+
+  // startMovieInThisView() {
+  //   this.startMovie = true;
+  // }
+
+  showMovieInfos(i) {
+    this.furtherInformations = true;
+    this.currentMoviePreviewDataRecord = this.myListResponseArray[0][i];
+    console.log(this.currentMoviePreviewDataRecord);
+  }
+
+  closeMovieInfos() {
+    this.furtherInformations = false;
   }
 }
