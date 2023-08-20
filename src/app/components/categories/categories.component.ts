@@ -60,9 +60,8 @@ export class CategoriesComponent implements OnInit {
 
   async loadCurrentUser() {
     let currentuserID = localStorage.getItem('CurrentUserID');
-    console.log('localStorage.getItem', currentuserID);
     this.currentUserResponse = await this.generalFunctionsService.tryLoading(`/userAPI/${currentuserID}/`);
-    console.log('TrycatchResponse localStorage CurrentUserID', this.currentUserResponse);
+    // console.log('TrycatchResponse localStorage CurrentUserID', this.currentUserResponse);
   }
 
   async loadAllCategories() {
@@ -72,7 +71,7 @@ export class CategoriesComponent implements OnInit {
         const category = response[0].category;
         this.movieDict[category] = response;
       }
-      console.log('Full Movie Dict', this.movieDict);
+      // console.log('Full Movie Dict', this.movieDict);
     } catch (e) {
       this.error = 'Fehler beim Laden!';
       return null;
@@ -86,14 +85,13 @@ export class CategoriesComponent implements OnInit {
     let currentMoviePreviewDataRecord = this.movieDict[movieDictcategory][i];
     this.currentMoviePreviewDataRecord.push(this.movieDict[movieDictcategory][i]);
     this.setCurrentMovieID(currentMoviePreviewDataRecord);
-    console.log(currentMoviePreviewDataRecord);
+    // console.log(currentMoviePreviewDataRecord);
     this.setElementsInHoverContainer(currentMoviePreviewDataRecord);
     this.checkMovieIsLikedStatus(currentMoviePreviewDataRecord);
   }
 
   setCurrentMovieID(currentMoviePreviewDataRecord) {
     this.currentMovieID = currentMoviePreviewDataRecord['id'];
-    console.log(this.currentMovieID);
   }
 
   setMoviePreviewContainer(i: number, movieDictcategory: string) {
@@ -145,7 +143,7 @@ export class CategoriesComponent implements OnInit {
   async increaseLikes() {
     this.likeIsTrue = true;
     let likesResponse = await this.generalFunctionsService.tryLoading(`/movie/${this.currentMovieID}/increase_likes/`);
-    console.log(likesResponse);
+    // console.log(likesResponse);
     await this.updateUser();
     await this.updateMovie();
     if (this.likeNumberRef) {
@@ -161,7 +159,7 @@ export class CategoriesComponent implements OnInit {
   async updateMovie() {
     this.currentMoviePreviewDataRecord = [];
     this.currentMoviePreviewDataRecord[0] = await this.generalFunctionsService.tryLoading(`/movieAPI/${this.currentMovieID}/`);
-    console.log(this.currentMoviePreviewDataRecord[0]);
+    // console.log(this.currentMoviePreviewDataRecord[0]);
     // for (let i = 8; i > 0; i++) {
     //   if (this.movieDict['nature'][i].id == this.currentMoviePreviewDataRecord[0].id) {
 

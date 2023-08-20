@@ -1,6 +1,16 @@
 @media only screen and (max-width: 600px)
     /*  General classes for this Responsive  */
 
+    /* CSS für die Scrollbar */
+    .scrollbar-move-responsive::-webkit-scrollbar
+        height: 0
+
+    .scrollbar-move-responsive::-webkit-scrollbar-track
+        background-color: #141414
+
+    .scrollbar-move-responsive::-webkit-scrollbar-thumb
+        background-color: black
+
     .hide-smartphone
         display: none !important
 
@@ -44,7 +54,37 @@
 
     /* other pages */ 
 
+    /* account-informations */
+
+    .account-informations
+        .user-login-datas
+            overflow-x: scroll
+            .data-container
+                min-width: 150px !important
+                p
+                    font-size: 14px
+                    word-wrap: break-word
+
+        .first-and-last-name
+            .data-container
+                min-width: 150px !important
+                p
+                    font-size: 14px
+                    word-wrap: break-word
     // imprint etc.
+
+    /* header-profile-settings*/
+    .konto-box
+        p
+           font-size: 14px
+
+    .help-box
+        p
+            font-size: 14px
+
+    .logout-box
+        p
+            font-size: 14px
 
     /* /home main */
 
