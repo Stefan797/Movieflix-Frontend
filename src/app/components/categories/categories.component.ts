@@ -159,14 +159,16 @@ export class CategoriesComponent implements OnInit {
   async updateMovie() {
     this.currentMoviePreviewDataRecord = [];
     this.currentMoviePreviewDataRecord[0] = await this.generalFunctionsService.tryLoading(`/movieAPI/${this.currentMovieID}/`);
-    // console.log(this.currentMoviePreviewDataRecord[0]);
-    // for (let i = 8; i > 0; i++) {
-    //   if (this.movieDict['nature'][i].id == this.currentMoviePreviewDataRecord[0].id) {
 
-    //     this.movieDict['nature'][i] = this.currentMoviePreviewDataRecord[0];
-    //     break;
-    //   }
-    // }
+    const categoriesToUpdate = ['nature', 'popularatpresent', 'sea'];
+
+    for (const category of categoriesToUpdate) {
+      const indexToUpdate = this.movieDict[category].findIndex(movie => movie.id === this.currentMoviePreviewDataRecord[0].id);
+
+      if (indexToUpdate !== -1) {
+        this.movieDict[category][indexToUpdate] = this.currentMoviePreviewDataRecord[0];
+      }
+    }
   }
 
   // End change movie properties and use HoverContainer functions
