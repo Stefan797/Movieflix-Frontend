@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpService } from 'src/app/services/http.service';
-import { environment } from 'src/environments/environment.development';
-import { lastValueFrom } from 'rxjs';
 import { RegisterService } from 'src/app/services/register.service';
 import { GeneralFunctionsService } from 'src/app/services/general-functions.service';
 
@@ -53,17 +51,13 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       let formData = this.registerForm.value;
       this.registerResponse = await this.generalFunctionsService.tryPostLoading('/sign-up/', formData);
-      await this.setUserEmailAndPassword(formData);
-      localStorage.setItem('token', this.loginResponse['token']);
-      console.log(this.registerResponse);
-      this.registerService.setRegisterResponse(this.registerResponse);
-      this.registerService.setRegisterComponent();
-      localStorage.setItem('CurrentUserID', this.registerResponse['id']);
-      this.router.navigate(['/home']);
+      // await this.loginUser(formData);
+      // await this.setInformationsToTheLocalStorage();
+      // this.router.navigate(['/home']);
     }
   }
 
-  async setUserEmailAndPassword(formData: any) {
+  async loginUser(formData: any) {
     let loginFormdata = {
       'email': formData.email,
       'password': formData.password,
@@ -71,73 +65,46 @@ export class RegisterComponent {
     return this.loginResponse = await this.generalFunctionsService.tryPostLoading('/api-user-login/', loginFormdata);
   }
 
+  setInformationsToTheLocalStorage() {
+    localStorage.setItem('CurrentUserID', this.registerResponse['user_id']);
+    localStorage.setItem('token', this.loginResponse['token']);
+  }
+
   // End Create Normal User 
 
   async loginAsGuest() {
-    this.registerResponse = await this.createNewGuestUser();
-    this.registerService.setRegisterResponse(this.registerResponse);
-    console.log(this.registerResponse);
-    this.registerService.setRegisterComponent();
-    this.isActiveResponse = await this.setGuestUserIsActive(this.registerResponse.user_id);
-    this.loginResponse = await this.loginpostData();
-    localStorage.setItem('token', this.loginResponse['token']);
-    console.log('This is the current user Register Response', this.registerResponse);
-    localStorage.setItem('CurrentUserID', this.registerResponse['user_id']);
-    this.router.navigate(['/home']);
+    await this.createNewGuestUser();
+    // console.log('', this.registerResponse);
+    // this.isActiveResponse = await this.generalFunctionsService.tryLoading(`/activate/${this.registerResponse.user_id}/`);
+    // console.log('', this.isActiveResponse);
+    // await this.loginGuestUser();
+    // await this.setInformationsToTheLocalStorage();
+    // this.router.navigate(['/home']);
   }
 
-  loginpostData() {
-    let formData = {
-      'email': this.setnewGastUser.email,
-      'password': this.setnewGastUser.password
-    }
-    try {
-      const url = environment.baseUrl + "/api-user-login/";
-      return lastValueFrom(this.httpService.postrequest(url, formData));
-    } catch (e) {
-      this.error = 'Fehler beim Laden!';
-      return null;
-    }
-  }
-
-  setGuestUserIsActive(pkUser) {
-    try {
-      const url = environment.baseUrl + `/activate/${pkUser}/`;
-      return lastValueFrom(this.httpService.getrequest(url));
-    } catch (e) {
-      this.error = 'Fehler beim Aktivieren des Accounts!';
-      return null;
-    }
-  }
-
-  createNewGuestUser() {
+  async createNewGuestUser() {
     const username = 'Gast' + this.getRandomNumber();
     const email = username + '@test.com';
     const firstname = 'guest' + username;
     const lastname = 'whoAmI' + username;
     const password = 'guest_password' + username;
 
-    const newUser = {
-      username: username,
-      email: email,
-      firstname: firstname,
-      lastname: lastname,
-      password: password
-    };
-
+    const newUser = {username: username, email: email, firstname: firstname, lastname: lastname, password: password};
     this.setnewGastUser = newUser;
-    
-    try {
-      const url = environment.baseUrl + "/sign-up/";
-      return lastValueFrom(this.httpService.postrequest(url, newUser));
-    } catch (e) {
-      this.error = 'Fehler beim Laden!';
-      return null;
+
+    return this.registerResponse = await this.generalFunctionsService.tryPostLoading('/sign-up/', newUser);
+  }
+  
+  async loginGuestUser() {
+    let formData = {
+      'email': this.setnewGastUser.email,
+      'password': this.setnewGastUser.password
     }
+    return this.loginResponse = await this.generalFunctionsService.tryPostLoading('/api-user-login/', formData);
   }
 
   getRandomNumber(): number {
-    return Math.floor(Math.random() * 1000) + 1; // Generate a random number between 1 and 1000
+    return Math.floor(Math.random() * 1001) + 1000; // Generate a random number between 1000 and 2000
   }
 
   // End Create Guest User 

@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RegisterService } from 'src/app/services/register.service';
+import { GeneralFunctionsService } from 'src/app/services/general-functions.service';
 
 @Component({
   selector: 'app-register-successfully',
@@ -10,26 +11,24 @@ export class RegisterSuccessfullyComponent implements OnInit, OnDestroy {
 
   guestUserRegistration = false;
   normalUserRegistration = false;
-  response: any = [];
+  currentUserResponse: any = [];
+  // response: any = [];
 
   // animateContainer: boolean = false;
 
   private timer: any;
 
-  ngOnInit(): void {
-    this.showregisterMessage();
-    // setTimeout(() => {
-    //   this.animateContainer = true;
-    // }, 1000);
+  async ngOnInit(): Promise<void> {
+    await this.showregisterMessage();
   }
 
-  constructor(private registerService: RegisterService) { }
+  constructor(private registerService: RegisterService, public generalFunctionsService: GeneralFunctionsService) { }
 
-  showregisterMessage(): any {
+  async showregisterMessage() {
     this.sethideRegisterSuccessMessage();
-    this.response = this.registerService.getRegisterResponse();
-    console.log('Get register response', this.response);
-    if (this.response.username && /^Gast\d+$/.test(this.response.username)) {
+    let currentuserID = localStorage.getItem('CurrentUserID');
+    this.currentUserResponse = await this.generalFunctionsService.tryLoading(`/userAPI/${currentuserID}/`);
+    if (this.currentUserResponse.username && /^Gast\d+$/.test(this.currentUserResponse.username)) {
       this.guestUserRegistration = true;
       this.normalUserRegistration = false;
       console.log(this.guestUserRegistration);
@@ -45,7 +44,6 @@ export class RegisterSuccessfullyComponent implements OnInit, OnDestroy {
       this.hideRegisterSuccessMessage();
     }, 15000);
   }
-
 
   hideRegisterSuccessMessage() {
     this.registerService.hideRegisterComponent();

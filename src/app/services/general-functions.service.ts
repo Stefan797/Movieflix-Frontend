@@ -27,10 +27,10 @@ export class GeneralFunctionsService {
     }
   }
 
-  tryPostLoading(linkEnding: string, datas: any) {
+  tryPostLoading(linkEnding: string, data: any) {
     try {
       const url = environment.baseUrl + `${linkEnding}`;
-      const formData = datas;
+      const formData = data;
       return lastValueFrom(this.httpService.postrequest(url, formData));
     } catch (e) {
       this.error = 'Fehler beim Laden!';

@@ -1,14 +1,14 @@
 <div  class="register-response-container center"> <!-- [class.center]="animateContainer" -->
     <div class="show-reponse" *ngIf="normalUserRegistration">
         <span>
-            Hallo {{ response.username }},
+            Hallo {{ currentUserResponse.username }},
             sie haben sie erfolgreich registriert.
             <!-- Sie erhalten in Kürze eine Email um den Account zu bestätigen. -->
         </span>
     </div>
     <div class="show-reponse" *ngIf="guestUserRegistration">
         <span>
-            Herzlich willkommen, Sie sind Gastnutzer: {{ response.username }}. Ihre Daten zum nächsten Login finden sie im Konto wieder.
+            Herzlich willkommen, Sie sind Gastnutzer: {{ currentUserResponse.username }}. Ihre Daten zum nächsten Login finden sie im Konto wieder.
         </span>
     </div>
 </div>

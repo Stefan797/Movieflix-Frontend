@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { lastValueFrom } from 'rxjs';
 import { HttpService } from 'src/app/services/http.service';
-import { environment } from 'src/environments/environment.development';
 import { GeneralFunctionsService } from 'src/app/services/general-functions.service';
 
 @Component({
@@ -15,6 +13,7 @@ export class LoginComponent {
 
   checkboxSrc = './assets/img/checkbox-white.png';
   checkboxVisible = true;
+  doNotMemorizeUserData = false;
   error = '';
   loginResponse: any = [];
 
@@ -38,18 +37,31 @@ export class LoginComponent {
   async login() {
     if (this.loginForm.valid) {
       let formData = this.loginForm.value;
+      // console.log('', formData);
       this.loginResponse = await this.generalFunctionsService.tryPostLoading('/api-user-login/', formData);
-      this.router.navigate(['/home']);
-      localStorage.setItem('token', this.loginResponse['token']);
+      console.log('', this.loginResponse);
+      let lastUserID = localStorage.getItem('CurrentUserID');
+      console.log('userID From LS', lastUserID);
+      // if (this.doNotMemorizeUserData) {
+      //   localStorage.removeItem('token');
+      //   localStorage.removeItem('CurrentUserID');
+      //   sessionStorage.setItem('token', this.loginResponse['token']);
+      //   sessionStorage.setItem('CurrentUserID', lastUserID);
+      // } else {
+      //   localStorage.setItem('token', this.loginResponse['token']);
+      // }
+      // this.router.navigate(['/home']);
     }
   }
-
+  
   // End Login User 
 
   changeCheckboxValue() {
     this.checkboxVisible = !this.checkboxVisible;
     if (!this.checkboxVisible) {
-      
+      this.doNotMemorizeUserData = true;
+    } else {
+      this.doNotMemorizeUserData = false;
     }
   }
 
