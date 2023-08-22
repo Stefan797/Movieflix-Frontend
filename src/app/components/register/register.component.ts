@@ -51,9 +51,12 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       let formData = this.registerForm.value;
       this.registerResponse = await this.generalFunctionsService.tryPostLoading('/sign-up/', formData);
-      // await this.loginUser(formData);
-      // await this.setInformationsToTheLocalStorage();
-      // this.router.navigate(['/home']);
+      this.isActiveResponse = await this.generalFunctionsService.tryLoading(`/activate/${this.registerResponse.user_id}/`);
+      await this.loginUser(formData);
+      await this.setInformationsToTheLocalStorage();
+      this.registerService.setRegisterResponse(this.registerResponse);
+      this.registerService.setRegisterComponent();
+      this.router.navigate(['/home']);
     }
   }
 
@@ -74,12 +77,12 @@ export class RegisterComponent {
 
   async loginAsGuest() {
     await this.createNewGuestUser();
-    // console.log('', this.registerResponse);
-    // this.isActiveResponse = await this.generalFunctionsService.tryLoading(`/activate/${this.registerResponse.user_id}/`);
-    // console.log('', this.isActiveResponse);
-    // await this.loginGuestUser();
-    // await this.setInformationsToTheLocalStorage();
-    // this.router.navigate(['/home']);
+    this.isActiveResponse = await this.generalFunctionsService.tryLoading(`/activate/${this.registerResponse.user_id}/`);
+    await this.loginGuestUser();
+    await this.setInformationsToTheLocalStorage();
+    this.registerService.setRegisterResponse(this.registerResponse);
+    this.registerService.setRegisterComponent();
+    this.router.navigate(['/home']);
   }
 
   async createNewGuestUser() {
