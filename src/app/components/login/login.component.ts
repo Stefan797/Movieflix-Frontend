@@ -39,9 +39,9 @@ export class LoginComponent {
       let formData = this.loginForm.value;
       // console.log('', formData);
       this.loginResponse = await this.generalFunctionsService.tryPostLoading('/api-user-login/', formData);
-      console.log('', this.loginResponse);
-      let lastUserID = localStorage.getItem('CurrentUserID');
-      console.log('userID From LS', lastUserID);
+      // console.log('', this.loginResponse);
+      // let lastUserID = localStorage.getItem('CurrentUserID');
+      // console.log('userID From LS', lastUserID);
       // if (this.doNotMemorizeUserData) {
       //   localStorage.removeItem('token');
       //   localStorage.removeItem('CurrentUserID');
@@ -50,7 +50,9 @@ export class LoginComponent {
       // } else {
       //   localStorage.setItem('token', this.loginResponse['token']);
       // }
-      // this.router.navigate(['/home']);
+      
+      localStorage.setItem('token', this.loginResponse['token']);
+      this.router.navigate(['/home']);
     }
   }
   

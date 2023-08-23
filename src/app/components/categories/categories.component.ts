@@ -21,16 +21,14 @@ export class CategoriesComponent implements OnInit {
   currentMoviePreviewDataRecord: any = [];
   currentMovieID: number = 0;
   currentUserResponse: any = [];
-  // userEmailResponse: any = [];
+  isMylistTextVisible = false;
   error = '';
-
+  currentloading = false;
   public showPreview: boolean = false;
   public currentXPosition: number = 0;
   public currentYPosition: number = 0;
   private pageIsScrolled: boolean = false;
-
   imgIsHovered: boolean[] = [];
-
   showHover: boolean = false;
   likeIsTrue: boolean = false;
 
@@ -61,7 +59,6 @@ export class CategoriesComponent implements OnInit {
   async loadCurrentUser() {
     let currentuserID = localStorage.getItem('CurrentUserID');
     this.currentUserResponse = await this.generalFunctionsService.tryLoading(`/userAPI/${currentuserID}/`);
-    // console.log('TrycatchResponse localStorage CurrentUserID', this.currentUserResponse);
   }
 
   async loadAllCategories() {
@@ -71,7 +68,7 @@ export class CategoriesComponent implements OnInit {
         const category = response[0].category;
         this.movieDict[category] = response;
       }
-      console.log('Full Movie Dict', this.movieDict);
+      // console.log('Full Movie Dict', this.movieDict);
     } catch (e) {
       this.error = 'Fehler beim Laden!';
       return null;
@@ -85,7 +82,6 @@ export class CategoriesComponent implements OnInit {
     let currentMoviePreviewDataRecord = this.movieDict[movieDictcategory][i];
     this.currentMoviePreviewDataRecord.push(this.movieDict[movieDictcategory][i]);
     this.setCurrentMovieID(currentMoviePreviewDataRecord);
-    // console.log(currentMoviePreviewDataRecord);
     this.setElementsInHoverContainer(currentMoviePreviewDataRecord);
     this.checkMovieIsLikedStatus(currentMoviePreviewDataRecord);
   }
@@ -124,7 +120,6 @@ export class CategoriesComponent implements OnInit {
     this.showPreview = false;
     this.currentMoviePreviewDataRecord = [];
     this.likeIsTrue = false;
-    // console.log(this.currentMoviePreviewDataRecord);
   }
 
   // End set Hover Container loading 
@@ -138,16 +133,26 @@ export class CategoriesComponent implements OnInit {
   async addMovieToMyList() {
     let myList = await this.generalFunctionsService.tryLoading(`/movie/${this.currentMovieID}/change-category/`);
     console.log(myList);
+    this.isMylistTextVisible = true;
+    let hidetext = setTimeout(() => {
+      this.isMylistTextVisible = false;
+    }, 2500);
+    // clearTimeout(hidetext);
   }
 
   async increaseLikes() {
     this.likeIsTrue = true;
+    if (this.likeNumberRef) {
+      this.likeNumberRef.nativeElement.classList.add('hide');
+    }
+    this.currentloading = true;
     let likesResponse = await this.generalFunctionsService.tryLoading(`/movie/${this.currentMovieID}/increase_likes/`);
-    // console.log(likesResponse);
     await this.updateUser();
     await this.updateMovie();
+    this.currentloading = false;
     if (this.likeNumberRef) {
       this.likeNumberRef.nativeElement.innerHTML = likesResponse['movieLikes'];
+      this.likeNumberRef.nativeElement.classList.remove('hide');
     }
   }
 

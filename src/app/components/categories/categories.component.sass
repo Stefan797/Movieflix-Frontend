@@ -62,5 +62,34 @@
     height: 100%
     width: 100%
 
+.movieflix-currently-loading
+    height: 10px
+    width: 10px
+    margin-right: 4px
+    margin-top: 6px
+    .loader
+        font-size: 3px
+
+.top-part
+    position: relative
+    .text-container
+        position: absolute
+        top: 50px
+        left: 0
+        font-size: 11px
+        background-color: rgba(0, 0, 0, 0.7)
+        color: white
+        margin-left: 6px
+        padding: 6px
+        animation: 0.5s forwards ease-in-out slide
+
+@keyframes slide
+    0%
+        transform: translateY(25px)
+        opacity: 0
+    100%
+        transform: translateY(0)
+        opacity: 1
+
 @import "src/assets/sass/width-responsive-600.sass"
 @import "src/assets/sass/width-responsive-smartphone-landscape.sass"

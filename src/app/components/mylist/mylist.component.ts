@@ -33,7 +33,6 @@ export class MylistComponent implements OnInit {
   async loadCurrentUser() {
     let currentuserID = localStorage.getItem('CurrentUserID');
     this.currentUserResponse = await this.generalFunctionsService.tryLoading(`/userAPI/${currentuserID}/`);
-    console.log('currentUserResponse', this.currentUserResponse);
   }
 
   async loadAllMyListMovies() {
@@ -44,7 +43,7 @@ export class MylistComponent implements OnInit {
         const response = await lastValueFrom(this.httpService.getrequest(url));
         this.myListMovieDict[i] = response;
       }
-      console.log('Full MyListMovie Dict', this.myListMovieDict);
+      // console.log('Full MyListMovie Dict', this.myListMovieDict);
     } catch (e) {
       this.error = 'Fehler beim Laden!';
       return null;
@@ -72,7 +71,6 @@ export class MylistComponent implements OnInit {
   showMovieInfos(i) {
     this.furtherInformations = true;
     this.currentMoviePreviewDataRecord = this.myListMovieDict[i];
-    console.log(this.currentMoviePreviewDataRecord);
   }
 
   closeMovieInfos() {

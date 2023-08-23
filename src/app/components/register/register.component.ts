@@ -17,6 +17,8 @@ export class RegisterComponent {
   loginResponse: any = [];
   setnewGastUser: any = {};
   error = '';
+  currentloadingGuest = false;
+  currentloadingNormal = false;
 
   public registerForm: FormGroup = new FormGroup({
     username: new FormControl('', [
@@ -49,11 +51,13 @@ export class RegisterComponent {
 
   async registerNewUser() {
     if (this.registerForm.valid) {
+      this.currentloadingNormal = true;
       let formData = this.registerForm.value;
       this.registerResponse = await this.generalFunctionsService.tryPostLoading('/sign-up/', formData);
       this.isActiveResponse = await this.generalFunctionsService.tryLoading(`/activate/${this.registerResponse.user_id}/`);
       await this.loginUser(formData);
       await this.setInformationsToTheLocalStorage();
+      this.currentloadingNormal = false;
       this.registerService.setRegisterResponse(this.registerResponse);
       this.registerService.setRegisterComponent();
       this.router.navigate(['/home']);
@@ -76,10 +80,12 @@ export class RegisterComponent {
   // End Create Normal User 
 
   async loginAsGuest() {
+    this.currentloadingGuest = true;
     await this.createNewGuestUser();
     this.isActiveResponse = await this.generalFunctionsService.tryLoading(`/activate/${this.registerResponse.user_id}/`);
     await this.loginGuestUser();
     await this.setInformationsToTheLocalStorage();
+    this.currentloadingGuest = false;
     this.registerService.setRegisterResponse(this.registerResponse);
     this.registerService.setRegisterComponent();
     this.router.navigate(['/home']);

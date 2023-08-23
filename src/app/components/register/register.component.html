@@ -9,6 +9,10 @@
             <button (click)="loginAsGuest()" class="guest-account-button primary-button">Mit Gast Account einloggen !</button>
         </div>
 
+        <div *ngIf="currentloadingGuest" class="movieflix-currently-loading">
+            <div class="loader"></div>
+        </div>
+
         <div class="register-container">
             <h2>Neu registrieren</h2>
             <form [formGroup]="registerForm" (ngSubmit)="registerNewUser()">
@@ -87,6 +91,9 @@
                 <button [disabled]="!registerForm.valid && (registerForm.dirty || registerForm.touched)"
                     class="primary-button" type="submit">Erstelle einen neuen Account !
                 </button>
+                <div *ngIf="currentloadingNormal" class="movieflix-currently-loading-normal-user">
+                    <div class="loader"></div>
+                </div>
             </form>
         </div>
     </div>
