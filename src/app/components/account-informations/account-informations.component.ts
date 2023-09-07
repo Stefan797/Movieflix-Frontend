@@ -13,7 +13,7 @@ export class AccountInformationsComponent implements OnInit {
   constructor(public generalFunctionsService: GeneralFunctionsService) { }
 
   async ngOnInit(): Promise<void> {
-    let currentuserID = localStorage.getItem('CurrentUserID');
+    let currentuserID = this.generalFunctionsService.handleGetLocalStorageUserID();
     this.currentUserResponse = await this.generalFunctionsService.tryLoading(`/userAPI/${currentuserID}/`);
     this.setUserInformations();
   }

@@ -34,6 +34,15 @@ export class HeaderComponent {
     });
   }
 
+  isHomePage() {
+    if (this.currentpath == '/home') {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   loadSearchCategoriesPage() {
     this.router.navigate(['search/categories']);
   }

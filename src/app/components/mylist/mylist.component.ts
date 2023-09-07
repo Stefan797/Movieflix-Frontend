@@ -14,24 +14,27 @@ import { environment } from 'src/environments/environment.development';
 export class MylistComponent implements OnInit {
   
   public results: boolean = false;
-  public mylistEmpty: boolean = true;
+  public mylistEmpty: boolean = false;
   furtherInformations: boolean = false;
   startMovie: boolean = false;
   currentUserResponse: any = [];
   myListMovieDict: any = [];
   currentMoviePreviewDataRecord: any = [];
   error = '';
+  currentloadingMylist: boolean = false;
 
   constructor(private router: Router, private httpService: HttpService, private loadSingleMovieService: LoadSingleMovieService, public generalFunctionsService: GeneralFunctionsService) {}
 
   async ngOnInit(): Promise<void> {
+    this.currentloadingMylist = true;
     await this.loadCurrentUser();
     await this.loadAllMyListMovies();
     this.checkIfResultsTrue();
+    this.currentloadingMylist = false;
   }
 
   async loadCurrentUser() {
-    let currentuserID = localStorage.getItem('CurrentUserID');
+    let currentuserID = this.generalFunctionsService.handleGetLocalStorageUserID();
     this.currentUserResponse = await this.generalFunctionsService.tryLoading(`/userAPI/${currentuserID}/`);
   }
 
@@ -53,7 +56,9 @@ export class MylistComponent implements OnInit {
   checkIfResultsTrue() {
     if (this.currentUserResponse['favorite_movies'] && this.currentUserResponse['favorite_movies'][0]) { 
       this.results = true;
-      this.mylistEmpty = false;
+    }
+    if (!this.results) {
+      this.mylistEmpty = true;
     }
   }
 

@@ -113,7 +113,7 @@ export class RegisterComponent {
   }
 
   getRandomNumber(): number {
-    return Math.floor(Math.random() * 1001) + 1000; // Generate a random number between 1000 and 2000
+    return Math.floor(Math.random() * 2001) + 1000; // Generate a random number between 1000 and 2000
   }
 
   // End Create Guest User 

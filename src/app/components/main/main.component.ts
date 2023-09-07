@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { lastValueFrom } from 'rxjs';
+import { GeneralFunctionsService } from 'src/app/services/general-functions.service';
 import { HttpService } from 'src/app/services/http.service';
 import { LoadSingleMovieService } from 'src/app/services/load-single-movie.service';
-import { environment } from 'src/environments/environment.development';
-
 
 @Component({
   selector: 'app-main',
@@ -19,30 +17,11 @@ export class MainComponent implements OnInit {
 
   error = '';
 
-  constructor(private router: Router, private httpService: HttpService, private loadSingleMovieService: LoadSingleMovieService) {}
+  constructor(private router: Router, private httpService: HttpService, private loadSingleMovieService: LoadSingleMovieService, public generalFunctionsService: GeneralFunctionsService) {}
 
   async ngOnInit(): Promise<void> {
-    //this.loadFirstMovie();
-    this.firstMovieResponses = await this.load();
-    // console.log(this.firstMovieResponses);
+    this.firstMovieResponses = await this.generalFunctionsService.tryLoading(`/movieAPI/3/`); // 3L 17Serv
   };
-
-  // async loadFirstMovie() {
-  //   this.firstMovieResponses = await this.load();
-
-  //   console.log(this.firstMovieResponses);
-  // }
-
-  load() {
-    const id = 3; // 3 local // 17 ist Server
-    try {
-      const url = environment.baseUrl + `/movie/${id}/load_movie/`; //"/movieAPI/"; movie/${id}/load_movie/ movie/{id}/load_movie/
-      return lastValueFrom(this.httpService.getrequest(url));
-    } catch (e) {
-      this.error = 'Fehler beim Laden!';
-      return null;
-    }
-  }
 
   showMovieFullscreen() {
     this.loadSingleMovieService.loadSingleM(this.firstMovieResponses.id, 'home').then(()=> {

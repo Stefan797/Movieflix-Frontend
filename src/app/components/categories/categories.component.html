@@ -8,9 +8,7 @@
             <div class="top-part center-with-space-between">
                 <div class="left-side">
                     <img (click)="showMovieFullscreen()" src="/assets/img/movie-hover-play.png">
-                    <!-- <div class="text-container" > -->
-                    <p class="text-container" *ngIf="isMylistTextVisible">Title wurde erfolgreich zu ihrer Liste hinzugefügt!</p>
-                    <!-- </div> -->
+                    <p class="text-container" *ngIf="isMylistTextVisible">{{ myListResponse }}</p>
                     <img (click)="addMovieToMyList()" src="/assets/img/movie-hover-plus.png">
                     <img [class.showLike]="likeIsTrue" (click)="increaseLikes()" src="/assets/img/movie-hover-like.png"> 
                 </div>

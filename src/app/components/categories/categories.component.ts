@@ -57,7 +57,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   async loadCurrentUser() {
-    let currentuserID = localStorage.getItem('CurrentUserID');
+    let currentuserID = this.generalFunctionsService.handleGetLocalStorageUserID();
     this.currentUserResponse = await this.generalFunctionsService.tryLoading(`/userAPI/${currentuserID}/`);
   }
 
@@ -130,9 +130,11 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
+  public myListResponse: string = '';
+
   async addMovieToMyList() {
     let myList = await this.generalFunctionsService.tryLoading(`/movie/${this.currentMovieID}/change-category/`);
-    console.log(myList);
+    this.myListResponse = myList['movie_myList_response']
     this.isMylistTextVisible = true;
     let hidetext = setTimeout(() => {
       this.isMylistTextVisible = false;

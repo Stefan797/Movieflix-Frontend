@@ -37,4 +37,15 @@ export class GeneralFunctionsService {
       return null;
     }
   }
+
+  handleGetLocalStorageUserID() {
+    if (localStorage.getItem('CurrentUserID') == undefined) {
+      return sessionStorage.getItem('CurrentUserID');
+    } else {
+      return localStorage.getItem('CurrentUserID');
+    }
+  }
+
+
+  //figure figcaption html img mit beschreibung
 }

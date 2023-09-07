@@ -29,7 +29,7 @@ export class LoginComponent {
     ], [])
   });
 
-  constructor(private router: Router, private httpService: HttpService, public generalFunctionsService: GeneralFunctionsService) {}
+  constructor(private router: Router, private httpService: HttpService, public generalFunctionsService: GeneralFunctionsService) { }
 
   ngOnInit(): void {
   }
@@ -39,23 +39,24 @@ export class LoginComponent {
       let formData = this.loginForm.value;
       // console.log('', formData);
       this.loginResponse = await this.generalFunctionsService.tryPostLoading('/api-user-login/', formData);
-      // console.log('', this.loginResponse);
-      // let lastUserID = localStorage.getItem('CurrentUserID');
-      // console.log('userID From LS', lastUserID);
-      // if (this.doNotMemorizeUserData) {
-      //   localStorage.removeItem('token');
-      //   localStorage.removeItem('CurrentUserID');
-      //   sessionStorage.setItem('token', this.loginResponse['token']);
-      //   sessionStorage.setItem('CurrentUserID', lastUserID);
-      // } else {
-      //   localStorage.setItem('token', this.loginResponse['token']);
-      // }
-      
-      localStorage.setItem('token', this.loginResponse['token']);
+      console.log(this.loginResponse);
+      // debugger;
+      let lastUserID = localStorage.getItem('CurrentUserID');
+      if (this.doNotMemorizeUserData) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('CurrentUserID');
+        sessionStorage.setItem('token', this.loginResponse['token']);
+        sessionStorage.setItem('CurrentUserID', this.loginResponse['user_id']);
+      } else {
+        localStorage.setItem('token', this.loginResponse['token']);
+        localStorage.setItem('CurrentUserID', this.loginResponse['user_id']);
+      }
+
+      // localStorage.setItem('token', this.loginResponse['token']);
       this.router.navigate(['/home']);
     }
   }
-  
+
   // End Login User 
 
   changeCheckboxValue() {

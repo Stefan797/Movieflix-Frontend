@@ -4,6 +4,10 @@
 <div class="mylist-page">
     <h2>Meine Liste</h2>
 
+    <div *ngIf="currentloadingMylist" class="mylist-position">
+        <div class="loader-three-points"></div>
+    </div>
+
     <div *ngIf="results" class="mylist-results">
         <div class="inside-mylist-results" *ngFor="let moviesmylist of myListMovieDict; let i = index">
             <img (click)="showMovieInfos(i)" src="{{ moviesmylist.screenshot }}">
