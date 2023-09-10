@@ -3,18 +3,30 @@
     width: 100%
     background-color: rgb(4, 3, 3)
     .inside-container
-        padding-top: 50px 
-        width: 80%
+        width: 50%
         display: flex
         justify-content: center
+
+        .movieflix-title-container
+            height: 100%
+            margin-right: 8vw
+            img
+                width: 180px
+                height: 8vh
+                border-radius: 16px
+
         .footer-links
+            margin-left: 8vw
+            height: 100%
             display: flex
-            justify-content: flex-start
             flex-direction: column
             p
                 color: grey
+                &:first-child
+                    margin-top: 30px 
                 &:hover
                     cursor: pointer
+
 
 @import "src/assets/sass/width-responsive-600.sass"
 @import "src/assets/sass/width-responsive-smartphone-landscape.sass"

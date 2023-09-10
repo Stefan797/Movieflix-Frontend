@@ -20,7 +20,7 @@ export class MainComponent implements OnInit {
   constructor(private router: Router, private httpService: HttpService, private loadSingleMovieService: LoadSingleMovieService, public generalFunctionsService: GeneralFunctionsService) {}
 
   async ngOnInit(): Promise<void> {
-    this.firstMovieResponses = await this.generalFunctionsService.tryLoading(`/movieAPI/3/`); // 3L 17Serv
+    this.firstMovieResponses = await this.generalFunctionsService.tryLoading(`/movieAPI/17/`); // 3L 17Serv
   };
 
   showMovieFullscreen() {
