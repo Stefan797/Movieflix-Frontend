@@ -21,7 +21,7 @@ export class LoadSingleMovieService {
   loadSingleData(givenID: number) {
     const id = givenID;
     try {
-      const url = environment.baseUrl + `/movie/${id}/load_movie/`; //"/movieAPI/"; movie/${id}/load_movie/ movie/{id}/load_movie/
+      const url = environment.baseUrl + `/movieAPI/${id}/`;
       return lastValueFrom(this.http.get(url));
     } catch (e) {
       this.error = 'Fehler beim Laden!';

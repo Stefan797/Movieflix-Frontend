@@ -17,7 +17,7 @@ export class MovieFullscreenComponent {
 
   ngOnInit(): void {
     this.response = this.loadSingleMovieService.getSingleM();
-    console.log(this.response);
+    // console.log(this.response);
   }
 
   backToHome() {
@@ -46,42 +46,42 @@ export class MovieFullscreenComponent {
     }
   }
 
-  volumeScrollbarOpacity: number = 0;
+  // volumeScrollbarOpacity: number = 0;
 
-  showVolumeScrollbar() {
-    this.volumeScrollbarOpacity = 1;
-  }
+  // showVolumeScrollbar() {
+  //   this.volumeScrollbarOpacity = 1;
+  // }
 
-  hideVolumeScrollbar() {
-    this.volumeScrollbarOpacity = 0;
-  }
+  // hideVolumeScrollbar() {
+  //   this.volumeScrollbarOpacity = 0;
+  // }
 
-  adjustVolume(event: MouseEvent) {
-    if (event.buttons === 1) {
-      const soundImg = document.getElementById("sound-img");
-      const y = event.clientY - soundImg.getBoundingClientRect().top;
-      const volume = 1 - (y / soundImg.offsetHeight);
+  // adjustVolume(event: MouseEvent) {
+  //   if (event.buttons === 1) {
+  //     const soundImg = document.getElementById("sound-img");
+  //     const y = event.clientY - soundImg.getBoundingClientRect().top;
+  //     const volume = 1 - (y / soundImg.offsetHeight);
 
-      // Hier kannst du den Lautstärkewert nutzen, um die Lautstärke zu regulieren
-      console.log("Lautstärke:", volume);
-    }
-  }
+  //     // Hier kannst du den Lautstärkewert nutzen, um die Lautstärke zu regulieren
+  //     console.log("Lautstärke:", volume);
+  //   }
+  // }
 
-  showNextMovie() {
-    this.router.navigate(['/home']);
-  }
+  // showNextMovie() {
+  //   this.router.navigate(['/home']);
+  // }
 
-  openFullscreen() {
-    const videoPlayer = this.elementRef.nativeElement.querySelector('video');
+  // openFullscreen() {
+  //   const videoPlayer = this.elementRef.nativeElement.querySelector('video');
 
-    if (videoPlayer.requestFullscreen) {
-      videoPlayer.requestFullscreen();
-    } else if (videoPlayer.mozRequestFullScreen) {
-      videoPlayer.mozRequestFullScreen();
-    } else if (videoPlayer.webkitRequestFullscreen) {
-      videoPlayer.webkitRequestFullscreen();
-    } else if (videoPlayer.msRequestFullscreen) {
-      videoPlayer.msRequestFullscreen();
-    }
-  }
+  //   if (videoPlayer.requestFullscreen) {
+  //     videoPlayer.requestFullscreen();
+  //   } else if (videoPlayer.mozRequestFullScreen) {
+  //     videoPlayer.mozRequestFullScreen();
+  //   } else if (videoPlayer.webkitRequestFullscreen) {
+  //     videoPlayer.webkitRequestFullscreen();
+  //   } else if (videoPlayer.msRequestFullscreen) {
+  //     videoPlayer.msRequestFullscreen();
+  //   }
+  // }
 }
