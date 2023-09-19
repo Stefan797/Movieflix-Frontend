@@ -12,6 +12,8 @@ import { AccountComponent } from './components/account/account.component';
 import { SearchResponseComponent } from './components/search-response/search-response.component';
 import { SearchCategoriesComponent } from './components/search-categories/search-categories.component';
 import { MylistComponent } from './components/mylist/mylist.component';
+import { ConfirmYourAccountComponent } from './components/confirm-your-account/confirm-your-account.component';
+import { EmailIsConfirmedComponent } from './components/email-is-confirmed/email-is-confirmed.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent},
@@ -27,6 +29,8 @@ const routes: Routes = [
   { path: 'FAQ', component: FaqComponent},
   { path: 'imprint', component: ImprintComponent},
   { path: 'data-protection', component: DataProtectionComponent},
+  { path: 'de/register/confirm-your-account', component: ConfirmYourAccountComponent},
+  { path: 'de/register/account-is-confirmed', component: EmailIsConfirmedComponent},
   { path: '**', component: FirstPageComponent},
 ];
 

@@ -30,6 +30,8 @@ import { SearchResponseComponent } from './components/search-response/search-res
 import { SearchCategoriesComponent } from './components/search-categories/search-categories.component';
 import { MylistComponent } from './components/mylist/mylist.component';
 import { AccountInformationsComponent } from './components/account-informations/account-informations.component';
+import { ConfirmYourAccountComponent } from './components/confirm-your-account/confirm-your-account.component';
+import { EmailIsConfirmedComponent } from './components/email-is-confirmed/email-is-confirmed.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { AccountInformationsComponent } from './components/account-informations/
     SearchResponseComponent,
     SearchCategoriesComponent,
     MylistComponent,
-    AccountInformationsComponent
+    AccountInformationsComponent,
+    ConfirmYourAccountComponent,
+    EmailIsConfirmedComponent
   ],
   imports: [
     BrowserModule,

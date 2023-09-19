@@ -53,13 +53,13 @@ export class RegisterComponent {
       this.currentloading = true;
       let formData = this.registerForm.value;
       this.registerResponse = await this.generalFunctionsService.tryPostLoading('/sign-up/', formData);
-      this.isActiveResponse = await this.generalFunctionsService.tryLoading(`/activate/${this.registerResponse.user_id}/`);
-      await this.loginUser(formData);
-      await this.setInformationsToTheLocalStorage();
+      //this.isActiveResponse = await this.generalFunctionsService.tryLoading(`/activate/${this.registerResponse.user_id}/`);
+      //await this.loginUser(formData);
+      //await this.setInformationsToTheLocalStorage();
       this.currentloading = false;
       this.registerService.setRegisterResponse(this.registerResponse);
       this.registerService.setRegisterComponent();
-      this.router.navigate(['/home']);
+      this.router.navigate(['/de/register/confirm-your-account']);
     }
   }
 

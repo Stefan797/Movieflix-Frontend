@@ -1,6 +1,6 @@
 .register-response-container
     position: fixed
-    top: calc( 8% + 6px ) // 100 letzte animation
+    top: calc( 8% + 6px )
     left: 50%
     transform: translateX(-50%)
     width: 25vw
@@ -10,9 +10,7 @@
     box-sizing: border-box
     background-color: rgba(0, 0, 0, 0.1)
     border: 1px solid white
-    //background-color: #262021 // #737573
     z-index: 3
-    // transition: top 0.5s ease-in-out
     .show-reponse
         text-align: center
         span
@@ -21,9 +19,17 @@
             line-height: 150%
             letter-spacing: 0.1em
 
+.register-response-container-normaluser
+    height: fit-content
+    .show-reponse
+        margin-top: 30px
+        text-align: left
+        span
+            color: white
+            font-size: 20px
+            line-height: 200%
+            letter-spacing: 0.1em
 
-// .register-response-container.center 
-//   top: 30px
 
 @import "src/assets/sass/width-responsive-600.sass"
 @import "src/assets/sass/width-responsive-900.sass"
