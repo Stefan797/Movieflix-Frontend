@@ -8,6 +8,10 @@
         <div class="loader-three-points"></div>
     </div>
 
+    <!-- <div *ngIf="currentloadingGuest" class="movieflix-currently-loading">
+        <div class="loader"></div>
+    </div> -->
+
     <div *ngIf="results" class="mylist-results">
         <div class="inside-mylist-results" *ngFor="let moviesmylist of myListMovieDict; let i = index">
             <img (click)="showMovieInfos(i)" src="{{ moviesmylist.screenshot }}">
